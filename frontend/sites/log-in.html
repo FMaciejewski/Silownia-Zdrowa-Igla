@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Siłownia Zdrowa Igła</title>
+    <link rel="stylesheet" href="dist/style.css">
+    <script type="module" src="js/main.js"></script>
+    <link rel="icon" href="assets/images/logo.png" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="assets/images/logo.png" alt="logo">
+            <h1>Siłownia Zdrowa Igła</h1>
+            <a href="../index.html"><button>Strona Główna</button></a>
+            <a href="sing-in.html"><button>Zarejestruj się</button></a>
+        </nav>
+    </header>
+    <main>
+        <article>
+            <h2>Rejestracja</h2>
+            <form action="../../backend/api/auth.php" method="POST">
+                <label for="username">Nazwa użytkownika:</label>
+                <input type="text" id="username" name="username" required>
+                
+                <label for="password">Hasło:</label>
+                <input type="password" id="password" name="password" required>
+
+                <button type="submit">Zaloguj się</button>
+            </form>
+        </article>
+    </main>
+    <footer>
+        <p>Siłownia Zdrowa Igła &copy; 2023</p>
+        <p>Wszelkie prawa zastrzeżone</p>
+        <p>Wykonanie: Filip Maciejewski, Adrian Cichocki</p>
+        <p>W razie pytań: </p>
+        <p><a href="mailto:silowniaZdrowaIgla@gmail.com">silowniazdrowaigla@gmail.com</a></p>
+        <p><a href="tel:+48999999999">+48 999 999 999</a></p>
+    </footer>
+</body>
+</html>
