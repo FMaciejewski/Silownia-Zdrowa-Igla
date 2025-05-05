@@ -4,7 +4,9 @@
   "description": "Nasz projekt ma spelniac podane zalozenia:",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch-scss": "sass --watch frontend/src/style.scss:frontend/dist/style.css",
+    "build-scss": "sass frontend/src/style.scss:frontend/dist/style.css --style=compressed"
   },
   "keywords": [],
   "author": "",
