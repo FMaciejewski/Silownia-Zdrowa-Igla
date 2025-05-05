@@ -54,6 +54,7 @@ header {
 .logging {
   display: flex;
   gap: 1rem;
+  float: right;
 }
 
 .logging a {
@@ -89,10 +90,24 @@ header {
 }
 
 .hero {
+  position: relative;
   background: url("https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D") no-repeat center center/cover;
   color: #ffffff;
   text-align: center;
   padding: 5rem 2rem;
+  height: 25rem;
+  z-index: 1;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: -1;
 }
 
 .hero blockquote {
@@ -130,26 +145,96 @@ header {
 footer {
   background: #333333;
   color: #ffffff;
-  padding: 2rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
+  padding: 2rem 0;
   text-align: center;
 }
 
-.footer-logo img {
-  height: 50px;
-  margin-bottom: 1rem;
+.footer-upper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.social-media a img {
-  height: 30px;
-  margin: 0 5px;
-  transition: transform 0.3s;
+.logo-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #ffffff;
 }
 
-.social-media a img:hover {
+.footer1,
+.opens,
+.footer2 {
+  flex: 1;
+  text-align: left;
+  padding: 0 1rem;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer-logo img.logo {
+  width: 50px;
+  height: auto;
+}
+
+.addres,
+.opens,
+.contact,
+.social-media {
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.social-media {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  text-align: center;
+  margin: auto;
+}
+
+.social-media a {
+  color: #ffffff;
+  font-size: 1.8rem;
+  transition: transform 0.3s, color 0.3s;
+}
+
+.social-media a:hover {
+  color: #90e0ef;
   transform: scale(1.2);
+}
+
+.contact {
+  text-align: center;
+  margin: auto;
+}
+
+.contact a {
+  color: #90e0ef;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.contact a:hover {
+  color: #ffffff;
+}
+
+.copyright {
+  grid-column: 1/-1;
+  font-size: 0.8rem;
+  text-align: center;
+  margin-top: 1rem;
+  border-top: 1px solid #555555;
+  padding-top: 1rem;
 }
 
 @media (max-width: 768px) {
