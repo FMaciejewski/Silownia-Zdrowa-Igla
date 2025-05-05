@@ -1,0 +1,44 @@
+# === Systemowe pliki macOS ===
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# === Katalogi IDE/Edytorów ===
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# === PHP ===
+/vendor/
+composer.lock
+.env
+*.cache.php
+
+# === Frontend ===
+/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+/.sass-cache/
+/css/build/
+/js/build/
+
+# === Bazy danych ===
+*.sql
+*.sqlite
+/database/dumps/
+*.dump
+
+# === Logi ===
+*.log
+logs/
+
+# === Uploady/użytkownika ===
+/uploads/
+/tmp/
+
+# === Konfiguracja serwera ===
+.htaccess
+httpd.conf
