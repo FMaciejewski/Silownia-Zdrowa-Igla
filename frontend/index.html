@@ -5,23 +5,34 @@
     <title>Siłownia Zdrowa Igła</title>
     <link rel="stylesheet" href="dist/style.css">
     <script type="module" src="js/main.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body>
     <header>
-        <nav>
-            <img src="assets/images/logo.png" alt="logo">
-            <h1>Siłownia Zdrowa Igła</h1>
-            <a href=""><button>Zarejestruj się</button></a>
-            <a href=""><button>Zaloguj się</button></a>
+        <nav calss="navbar">
+            <div class="navbar-logo">
+                <img class="logo" src="assets/images/logo.png" alt="logo">
+                <h1 class="logo-name">Siłownia Zdrowa Igła</h1>
+            </div>
+            <ul class="navbar-menu">
+                <li><a href="#">O nas</a></li>
+                <li><a href="#">Trenerzy</a></li>
+                <li><a href="#">Cennik</a></li>
+                <li><a href="#">Zajęcia</a></li>
+                <li><a href="#">Kontakt</a></li>
+            </ul>
+            <div class="logging">
+                <a class="signin-btn" href="sites/sign-in.html">Zarejestruj się</a>
+                <a class="login-btn" href="sites/log-in.html">Zaloguj się</a>
+            </div>
         </nav>
         
     </header>
     <main>
-        <section>
-            <img src="" alt="silowniana_kobieta">
+        <section class="hero">
             <blockquote>"Najlepszy czas na zasadzenie drzewa był 20 lat temu, drugi najlepszy jest dziś"</blockquote>
         </section>
-        <article>
+        <article class="treners">
             <h3>Nasi trenerzy</h3>
         </article>
         <aside>
@@ -29,7 +40,7 @@
             tu dać kalendarz z zajęciami
         -->
         </aside>
-        <article>
+        <article class="cennik">
             <h2>Plany karnetów</h2>
             <table>
                 <tr>
@@ -66,12 +77,37 @@
         </article>
     </main>
     <footer>
-        <p>Siłownia Zdrowa Igła &copy; 2023</p>
-        <p>Wszelkie prawa zastrzeżone</p>
-        <p>Wykonanie: Filip Maciejewski, Adrian Cichocki</p>
-        <p>W razie pytań: </p>
-        <p><a href="mailto:silowniaZdrowaIgla@gmail.com">silowniazdrowaigla@gmail.com</a></p>
-        <p><a href="tel:+48999999999">+48 999 999 999</a></p>
+        <div class="footer-logo">
+            <img class="logo" src="assets/images/logo.png" alt="logo">
+            <h1 class="logo-name">Siłownia Zdrowa Igła</h1>
+        </div>
+        <div class="addres">
+            <p>ul. Zdrowa 1</p>
+            <p>00-000 Warszawa</p>
+        </div>
+        <div class="opens">
+            <p>Godziny techniczne:</p>
+            <p>Poniedziałek - Piątek: 3:00 - 4:00</p>
+            <p>Sobota - Niedziela: 2:00 - 3:00</p>
+            <p>Wszystkie zajęcia odbywają się w godzinach otwarcia siłowni</p>
+        </div>
+        <div class="social-media">
+            <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.tiktok.com/" target="_blank"><i class="fab fa-tiktok"></i></a>
+        </div>
+        <div class="contact">
+            <p>W razie pytań: </p>
+            <p><a href="mailto:silowniaZdrowaIgla@gmail.com">silowniazdrowaigla@gmail.com</a></p>
+            <p><a href="tel:+48999999999">+48 999 999 999</a></p>
+        </div>
+        <div class="copyright">
+            <p>Siłownia Zdrowa Igła &copy; 2023</p>
+            <p>Wszelkie prawa zastrzeżone</p>
+            <p>Wykonanie: Filip Maciejewski, Adrian Cichocki</p>
+        </div>
     </footer>
 </body>
 </html>

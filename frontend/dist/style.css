@@ -1,6 +1,168 @@
-img {
-  width: 200px;
-  height: 200px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  line-height: 1.6;
+  color: #333333;
+  background-color: #f4f4f9;
+}
+
+header {
+  background: #4a90e2;
+  color: #ffffff;
+  padding: 1rem 2rem;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo img {
+  height: 50px;
+  margin-right: 10px;
+}
+
+.navbar-menu {
+  display: flex;
+  list-style: none;
+  gap: 1rem;
+}
+
+.navbar-menu li a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.navbar-menu li a:hover {
+  color: #d9e9f8;
+}
+
+.logging {
+  display: flex;
+  gap: 1rem;
+}
+
+.logging a {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s, color 0.3s, border 0.3s;
+  border: 2px solid #ffffff;
+}
+
+.signin-btn {
+  background: #ffffff;
+  color: #4a90e2;
+}
+
+.signin-btn:hover {
+  background: #4a90e2;
+  color: #ffffff;
+  border-color: #4a90e2;
+}
+
+.login-btn {
+  background: transparent;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+}
+
+.login-btn:hover {
+  background: #ffffff;
+  color: #4a90e2;
+  border-color: #4a90e2;
+}
+
+.hero {
+  background: url("https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D") no-repeat center center/cover;
+  color: #ffffff;
+  text-align: center;
+  padding: 5rem 2rem;
+}
+
+.hero blockquote {
+  font-size: 1.5rem;
+  font-style: italic;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+.treners, .cennik {
+  padding: 2rem;
+  background: #ffffff;
+  margin: 1rem auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cennik table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.cennik th, .cennik td {
+  padding: 1rem;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.cennik th {
+  background: #4a90e2;
+  color: #ffffff;
+}
+
+footer {
+  background: #333333;
+  color: #ffffff;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  text-align: center;
+}
+
+.footer-logo img {
+  height: 50px;
+  margin-bottom: 1rem;
+}
+
+.social-media a img {
+  height: 30px;
+  margin: 0 5px;
+  transition: transform 0.3s;
+}
+
+.social-media a img:hover {
+  transform: scale(1.2);
+}
+
+@media (max-width: 768px) {
+  .navbar-menu {
+    flex-direction: column;
+    align-items: center;
+  }
+  .logging {
+    margin-top: 1rem;
+  }
+  .hero blockquote {
+    font-size: 1.2rem;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
