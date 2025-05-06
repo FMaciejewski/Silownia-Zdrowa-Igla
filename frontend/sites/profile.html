@@ -24,6 +24,12 @@
                 <p><strong>Email:</strong> ${data.email}</p>
                 <p><strong>Numer telefonu:</strong> ${data.telefon}</p>
             `;
+            if(data.typ_konta === 'trener'){
+                profileSection.innerHTML += `	
+                    <p><strong>Specjalizacja:</strong> ${data.specjation}</p>
+                    <p><strong>Biografia:</strong> ${data.bio}</p>
+                    <p><strong>Godzinówka:</strong> ${data.HourlyRate}</p>`;
+            }
         });
     </script>
 </head>
