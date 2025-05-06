@@ -53,6 +53,14 @@ $stmt->bind_param("sssssss", $login, $hash, $firstName, $lastName, $email, $phon
 
 if ($stmt->execute()) {
     echo json_encode(['success' => true, 'message' => 'Rejestracja zakończona sukcesem']);
+    $to = urlencode($email);
+    $name = urlencode($firstName . ' ' . $lastName);
+    $subject = urlencode('Witamy na naszej stronie');
+    $message = urlencode('Dziękujemy za rejestrację! Cieszymy się, że jesteś z nami.');
+
+    file_get_contents("http://localhost/Silownia-Zdrowa-Igla/backend/api/mail.php?to=$to&name=$name&subject=$subject&body=$message");
+
+
     header('Location: ../../frontend/sites/log-in.html?success=1');
     exit;
 } else {

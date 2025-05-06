@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 session_start();
 
 $db_host = 'localhost';
@@ -24,10 +27,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = $result->fetch_assoc();
 
     if ($user && password_verify($password, $user['PasswordHash'])) {
-        $_SESSION['user_id'] = $user['id'];
-        header("Zalogowano pomyślnie!", "../../frontend/sites/profile.html?success=1");
+        $_SESSION['user_id'] = $user['UserID'];
+        header("Location: ../../frontend/sites/profile.html?success=1");
+        exit;
     } else {
-        header("Niepoprawny login lub hasło.", "../../frontend/sites/log-in.html?error=wrong");
+        header("Location: ../../frontend/sites/log-in.html?error=wrong");
+        exit;
     }
 
     $stmt->close();
