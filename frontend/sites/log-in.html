@@ -9,17 +9,20 @@
 </head>
 <body>
     <header>
-        <nav>
-            <img src="../assets/images/logo.png" alt="logo">
-            <h1>Siłownia Zdrowa Igła</h1>
-            <a href="../index.html"><button>Strona Główna</button></a>
-            <a href="sing-in.html"><button>Zarejestruj się</button></a>
-        </nav>
+        <nav calss="navbar">
+            <div class="logging">
+                <a class="signin-btn" href="../index.html">Strona Główna</a>
+                <a class="login-btn" href="sites/sign-in.html">Zarejestruj się</a>
+            </div>
+            <div class="navbar-logo">
+                <img class="logo" src="../assets/images/logo.png" alt="logo">
+                <h1 class="logo-name">Siłownia Zdrowa Igła</h1>
+            </div>
     </header>
     <main>
         <article>
             <h2>Rejestracja</h2>
-            <form action="../../backend/api/auth.php" method="POST">
+            <form action="../../backend/api/loging.php" method="POST">
                 <label for="username">Nazwa użytkownika:</label>
                 <input type="text" id="username" name="username" required>
                 
@@ -31,12 +34,41 @@
         </article>
     </main>
     <footer>
-        <p>Siłownia Zdrowa Igła &copy; 2023</p>
-        <p>Wszelkie prawa zastrzeżone</p>
-        <p>Wykonanie: Filip Maciejewski, Adrian Cichocki</p>
-        <p>W razie pytań: </p>
-        <p><a href="mailto:silowniaZdrowaIgla@gmail.com">silowniazdrowaigla@gmail.com</a></p>
-        <p><a href="tel:+48999999999">+48 999 999 999</a></p>
+        <section class="footer-upper">
+        <div class="footer1">
+            <div class="footer-logo">
+                <img class="logo" src="../assets/images/logo.png" alt="logo">
+                <h1 class="logo-name">Siłownia Zdrowa Igła</h1>
+            </div>
+            <div class="addres">
+                <p>ul. Zdrowa 1</p>
+                <p>00-000 Warszawa</p>
+            </div>
+        </div>
+        <div class="opens">
+            <p>Godziny techniczne:</p>
+            <p>Poniedziałek - Piątek: 3:00 - 4:00</p>
+            <p>Sobota - Niedziela: 2:00 - 3:00</p>
+            <p>Wszystkie zajęcia odbywają się w godzinach otwarcia siłowni</p>
+        </div>
+        <div class="footer2">
+            <div class="social-media">
+                <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.tiktok.com/" target="_blank"><i class="fab fa-tiktok"></i></a>
+            </div>
+            <div class="contact">
+                <p>W razie pytań: </p>
+                <p><a href="mailto:silowniaZdrowaIgla@gmail.com">silowniazdrowaigla@gmail.com</a></p>
+                <p><a href="tel:+48999999999">+48 999 999 999</a></p>
+            </div>
+        </div>
+</section>
+        <div class="copyright">
+            <p>Siłownia Zdrowa Igła &copy; 2023 Wszelkie prawa zastrzeżone</p>
+            <p>Wykonanie: Filip Maciejewski, Adrian Cichocki</p>
+        </div>
     </footer>
 </body>
 </html>
