@@ -13,20 +13,41 @@
             <img src="../assets/images/logo.png" alt="logo">
             <h1>Siłownia Zdrowa Igła</h1>
             <a href="../index.html"><button>Strona Główna</button></a>
-            <a href="sing-in.html"><button>Zarejestruj się</button></a>
+            <a href="log-in.html"><button>Zaloguj się</button></a>
         </nav>
     </header>
     <main>
         <article>
             <h2>Rejestracja</h2>
             <form action="../../backend/api/auth.php" method="POST">
-                <label for="username">Nazwa użytkownika:</label>
+                <label for="imie">Imię:</label>
+                <input type="text" id="imie" name="imie" required>
+
+                <label for="nazwisko">Nazwisko:</label>
+                <input type="text" id="nazwisko" name="nazwisko" required>
+
+                <label for="username">Login:</label>
                 <input type="text" id="username" name="username" required>
+                
+                <label for="email">Adres e-mail:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="tel">Numer telefonu:</label>
+                <input type="tel" id="tel" name="tel" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" placeholder="123-456-789">
                 
                 <label for="password">Hasło:</label>
                 <input type="password" id="password" name="password" required>
+                
+                <label for="confirm_password">Potwierdź hasło:</label>
+                <input type="password" id="confirm_password" name="confirm_password" required>
 
-                <button type="submit">Zaloguj się</button>
+                <label for="account_type">Typ konta: </label>
+                <select id="account_type" name="account_type" required>
+                    <option value="klient">Klient</option>
+                    <option value="trener">Trener</option>
+                    <option value="fizjo">Fizjoterapeuta</option>
+
+                <button type="submit">Zarejestruj się</button>
             </form>
         </article>
     </main>

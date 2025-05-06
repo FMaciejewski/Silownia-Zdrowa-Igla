@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Siłownia Zdrowa Igła</title>
+    <link rel="stylesheet" href="../dist/style.css">
+    <script type="module" src="js/main.js"></script>
+    <link rel="icon" href="../assets/images/logo.png" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>Kup Karnet</h1>
+            <a href="../index.html">Strona Główna</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Kup karnet</h2>
+        <form action="../../backend/api/auth.php" method="POST">
+            <label for="rodzaj">Wybierz rodzaj karnetu: </label>
+            <select id="rodzaj" name="rodzaj" required>
+                <option value="normalny">Normalny</option>
+                <option value="premium">Premium</option>
+                <option value="vip">VIP</option>
+            </select>
+
+            <label for="data_rozpoczecia">Data rozpoczęcia:</label>
+            <input type="date" id="data_rozpoczecia" name="data_rozpoczecia" required>
+
+            <label for="imie">Imię właściciela karty: </label>
+            <input type="text" id="imie" name="imie" required>
+
+            <label for="nazwisko">Nazwisko właściciela karty: </label>
+            <input type="text" id="nazwisko" name="nazwisko" required>
+
+            <label for="numer_karty">Numer karty: </label>
+            <input type="text" id="numer_karty" name="numer_karty" required pattern="[0-9]{4}-[0-9]{4}-[0-9]{4}" placeholder="1234-5678-9012">
+
+            <label for="data_wygasu">Data wygaśnięcia karty: </label>
+            <input type="date" id="data_wygasu" name="data_wygasu" required>
+
+            <label for="numerki">3 numerki z tyłu karty: </label>
+            <input type="text" id="numerki" name="numerki" required pattern="[0-9]{3}" placeholder="123">
+
+            <label for="cykliczne">Włącz cykliczne płatności: </label>
+            <input type="radio" id="cykliczne" name="cykliczne">
+
+            <input type="submit" value="Kup karnet">
+            <input type="reset" value="Wyczyść formularz">
+        </form>
+    </main>
+    <footer>
+        <p>Siłownia Zdrowa Igła &copy; 2023</p>
+        <p>Wszelkie prawa zastrzeżone</p>
+        <p>Wykonanie: Filip Maciejewski, Adrian Cichocki</p>
+        <p>W razie pytań: </p>
+        <p><a href="mailto:silowniaZdrowaIgla@gmail.com">silowniazdrowaigla@gmail.com</a></p>
+        <p><a href="tel:+48999999999">+48 999 999 999</a></p>
+    </footer>
+</body>
+</html>
