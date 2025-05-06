@@ -6,8 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch-scss": "sass --watch frontend/src/style.scss:frontend/dist/style.css",
-    "build-scss": "sass frontend/src/style.scss:frontend/dist/style.css --style=compressed",
-    "dev": "vite"
+    "build-scss": "sass frontend/src/style.scss:frontend/dist/style.css --style=compressed"
   },
   "keywords": [],
   "author": "",
