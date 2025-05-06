@@ -6,14 +6,11 @@
     <link rel="stylesheet" href="../dist/logging.css">
     <script type="module" src="/Silownia-Zdrowa-Igla/frontend/js/main.js"></script>
     <link rel="icon" href="../assets/images/logo.png" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <script>
-        const params = new URLSearchParams(window.location.search);
-        if (params.get("success") === "1") {
-            alert("Rejestracja zakończona sukcesem! Zaloguj się.");
-        }
-    </script>
+    
     <header>
         <nav calss="navbar">
             <div class="logging">
@@ -26,6 +23,19 @@
             </div>
     </header>
     <main>
+        <div class="success-msg" id="success-message"></div>
+        <script defer>
+        const params = new URLSearchParams(window.location.search);
+    if (params.get("success") === "1") {
+        const successMessage = document.getElementById("success-message");
+        successMessage.textContent = "Rejestracja przebiegła pomyślnie. Możesz się teraz zalogować.";
+        successMessage.style.opacity = '1';
+        setTimeout(() => {
+            successMessage.style.opacity = '0';
+            successMessage.style.display = 'none';
+        }, 6000);
+    }
+    </script>
         <article>
             <h2>Rejestracja</h2>
             <form action="../../backend/api/loging.php" method="POST">
@@ -34,7 +44,8 @@
                 
                 <label for="password">Hasło:</label>
                 <input type="password" id="password" name="password" required>
-
+                <div class="error-msg">
+                    <p id="error-message"></p>
                 <script>
                     const urlParams = new URLSearchParams(window.location.search);
                     const error = urlParams.get('error');
@@ -49,6 +60,7 @@
                         errorMsg.textContent = errorMessage[error] || 'Wystąpił nieznany błąd.';
                     }
                 </script>
+                </div>
 
                 <button type="submit">Zaloguj się</button>
             </form>
