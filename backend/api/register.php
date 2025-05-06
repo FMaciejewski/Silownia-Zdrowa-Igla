@@ -1,0 +1,76 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+session_start();
+$host = 'localhost';
+$user = 'root';
+$pass = '';
+$dbName = 'SilowniaZdrowaIgla';
+
+$conn = new mysqli($host, $user, $pass, $dbName);
+if ($conn->connect_error) {
+    http_response_code(500);
+    echo json_encode(['error' => 'Błąd połączenia z bazą danych: ' . $conn->connect_error]);
+    exit;
+}
+
+$firstName = $_POST['firstName'] ?? null;
+$lastName = $_POST['lastName'] ?? null;
+$email = $_POST['email'] ?? null;
+$login = $_POST['login'] ?? null;
+$password = $_POST['password'] ?? null;
+$confirmPassword = $_POST['confirmPassword'] ?? null;
+$phone = $_POST['tel'] ?? null;
+$role = $_POST['role'] ?? 'client';
+
+$allowedRoles = ['client', 'trainer', 'admin', 'fizjo'];
+if (!in_array($role, $allowedRoles)) {
+    echo "<script>console.error('Niepoprawna rola: $role');</script>";
+}
+
+$phone = "+48" . $phone;
+if ($password !== $confirmPassword) {
+    header('Location: ../../frontend/sites/sign-in.html?error=missmatch');
+    exit;
+}
+if (!$firstName || !$lastName || !$email || !$login || !$password || !$confirmPassword) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Wszystkie pola są wymagane']);
+    exit;
+}
+
+$stmt = $conn->prepare("SELECT * FROM Users WHERE Login = ? OR Email = ?");
+$stmt->bind_param("ss", $login, $email);
+$stmt->execute();
+$result = $stmt->get_result();
+if ($result->num_rows > 0) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Login lub email już istnieje']);
+    exit;
+}
+$stmt->close();
+
+$hash = password_hash($password, PASSWORD_DEFAULT);
+
+$stmt = $conn->prepare("INSERT INTO Users (Login, PasswordHash, FirstName, LastName, Email, PhoneNumber, Role) VALUES (?, ?, ?, ?, ?, ?, ?)");
+$stmt->bind_param("sssssss", $login, $hash, $firstName, $lastName, $email, $phone, $role);
+
+if ($stmt->execute()) {
+    echo json_encode(['success' => true, 'message' => 'Rejestracja zakończona sukcesem']);
+    header('Location: ../../frontend/sites/log-in.html?success=1');
+    exit;
+} else {
+    http_response_code(500);
+    echo json_encode(['error' => 'Błąd rejestracji: ' . $stmt->error]);
+    header('Location: ../../frontend/sites/register.html?error=błąd_sql');
+    exit;
+}
+
+    $stmt->close();
+    $conn->close();
+
+
+
+
+?>
