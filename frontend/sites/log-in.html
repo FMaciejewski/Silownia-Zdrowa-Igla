@@ -32,6 +32,21 @@
                 <label for="password">Hasło:</label>
                 <input type="password" id="password" name="password" required>
 
+                <script>
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const error = urlParams.get('error');
+                
+                    if (error) {
+                        const errorMessage = {
+                            empty: 'Hasła nie pasują do siebie.',
+                            wrong: 'Hasło lub login są błędne.',
+                        };
+                
+                        const errorMsg= document.getElementById('error-message');
+                        errorMsg.textContent = errorMessage[error] || 'Wystąpił nieznany błąd.';
+                    }
+                </script>
+
                 <button type="submit">Zaloguj się</button>
             </form>
         </article>

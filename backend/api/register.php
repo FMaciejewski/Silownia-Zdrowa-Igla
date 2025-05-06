@@ -24,11 +24,6 @@ $confirmPassword = $_POST['confirmPassword'] ?? null;
 $phone = $_POST['tel'] ?? null;
 $role = $_POST['role'] ?? 'client';
 
-$allowedRoles = ['client', 'trainer', 'admin', 'fizjo'];
-if (!in_array($role, $allowedRoles)) {
-    echo "<script>console.error('Niepoprawna rola: $role');</script>";
-}
-
 $phone = "+48" . $phone;
 if ($password !== $confirmPassword) {
     header('Location: ../../frontend/sites/sign-in.html?error=missmatch');
