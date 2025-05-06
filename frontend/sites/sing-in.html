@@ -20,7 +20,13 @@
         <article>
             <h2>Rejestracja</h2>
             <form action="../../backend/api/auth.php" method="POST">
-                <label for="username">Nazwa użytkownika:</label>
+                <label for="imie">Imię:</label>
+                <input type="text" id="imie" name="imie" required>
+
+                <label for="nazwisko">Nazwisko:</label>
+                <input type="text" id="nazwisko" name="nazwisko" required>
+
+                <label for="username">Login:</label>
                 <input type="text" id="username" name="username" required>
                 
                 <label for="email">Adres e-mail:</label>
