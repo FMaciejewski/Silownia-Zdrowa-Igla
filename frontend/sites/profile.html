@@ -6,6 +6,26 @@
     <link rel="stylesheet" href="../dist/style.css">
     <script type="module" src="js/main.js"></script>
     <link rel="icon" href="../assets/images/logo.png" type="image/x-icon">
+    <script>
+        fetch("../../backend/api/profile.php")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Nieautoryzowany dostęp albo błąd serwera');
+            }
+            return response.json();
+        })
+        .then(data => {
+            const profileSection = document.getElementById('profile-info');
+            profileSection.innerHTML = `
+                <h2>Profil użytkownika</h2>
+                <p><strong>Imię:</strong> ${data.imie}</p>
+                <p><strong>Nazwisko:</strong> ${data.nazwisko}</p>
+                <p><strong>Login:</strong> ${data.login}</p>
+                <p><strong>Email:</strong> ${data.email}</p>
+                <p><strong>Numer telefonu:</strong> ${data.telefon}</p>
+            `;
+        });
+    </script>
 </head>
 <body>
     <header>
@@ -20,14 +40,8 @@
     </header>
     <main>
         <section>
-            <h2>Witaj, [Imię]!</h2>
-            <p>Twoje dane:</p>
-            <ul>
-                <li>Nazwa użytkownika: [Nazwa użytkownika]</li>
-                <li>Email: [Email]</li>
-                <li>Numer telefonu: </li>
-                <li>Rodzaj konta: </li>
-            </ul>
+            <div id="profile-info"></div>
+            </div>
             <button id="edit-profile">Edytuj profil</button>
         </section>
         <article>
