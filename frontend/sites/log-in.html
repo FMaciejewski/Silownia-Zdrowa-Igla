@@ -4,10 +4,16 @@
     <meta charset="UTF-8">
     <title>Siłownia Zdrowa Igła</title>
     <link rel="stylesheet" href="../dist/style.css">
-    <script type="module" src="js/main.js"></script>
+    <script type="module" src="/Silownia-Zdrowa-Igla/frontend/js/main.js"></script>
     <link rel="icon" href="../assets/images/logo.png" type="image/x-icon">
 </head>
 <body>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        if (params.get("success") === "1") {
+            alert("Rejestracja zakończona sukcesem! Zaloguj się.");
+        }
+    </script>
     <header>
         <nav calss="navbar">
             <div class="logging">
@@ -28,6 +34,21 @@
                 
                 <label for="password">Hasło:</label>
                 <input type="password" id="password" name="password" required>
+
+                <script>
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const error = urlParams.get('error');
+                
+                    if (error) {
+                        const errorMessage = {
+                            empty: 'Hasła nie pasują do siebie.',
+                            wrong: 'Hasło lub login są błędne.',
+                        };
+                
+                        const errorMsg= document.getElementById('error-message');
+                        errorMsg.textContent = errorMessage[error] || 'Wystąpił nieznany błąd.';
+                    }
+                </script>
 
                 <button type="submit">Zaloguj się</button>
             </form>

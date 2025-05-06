@@ -33,7 +33,7 @@ if ($tableCheck->num_rows === 0) {
     LastName VARCHAR(50) NOT NULL,
     Email VARCHAR(100) NOT NULL UNIQUE,
     PhoneNumber VARCHAR(15),
-    Role ENUM('client', 'trainer', 'admin') DEFAULT 'client',
+    Role ENUM('client', 'trainer', 'admin', 'fizjo') DEFAULT 'client',
     CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     LastLogin TIMESTAMP NULL
 ) ENGINE=InnoDB;

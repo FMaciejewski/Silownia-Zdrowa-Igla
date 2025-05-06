@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Siłownia Zdrowa Igła</title>
     <link rel="stylesheet" href="../dist/style.css">
-    <script type="module" src="js/main.js"></script>
+    <script src="/Silownia-Zdrowa-Igla/frontend/js/main.js" type="module"></script>
     <link rel="icon" href="../assets/images/logo.png" type="image/x-icon">
 </head>
 <body>
@@ -22,34 +22,54 @@
     <main>
         <article>
             <h2>Rejestracja</h2>
-            <form action="../../backend/api/auth.php" method="POST">
+            <form action="../../backend/api/register.php" method="POST">
                 <label for="imie">Imię:</label>
-                <input type="text" id="imie" name="imie" required>
+                <input type="text" id="imie" name="firstName" required>
 
                 <label for="nazwisko">Nazwisko:</label>
-                <input type="text" id="nazwisko" name="nazwisko" required>
+                <input type="text" id="nazwisko" name="lastName" required>
 
                 <label for="username">Login:</label>
-                <input type="text" id="username" name="username" required>
+                <input type="text" id="username" name="login" required>
                 
                 <label for="email">Adres e-mail:</label>
                 <input type="email" id="email" name="email" required>
 
                 <label for="tel">Numer telefonu:</label>
-                <input type="tel" id="tel" name="tel" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" placeholder="123-456-789">
+                <input type="tel" id="tel" name="tel" required pattern="[0-9]{3}[0-9]{3}[0-9]{3}" placeholder="123 456 789">
                 
                 <label for="password">Hasło:</label>
                 <input type="password" id="password" name="password" required>
                 
                 <label for="confirm_password">Potwierdź hasło:</label>
-                <input type="password" id="confirm_password" name="confirm_password" required>
+                <input type="password" id="confirm_password" name="confirmPassword" required>
 
                 <label for="account_type">Typ konta: </label>
-                <select id="account_type" name="account_type" required>
-                    <option value="klient">Klient</option>
-                    <option value="trener">Trener</option>
+                <select id="account_type" name="role" required>
+                    <option value="client">Klient</option>
+                    <option value="trainer">Trener</option>
                     <option value="fizjo">Fizjoterapeuta</option>
                 </select>
+
+                <div class="error-msg">
+                    <p id="error-message"></p>
+                    <script>
+                        const urlParams = new URLSearchParams(window.location.search);
+                        const error = urlParams.get('error');
+                    
+                        if (error) {
+                            const errorMessage = {
+                                missmatch: 'Hasła nie pasują do siebie.',
+                                required: 'Wszystkie pola są wymagane.',
+                                already_registered: 'Login lub email już istnieje.'
+                            };
+                    
+                            const errorMsg= document.getElementById('error-message');
+                            errorMsg.textContent = errorMessage[error] || 'Wystąpił nieznany błąd.';
+                        }
+                    </script>
+                </div>
+
 
                 <button type="submit">Zarejestruj się</button>
             </form>

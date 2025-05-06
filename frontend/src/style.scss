@@ -233,6 +233,12 @@ footer {
     border-top: 1px solid #555555;
     padding-top: 1rem;
 }
+.error-message {
+    color: red;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 1rem;
+}
 @media (max-width: 768px) {
     .navbar-menu {
         flex-direction: column;
