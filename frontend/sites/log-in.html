@@ -1,107 +1,153 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pl">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Siłownia Zdrowa Igła</title>
-    <link rel="stylesheet" href="../dist/style.css">
-    <script type="module" src="/Silownia-Zdrowa-Igla/frontend/js/main.js"></script>
-    <link rel="icon" href="../assets/images/logo.png" type="image/x-icon">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
-</head>
-<body>
-    
+    <link rel="stylesheet" href="../dist/style.css" />
+    <script
+      type="module"
+      src="/Silownia-Zdrowa-Igla/frontend/js/main.js"
+    ></script>
+    <link rel="icon" href="../assets/images/logo.png" type="image/x-icon" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/your-fontawesome-kit.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
     <header>
-        <nav calss="navbar">
-            <div class="logging">
-                <a class="signin-btn" href="../index.html">Strona Główna</a>
-                <a class="login-btn" href="sites/sign-in.html">Zarejestruj się</a>
-            </div>
-            <div class="navbar-logo">
-                <img class="logo" src="../assets/images/logo.png" alt="logo">
-                <h1 class="logo-name">Siłownia Zdrowa Igła</h1>
-            </div>
+      <nav calss="navbar">
+        <div class="logging">
+          <a class="signin-btn" href="../index.html">Strona Główna</a>
+          <a class="login-btn" href="../sites/sign-in.html">Zarejestruj się</a>
+        </div>
+        <div class="navbar-logo">
+          <img class="logo" src="../assets/images/logo.png" alt="logo" />
+          <h1 class="logo-name">Siłownia Zdrowa Igła</h1>
+        </div>
+      </nav>
     </header>
     <main>
-        <div class="success-msg" id="success-message"></div>
-        <script defer>
+      <div class="success-msg" id="success-message"></div>
+      <script defer>
         const params = new URLSearchParams(window.location.search);
-    if (params.get("success") === "1") {
         const successMessage = document.getElementById("success-message");
-        successMessage.textContent = "Rejestracja przebiegła pomyślnie. Możesz się teraz zalogować.";
-        successMessage.style.opacity = '1';
-        setTimeout(() => {
-            successMessage.style.opacity = '0';
-            successMessage.style.display = 'none';
-        }, 6000);
-    }
-    </script>
-        <article>
-            <h2>Rejestracja</h2>
-            <form action="../../backend/api/loging.php" method="POST">
-                <label for="username">Nazwa użytkownika:</label>
-                <input type="text" id="username" name="username" required>
-                
-                <label for="password">Hasło:</label>
-                <input type="password" id="password" name="password" required>
-                <div class="error-msg">
-                    <p id="error-message"></p>
-                <script>
-                    const urlParams = new URLSearchParams(window.location.search);
-                    const error = urlParams.get('error');
-                
-                    if (error) {
-                        const errorMessage = {
-                            empty: 'Hasła nie pasują do siebie.',
-                            wrong: 'Hasło lub login są błędne.',
-                        };
-                
-                        const errorMsg= document.getElementById('error-message');
-                        errorMsg.textContent = errorMessage[error] || 'Wystąpił nieznany błąd.';
-                    }
-                </script>
-                </div>
+        if (params.get("success") === "1") {
+          successMessage.textContent =
+            "Rejestracja przebiegła pomyślnie. Możesz się teraz zalogować.";
+          successMessage.style.opacity = "1";
+          setTimeout(() => {
+            successMessage.style.opacity = "0";
+            successMessage.style.display = "none";
+          }, 6000);
+        } else if (params.get("success") === "2") {
+          const successMessage = document.getElementById("success-message");
+          successMessage.textContent =
+            "Hasło zostało zmienione. Możesz się teraz zalogować.";
+          successMessage.style.opacity = "1";
+          setTimeout(() => {
+            successMessage.style.opacity = "0";
+            successMessage.style.display = "none";
+          }, 6000);
+        } else {
+          successMessage.style.opacity = "0";
+          successMessage.style.display = "none";
+          successMessage.style.visibility = "hidden";
+        }
+      </script>
+      <article>
+        <h2>Rejestracja</h2>
+        <form action="../../backend/api/loging.php" method="POST">
+          <label for="username">Nazwa użytkownika:</label>
+          <input type="text" id="username" name="username" required />
 
-                <button type="submit">Zaloguj się</button>
-            </form>
-        </article>
+          <label for="password">Hasło:</label>
+          <input type="password" id="password" name="password" required />
+          <div class="error-msg">
+            <p id="error-message"></p>
+            <script>
+              const urlParams = new URLSearchParams(window.location.search);
+              const error = urlParams.get("error");
+
+              if (error) {
+                const errorMessage = {
+                  empty: "Hasła nie pasują do siebie.",
+                  wrong: "Hasło lub login są błędne.",
+                };
+
+                const errorMsg = document.getElementById("error-message");
+                errorMsg.textContent =
+                  errorMessage[error] || "Wystąpił nieznany błąd.";
+              }
+            </script>
+          </div>
+
+          <button type="submit">Zaloguj się</button>
+        </form>
+        <div class="adds">
+          <p class="new-acc">
+            Nie masz jeszcze konta?
+            <a href="../sites/sign-in.html">Zarejestruj się</a>
+          </p>
+          <p class="no-pass">
+            Nie pamiętasz hasła?
+            <a href="../sites/pass-forget.html">Odzyskaj hasło</a>
+          </p>
+        </div>
+      </article>
     </main>
     <footer>
-        <section class="footer-upper">
+      <section class="footer-upper">
         <div class="footer1">
-            <div class="footer-logo">
-                <img class="logo" src="../assets/images/logo.png" alt="logo">
-                <h1 class="logo-name">Siłownia Zdrowa Igła</h1>
-            </div>
-            <div class="addres">
-                <p>ul. Zdrowa 1</p>
-                <p>00-000 Warszawa</p>
-            </div>
+          <div class="footer-logo">
+            <img class="logo" src="../assets/images/logo.png" alt="logo" />
+            <h1 class="logo-name">Siłownia Zdrowa Igła</h1>
+          </div>
+          <div class="addres">
+            <p>ul. Zdrowa 1</p>
+            <p>00-000 Warszawa</p>
+          </div>
         </div>
         <div class="opens">
-            <p>Godziny techniczne:</p>
-            <p>Poniedziałek - Piątek: 3:00 - 4:00</p>
-            <p>Sobota - Niedziela: 2:00 - 3:00</p>
-            <p>Wszystkie zajęcia odbywają się w godzinach otwarcia siłowni</p>
+          <p>Godziny techniczne:</p>
+          <p>Poniedziałek - Piątek: 3:00 - 4:00</p>
+          <p>Sobota - Niedziela: 2:00 - 3:00</p>
+          <p>Wszystkie zajęcia odbywają się w godzinach otwarcia siłowni</p>
         </div>
         <div class="footer2">
-            <div class="social-media">
-                <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube"></i></a>
-                <a href="https://www.tiktok.com/" target="_blank"><i class="fab fa-tiktok"></i></a>
-            </div>
-            <div class="contact">
-                <p>W razie pytań: </p>
-                <p><a href="mailto:silowniaZdrowaIgla@gmail.com">silowniazdrowaigla@gmail.com</a></p>
-                <p><a href="tel:+48999999999">+48 999 999 999</a></p>
-            </div>
+          <div class="social-media">
+            <a href="https://www.facebook.com/" target="_blank"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="https://www.instagram.com/" target="_blank"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="https://www.youtube.com/" target="_blank"
+              ><i class="fab fa-youtube"></i
+            ></a>
+            <a href="https://www.tiktok.com/" target="_blank"
+              ><i class="fab fa-tiktok"></i
+            ></a>
+          </div>
+          <div class="contact">
+            <p>W razie pytań:</p>
+            <p>
+              <a href="mailto:silowniaZdrowaIgla@gmail.com"
+                >silowniazdrowaigla@gmail.com</a
+              >
+            </p>
+            <p><a href="tel:+48999999999">+48 999 999 999</a></p>
+          </div>
         </div>
-</section>
-        <div class="copyright">
-            <p>Siłownia Zdrowa Igła &copy; 2023 Wszelkie prawa zastrzeżone</p>
-            <p>Wykonanie: Filip Maciejewski, Adrian Cichocki</p>
-        </div>
+      </section>
+      <div class="copyright">
+        <p>Siłownia Zdrowa Igła &copy; 2023 Wszelkie prawa zastrzeżone</p>
+        <p>Wykonanie: Filip Maciejewski, Adrian Cichocki</p>
+      </div>
     </footer>
-</body>
+  </body>
 </html>

@@ -1,4 +1,5 @@
 # Siłownia Zdrowa Igła
+
 Nasz projekt ma spelniac podane zalozenia:
 
 -Stworzenie strony dla klubu sportowego/silowni, który pomoże w jej zarzadzaniu
@@ -8,8 +9,8 @@ Nasz projekt ma spelniac podane zalozenia:
 -Backend: PHP, MySQL
 
 -API: będzie
- 
--Działanie strony: 
+
+-Działanie strony:
 
 &emsp;1) Założenie konta
 
@@ -25,5 +26,4 @@ Nasz projekt ma spelniac podane zalozenia:
 
 &emsp;7) Zarządzanie wizytami(fizjo)
 
-&emsp;8) Wysyłanie wiadomości 
-  
+&emsp;8) Wysyłanie wiadomości
