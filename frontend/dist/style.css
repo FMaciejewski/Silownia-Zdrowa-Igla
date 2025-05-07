@@ -62,7 +62,10 @@ header {
   border-radius: 5px;
   text-decoration: none;
   font-weight: bold;
-  transition: background 0.3s, color 0.3s, border 0.3s;
+  transition:
+    background 0.3s,
+    color 0.3s,
+    border 0.3s;
   border: 2px solid #ffffff;
 }
 
@@ -91,7 +94,8 @@ header {
 
 .hero {
   position: relative;
-  background: url("https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D") no-repeat center center/cover;
+  background: url("https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+    no-repeat center center/cover;
   color: #ffffff;
   text-align: center;
   padding: 5rem 2rem;
@@ -117,7 +121,8 @@ header {
   max-width: 600px;
 }
 
-.treners, .cennik {
+.treners,
+.cennik {
   padding: 2rem;
   background: #ffffff;
   margin: 1rem auto;
@@ -131,7 +136,8 @@ header {
   margin-top: 1rem;
 }
 
-.cennik th, .cennik td {
+.cennik th,
+.cennik td {
   padding: 1rem;
   text-align: center;
   border: 1px solid #ddd;
@@ -205,7 +211,9 @@ footer {
 .social-media a {
   color: #ffffff;
   font-size: 1.8rem;
-  transition: transform 0.3s, color 0.3s;
+  transition:
+    transform 0.3s,
+    color 0.3s;
 }
 
 .social-media a:hover {

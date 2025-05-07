@@ -35,7 +35,9 @@ if ($tableCheck->num_rows === 0) {
     PhoneNumber VARCHAR(15),
     Role ENUM('client', 'trainer', 'admin', 'fizjo') DEFAULT 'client',
     CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    LastLogin TIMESTAMP NULL
+    LastLogin TIMESTAMP NULL,
+    Token VARCHAR(8) DEFAULT NULL;
+    TokenCreatedAt TIMESTAMP NULL
 ) ENGINE=InnoDB;
     ";
     if (!$conn->query($sql)) {
