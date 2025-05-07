@@ -35,7 +35,8 @@ if ($tableCheck->num_rows === 0) {
     PhoneNumber VARCHAR(15),
     Role ENUM('client', 'trainer', 'admin', 'fizjo') DEFAULT 'client',
     CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    LastLogin TIMESTAMP NULL
+    LastLogin TIMESTAMP NULL,
+    ProfilePicture VARCHAR(255) DEAFULT 'assets/images/default_profile.png'
 ) ENGINE=InnoDB;
     ";
     if (!$conn->query($sql)) {

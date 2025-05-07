@@ -36,9 +36,8 @@
     }
     </script>
     <main>
-        <section>
+        <section class="profile-section">
             <div id="profile-info"></div>
-            </div>
             <button id="edit-profile">Edytuj profil</button>
         </section>
         <article>
@@ -51,7 +50,7 @@
                 <li><a href="../assets/documents/zasady.pdf" target="_blank">Regulamin</a></li>
         </article>
     </main>
-    <footer>
+    <footer id="kontakt">
         <section class="footer-upper">
         <div class="footer1">
             <div class="footer-logo">
@@ -78,7 +77,7 @@
             </div>
             <div class="contact">
                 <p>W razie pytań: </p>
-                <p><a href="mailto:silowniaZdrowaIgla@gmail.com">silowniazdrowaigla@gmail.com</a></p>
+                <p><a href="mailto:silownia.zdrowa.igla@gmail.com">silowniazdrowaigla@gmail.com</a></p>
                 <p><a href="tel:+48999999999">+48 999 999 999</a></p>
             </div>
         </div>
@@ -100,6 +99,7 @@
             const profileSection = document.getElementById('profile-info');
             profileSection.innerHTML = `
                 <h2>Profil użytkownika</h2>
+                <img src="../${data.ProfilePicture}" alt="Profile Image" class="profile-image">
                 <p><strong>Imię:</strong> ${data.FirstName}</p>
                 <p><strong>Nazwisko:</strong> ${data.LastName}</p>
                 <p><strong>Login:</strong> ${data.Login}</p>

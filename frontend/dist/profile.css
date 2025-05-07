@@ -225,101 +225,154 @@ footer {
     transform: translateY(-100px);
   }
 }
+@media (max-width: 768px) {
+  .navbar-menu {
+    flex-direction: column;
+    align-items: center;
+  }
+  .logging {
+    margin-top: 1rem;
+  }
+  .hero blockquote {
+    font-size: 1.2rem;
+  }
+  .main-loging {
+    aspect-ratio: unset;
+    padding: 2rem;
+  }
+}
 main {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  justify-content: flex-start;
-  padding: 3rem 1rem;
-  background: linear-gradient(135deg, #f5faff, #ffffff);
+  flex-direction: column;
+  padding: 4rem 1rem;
+  background: linear-gradient(135deg, #e0ecff, #ffffff);
   min-height: 100vh;
 }
 main section {
-  width: 100%;
-  max-width: 800px;
   background: #fff;
   border-radius: 20px;
-  padding: 2rem;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-  margin-bottom: 2rem;
-  animation: fadeIn 0.6s ease-out forwards;
-  transform: translateY(20px);
-  opacity: 0;
-}
-main section h2 {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #333;
-  margin-bottom: 1.5rem;
+  padding: 3rem;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
+  gap: 1rem;
+  animation: fadeIn 0.5s ease-out forwards;
 }
-main section p {
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.profile-image {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #4a90e2;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.profile-image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+}
+
+.profile-section p {
   font-size: 1rem;
-  margin-bottom: 0.75rem;
-  color: #444;
-  line-height: 1.5;
+  color: #333;
+  margin: 0.3rem 0;
+  font-weight: 500;
 }
-main section p strong {
-  color: #222;
+.profile-section p strong {
+  color: #4a90e2;
   font-weight: 700;
 }
-main section button#edit-profile {
+
+#edit-profile {
   margin-top: 2rem;
+  padding: 0.75rem 1.5rem;
   background: linear-gradient(135deg, #4a90e2, #005caa);
   color: #fff;
   border: none;
-  padding: 0.75rem 1.2rem;
+  border-radius: 12px;
   font-size: 1rem;
   font-weight: 700;
-  border-radius: 12px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background 0.3s ease, transform 0.3s ease;
 }
-main section button#edit-profile:hover {
+#edit-profile:hover {
   background: linear-gradient(135deg, #005caa, #003f7f);
   transform: scale(1.05);
 }
+
+#edit-profile {
+  margin-top: 2rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #4a90e2, #005caa);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+#edit-profile:hover {
+  background: linear-gradient(135deg, #005caa, #003f7f);
+  transform: scale(1.05);
+}
+
 main article {
-  max-width: 800px;
   background: #fff;
   border-radius: 20px;
-  padding: 2rem;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  padding: 2.5rem;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
+  animation: fadeIn 0.5s ease-out forwards;
 }
 main article h2 {
+  color: #4a90e2;
   font-size: 1.8rem;
   margin-bottom: 1rem;
-  color: #333;
   text-align: center;
 }
 main article p {
   font-size: 1rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
   color: #555;
-  margin-bottom: 1rem;
 }
 main article ul {
   list-style: none;
-  padding-left: 0;
-}
-main article ul li {
-  margin-bottom: 0.75rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
 }
 main article ul li a {
-  color: #4a90e2;
-  font-weight: 600;
+  display: inline-block;
   text-decoration: none;
+  color: #005caa;
+  font-weight: 600;
   transition: color 0.2s ease;
 }
 main article ul li a:hover {
   color: #003f7f;
-  text-decoration: underline;
-}
-
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /*# sourceMappingURL=profile.css.map */
