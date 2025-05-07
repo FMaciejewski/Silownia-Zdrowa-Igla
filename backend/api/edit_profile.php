@@ -25,7 +25,7 @@ if ($profilePicture && $profilePicture['error'] === 0) {
         die("Niedozwolony format pliku.");
     }
 
-    $newFileName = uniqid('profile_', true) . '.' . $fileExtension;
+    $newFileName = uniqid('profile_', false) . '.' . $fileExtension;
     $uploadDir = '../../frontend/assets/images/';
     $uploadPath = $uploadDir . $newFileName;
 
@@ -38,14 +38,24 @@ if ($profilePicture && $profilePicture['error'] === 0) {
 }
 
 $ID = $_SESSION['user_id'];
+
 if ($profilePicturePath) {
+    $relativePath = 'assets/images/' . basename($profilePicturePath);
     $query = "UPDATE users SET FirstName = ?, LastName = ?, Login = ?, Email = ?, PhoneNumber = ?, ProfilePicture = ? WHERE UserID = ?";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("ssssssi",$firstName, $lastName, $login, $email, $phoneNumber, $profilePicturePath, $ID);
+    $stmt->bind_param("ssssssi",$firstName, $lastName, $login, $email, $phoneNumber, $relativePath, $ID);
+    if(!$stmt->execute()) {
+        die("Błąd podczas aktualizacji danych: " . $stmt->error);
+    }
+    $stmt->close();
 } else {
     $query = "UPDATE users SET FirstName = ?, LastName = ?, Login = ?, Email = ?, PhoneNumber = ? WHERE UserID = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("sssssi",$firstName, $lastName, $login, $email, $phoneNumber, $ID);
+    if(!$stmt->execute()) {
+        die("Błąd podczas aktualizacji danych: " . $stmt->error);
+    }
+    $stmt->close();
 }
 
 header('Location: ../../frontend/sites/profile.html');

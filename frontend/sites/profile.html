@@ -123,7 +123,7 @@
                     <label for="email">Email:</label>
                     <input type="email" id="email" name="email" value="${data.Email}" class="profile-input" required>
                     <label for="phone-number">Numer telefonu:</label>
-                    <input type="tel" id="phone-number" name="phone-number" value="${data.PhoneNumber}" class="profile-input" required>
+                    <input type="text" required pattern="^\+48\d{9}$" id="phone-number" name="phone-number" value="${data.PhoneNumber}" class="profile-input" required>
                     <button type="submit" id="save-profile-btn">Zapisz zmiany</button>
                 </form>`;
             if(data.typ_konta === 'trener'){
