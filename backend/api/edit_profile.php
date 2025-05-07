@@ -12,7 +12,7 @@ $firstName = $_POST['first-name'] ?? '';
 $lastName = $_POST['last-name'] ?? '';
 $login = $_POST['login'] ?? '';
 $email = $_POST['email'] ?? '';
-$phoneNumber = $_POST['phone-number'] ?? '';
+$phoneNumber = "+48" . $_POST['phone-number'] ?? '';
 $profilePicture = $_FILES['profile-picture'] ?? null;
 
 if ($profilePicture && $profilePicture['error'] === 0) {

@@ -109,11 +109,12 @@
                 <p><strong>Email:</strong> ${data.Email}</p>
                 <p><strong>Numer telefonu:</strong> ${data.PhoneNumber}</p>
             `;
+            const nrTelefonu = data.PhoneNumber.slice(3, 12);
             profileForm.innerHTML = `
                 <h2>Edytuj profil</h2>
                 <form id="edit-profile-form" method="POST" action="../../backend/api/edit_profile.php" enctype="multipart/form-data">
                     <label for="profile-picture">Zdjęcie profilowe:</label>
-                    <input type="file" id="profile-picture" name="profile-picture">
+                    <input type="file" id="profile-picture" name="profile-picture" accept=".jpg, .jpeg, .png">
                     <label for="first-name">Imię:</label>
                     <input type="text" id="first-name" name="first-name" value="${data.FirstName}" class="profile-input" required>
                     <label for="last-name">Nazwisko:</label>
@@ -123,7 +124,7 @@
                     <label for="email">Email:</label>
                     <input type="email" id="email" name="email" value="${data.Email}" class="profile-input" required>
                     <label for="phone-number">Numer telefonu:</label>
-                    <input type="text" required pattern="^\+48\d{9}$" id="phone-number" name="phone-number" value="${data.PhoneNumber}" class="profile-input" required>
+                    <input type="tel" required pattern="[0-9]{3}[0-9]{3}[0-9]{3}" id="phone-number" name="phone-number" value="${nrTelefonu}" class="profile-input" required>
                     <button type="submit" id="save-profile-btn">Zapisz zmiany</button>
                 </form>`;
             if(data.typ_konta === 'trener'){
