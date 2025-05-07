@@ -290,32 +290,15 @@ main section {
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
 }
 
-.profile-section p {
+.profile-section p, label {
   font-size: 1rem;
   color: #333;
   margin: 0.3rem 0;
   font-weight: 500;
 }
-.profile-section p strong {
+.profile-section p strong, label strong {
   color: #4a90e2;
   font-weight: 700;
-}
-
-#edit-profile {
-  margin-top: 2rem;
-  padding: 0.75rem 1.5rem;
-  background: linear-gradient(135deg, #4a90e2, #005caa);
-  color: #fff;
-  border: none;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.3s ease;
-}
-#edit-profile:hover {
-  background: linear-gradient(135deg, #005caa, #003f7f);
-  transform: scale(1.05);
 }
 
 #edit-profile {
@@ -373,6 +356,47 @@ main article ul li a {
 }
 main article ul li a:hover {
   color: #003f7f;
+}
+
+.profile-input {
+  width: 90%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  transition: border 0.3s ease;
+}
+.profile-input:focus {
+  border-color: #4a90e2;
+  outline: none;
+}
+
+#save-profile-btn {
+  margin-top: 2rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #4a90e2, #005caa);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+#save-profile-btn:hover {
+  background: linear-gradient(135deg, #005caa, #003f7f);
+  transform: scale(1.05);
+}
+
+label {
+  color: #4a90e2;
+  font-weight: 700;
+  margin: 0.3rem 0;
+  font-size: 1rem;
+  display: block;
+  text-align: left;
 }
 
 /*# sourceMappingURL=profile.css.map */
