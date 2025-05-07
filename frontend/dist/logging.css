@@ -15,13 +15,6 @@ body {
   background-color: #f4f4f9;
 }
 
-#error-message {
-  color: red;
-  font-size: 1.2rem;
-  text-align: center;
-  margin-top: 1rem;
-}
-
 header {
   background: #4a90e2;
   color: #ffffff;
@@ -205,6 +198,10 @@ footer {
   .hero blockquote {
     font-size: 1.2rem;
   }
+  .main-loging {
+    aspect-ratio: unset;
+    padding: 2rem;
+  }
 }
 main {
   display: flex;
@@ -296,13 +293,6 @@ button[type=submit] {
 button[type=submit]:hover {
   background: linear-gradient(135deg, #005caa, #003f7f);
   transform: scale(1.03);
-}
-
-@media (max-width: 700px) {
-  .main-loging {
-    aspect-ratio: unset;
-    padding: 2rem;
-  }
 }
 
 /*# sourceMappingURL=logging.css.map */
