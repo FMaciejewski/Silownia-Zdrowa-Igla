@@ -29,17 +29,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $null = NULL;
 
     if ($user) {
+
+        if ($password !== $confirmPassword) {
+            header('Location: ../../frontend/sites/new-password.html?error=missmatch&token=' . $token);
+            exit;
+        }
+        
         $stmt = $conn->prepare("UPDATE Users SET Token = ?, LastLogin = NOW() WHERE UserID = ?");
         $stmt->bind_param("si", $null, $user['UserID']);
         $stmt->execute();
         $stmt->close();
-
-
-
-        if ($password !== $confirmPassword) {
-            header('Location: ../../frontend/sites/new-password.html?error=missmatch');
-            exit;
-        }
 
         $hash = password_hash($password, PASSWORD_DEFAULT);
         $stmt = $conn->prepare("UPDATE Users SET PasswordHash = ? WHERE UserID = ?");
