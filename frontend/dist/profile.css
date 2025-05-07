@@ -194,115 +194,132 @@ footer {
   color: #ffffff;
 }
 
-@media (max-width: 768px) {
-  .navbar-menu {
-    flex-direction: column;
-    align-items: center;
-  }
-  .logging {
-    margin-top: 1rem;
-  }
-  .hero blockquote {
-    font-size: 1.2rem;
-  }
-}
 main {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  padding: 4rem 1rem;
-  background: linear-gradient(135deg, #e0ecff, #ffffff);
+  justify-content: flex-start;
+  padding: 3rem 1rem;
+  background: linear-gradient(135deg, #f5faff, #ffffff);
   min-height: 100vh;
 }
-
-.main-loging {
+main section {
   width: 100%;
-  max-width: 600px;
-  aspect-ratio: 1/1;
-  background: #ffffff;
-  padding: 3rem;
-  border-radius: 20px;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  animation: popIn 0.5s ease-out forwards;
-  transform: scale(0.95);
-}
-
-@keyframes popIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-.main-loging h2 {
-  text-align: center;
-  color: #4a90e2;
-  font-size: 2.2rem;
-  margin-bottom: 2rem;
-  letter-spacing: 0.5px;
-  font-weight: 800;
-}
-
-.register-form {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.2rem;
-}
-
-.register-form label {
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 0.4rem;
-  font-size: 1rem;
-}
-
-.register-form input,
-.register-form select {
-  padding: 0.75rem 1rem;
-  border: 2px solid #e0e0e0;
-  border-radius: 10px;
-  background: #fafafa;
-  font-size: 1rem;
-  transition: all 0.25s ease;
-}
-
-.register-form input:focus,
-.register-form select:focus {
-  border-color: #4a90e2;
+  max-width: 800px;
   background: #fff;
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.25);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  margin-bottom: 2rem;
+  animation: fadeIn 0.6s ease-out forwards;
+  transform: translateY(20px);
+  opacity: 0;
 }
-
-button[type=submit] {
-  margin-top: 1rem;
+main section h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+main section p {
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  color: #444;
+  line-height: 1.5;
+}
+main section p strong {
+  color: #222;
+  font-weight: 700;
+}
+main section button#edit-profile {
+  margin-top: 2rem;
   background: linear-gradient(135deg, #4a90e2, #005caa);
   color: #fff;
   border: none;
-  padding: 0.9rem;
-  font-size: 1.1rem;
+  padding: 0.75rem 1.2rem;
+  font-size: 1rem;
   font-weight: 700;
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
-
-button[type=submit]:hover {
+main section button#edit-profile:hover {
   background: linear-gradient(135deg, #005caa, #003f7f);
-  transform: scale(1.03);
+  transform: scale(1.05);
+}
+main article {
+  max-width: 800px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+main article h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #333;
+  text-align: center;
+}
+main article p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+main article ul {
+  list-style: none;
+  padding-left: 0;
+}
+main article ul li {
+  margin-bottom: 0.75rem;
+}
+main article ul li a {
+  color: #4a90e2;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+main article ul li a:hover {
+  color: #003f7f;
+  text-decoration: underline;
 }
 
-@media (max-width: 700px) {
-  .main-loging {
-    aspect-ratio: unset;
-    padding: 2rem;
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.success-msg {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 1rem;
+  border: 1px solid #c3e6cb;
+  border-radius: 5px;
+  text-align: center;
+  position: fixed;
+  top: 10%;
+  left: 40%;
+  transform: translateX(-50%);
+  width: 20%;
+  opacity: 0;
+  animation: showMessage 5s forwards;
+  z-index: 1000;
+}
+
+@keyframes showMessage {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100px);
   }
 }
 
-/*# sourceMappingURL=logging.css.map */
+/*# sourceMappingURL=profile.css.map */

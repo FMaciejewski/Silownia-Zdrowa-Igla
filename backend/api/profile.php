@@ -1,7 +1,8 @@
 <?php
 session_start();
+header('Content-Type: application/json');
 
-$db = new mysqli('localhost', 'root', '', 'twoja_baza');
+$db = new mysqli('localhost', 'root', '', 'silowniazdrowaigla');
 
 if ($db->connect_error) {
     http_response_code(500);
@@ -11,14 +12,14 @@ if ($db->connect_error) {
 
 $id = $_SESSION['user_id'];
 
-$stmt = $db->prepare("SELECT * FROM users WHERE id = ?");
+$stmt = $db->prepare("SELECT * FROM users WHERE UserID = ?");
 $stmt->bind_param("i", $id);
 $stmt->execute();
 $result = $stmt->get_result();
 $data = $result->fetch_assoc();
 
 if($data['Role'] == 'trener'){
-    $stmt = $db->prepare("SELECT Specialization, Bio, HourlyRate FROM trainers WHERE id = ?");
+    $stmt = $db->prepare("SELECT Specialization, Bio, HourlyRate FROM trainers WHERE TrainerID = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $result = $stmt->get_result();

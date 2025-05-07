@@ -10,17 +10,17 @@
     <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    
     <header>
-        <nav calss="navbar">
+        <nav class="navbar">
             <div class="logging">
                 <a class="signin-btn" href="../index.html">Strona Główna</a>
-                <a class="login-btn" href="sites/sign-in.html">Zarejestruj się</a>
+                <a class="login-btn" href="sign-in.html">Zarejestruj się</a>
             </div>
             <div class="navbar-logo">
                 <img class="logo" src="../assets/images/logo.png" alt="logo">
                 <h1 class="logo-name">Siłownia Zdrowa Igła</h1>
             </div>
+        </nav>
     </header>
     <main>
         <div class="success-msg" id="success-message"></div>
@@ -36,9 +36,9 @@
         }, 6000);
     }
     </script>
-        <article>
-            <h2>Rejestracja</h2>
-            <form action="../../backend/api/loging.php" method="POST">
+        <article class="main-loging">
+            <h2>Logowanie</h2>
+            <form action="../../backend/api/loging.php" method="POST" class="register-form">
                 <label for="username">Nazwa użytkownika:</label>
                 <input type="text" id="username" name="username" required>
                 

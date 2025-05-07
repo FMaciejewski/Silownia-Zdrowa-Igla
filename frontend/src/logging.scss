@@ -1,4 +1,113 @@
-@use 'base/baza.scss';
-@use 'layout/header.scss';
-@use 'layout/footer.scss';
-@use 'layout/logo.scss';
+@use './base/baza.scss';
+@use './layout/header.scss';
+@use './layout/footer.scss';
+@use './layout/logo.scss';
+
+@media (max-width: 768px) {
+    .navbar-menu {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .logging {
+        margin-top: 1rem;
+    }
+
+    .hero blockquote {
+        font-size: 1.2rem;
+    }
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 1rem;
+    background: linear-gradient(135deg, #e0ecff, #ffffff);
+    min-height: 100vh;
+}
+
+.main-loging {
+    width: 100%;
+    max-width: 600px;
+    aspect-ratio: 1 / 1;
+    background: #ffffff;
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    animation: popIn 0.5s ease-out forwards;
+    transform: scale(0.95);
+}
+
+@keyframes popIn {
+    0% { opacity: 0; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+.main-loging h2 {
+    text-align: center;
+    color: #4a90e2;
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+    letter-spacing: 0.5px;
+    font-weight: 800;
+}
+
+.register-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+}
+
+.register-form label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.4rem;
+    font-size: 1rem;
+}
+
+.register-form input,
+.register-form select {
+    padding: 0.75rem 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    background: #fafafa;
+    font-size: 1rem;
+    transition: all 0.25s ease;
+}
+
+.register-form input:focus,
+.register-form select:focus {
+    border-color: #4a90e2;
+    background: #fff;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.25);
+}
+
+button[type="submit"] {
+    margin-top: 1rem;
+    background: linear-gradient(135deg, #4a90e2, #005caa);
+    color: #fff;
+    border: none;
+    padding: 0.9rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background: linear-gradient(135deg, #005caa, #003f7f);
+    transform: scale(1.03);
+}
+
+@media (max-width: 700px) {
+    .main-loging {
+        aspect-ratio: unset;
+        padding: 2rem;
+    }
+}

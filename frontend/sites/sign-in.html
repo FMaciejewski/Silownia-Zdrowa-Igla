@@ -11,7 +11,7 @@
 </head>
 <body>
     <header>
-        <nav calss="navbar">
+        <nav class="navbar">
             <div class="logging">
                 <a class="signin-btn" href="../index.html">Strona Główna</a>
                 <a class="login-btn" href="log-in.html">Zaloguj się</a>
@@ -20,11 +20,12 @@
                 <img class="logo" src="../assets/images/logo.png" alt="logo">
                 <h1 class="logo-name">Siłownia Zdrowa Igła</h1>
             </div>
+        </nav>
     </header>
     <main>
-        <article>
+        <article class="main-loging">
             <h2>Rejestracja</h2>
-            <form action="../../backend/api/register.php" method="POST">
+            <form action="../../backend/api/register.php" method="POST" class="register-form">
                 <label for="imie">Imię:</label>
                 <input type="text" id="imie" name="firstName" required>
 

@@ -3,41 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Siłownia Zdrowa Igła</title>
-    <link rel="stylesheet" href="../dist/style.css">
+    <link rel="stylesheet" href="../dist/profile.css">
     <script type="module" src="js/main.js"></script>
     <link rel="icon" href="../assets/images/logo.png" type="image/x-icon">
-    <script>
-        fetch("../../backend/api/profile.php")
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Nieautoryzowany dostęp albo błąd serwera');
-            }
-            return response.json();
-        })
-        .then(data => {
-            const profileSection = document.getElementById('profile-info');
-            profileSection.innerHTML = `
-                <h2>Profil użytkownika</h2>
-                <p><strong>Imię:</strong> ${data.imie}</p>
-                <p><strong>Nazwisko:</strong> ${data.nazwisko}</p>
-                <p><strong>Login:</strong> ${data.login}</p>
-                <p><strong>Email:</strong> ${data.email}</p>
-                <p><strong>Numer telefonu:</strong> ${data.telefon}</p>
-            `;
-            if(data.typ_konta === 'trener'){
-                profileSection.innerHTML += `	
-                    <p><strong>Specjalizacja:</strong> ${data.specjation}</p>
-                    <p><strong>Biografia:</strong> ${data.bio}</p>
-                    <p><strong>Godzinówka:</strong> ${data.HourlyRate}</p>`;
-            }
-        });
-    </script>
+    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
-        <nav calss="navbar">
+        <nav class="navbar">
             <div class="logging">
                 <a class="signin-btn" href="../index.html">Strona Główna</a>
             </div>
@@ -45,6 +20,7 @@
                 <img class="logo" src="../assets/images/logo.png" alt="logo">
                 <h1 class="logo-name">Siłownia Zdrowa Igła</h1>
             </div>
+        </nav>
     </header>
     <div class="success-msg" id="success-message"></div>
         <script defer>
@@ -112,5 +88,31 @@
             <p>Wykonanie: Filip Maciejewski, Adrian Cichocki</p>
         </div>
     </footer>
+    <script>
+        fetch("../../backend/api/profile.php")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Nieautoryzowany dostęp albo błąd serwera');
+            }
+            return response.json();
+        })
+        .then(data => {
+            const profileSection = document.getElementById('profile-info');
+            profileSection.innerHTML = `
+                <h2>Profil użytkownika</h2>
+                <p><strong>Imię:</strong> ${data.FirstName}</p>
+                <p><strong>Nazwisko:</strong> ${data.LastName}</p>
+                <p><strong>Login:</strong> ${data.Login}</p>
+                <p><strong>Email:</strong> ${data.Email}</p>
+                <p><strong>Numer telefonu:</strong> ${data.PhoneNumber}</p>
+            `;
+            if(data.typ_konta === 'trener'){
+                profileSection.innerHTML += `	
+                    <p><strong>Specjalizacja:</strong> ${data.Specialization}</p>
+                    <p><strong>Biografia:</strong> ${data.Bio}</p>
+                    <p><strong>Godzinówka:</strong> ${data.HourlyRate}</p>`;
+            }
+        });
+    </script>
 </body>
 </html>
