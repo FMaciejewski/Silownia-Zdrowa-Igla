@@ -46,3 +46,25 @@ button[type="submit"]:hover {
     background: linear-gradient(135deg, #005caa, #003f7f);
     transform: scale(1.03);
 }
+
+textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    resize: none;
+}
+
+#additional-fields label,
+#additional-fields input,
+#additional-fields textarea,
+#additional-fields select {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#additional-fields {
+    gap: 1rem;
+}

@@ -159,3 +159,13 @@ label{
     justify-content: center;
     flex-wrap: wrap;
   }
+
+textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    resize: none;
+}

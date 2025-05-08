@@ -18,8 +18,8 @@ $stmt->execute();
 $result = $stmt->get_result();
 $data = $result->fetch_assoc();
 
-if($data['Role'] == 'trener'){
-    $stmt = $db->prepare("SELECT Specialization, Bio, HourlyRate FROM trainers WHERE TrainerID = ?");
+if($data['Role'] == 'trainer'){
+    $stmt = $db->prepare("SELECT Specialization, Bio, HourlyRate FROM trainers WHERE UserID = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $result = $stmt->get_result();

@@ -17,10 +17,10 @@ $profilePicture = $_FILES['profile-picture'] ?? null;
 
 $ID = $_SESSION['user_id'];
 
-$stmt = $conn->prepare("SELECT PRofilePicture FROM users WHERE UserID = ?");
+$stmt = $conn->prepare("SELECT PRofilePicture, Role FROM users WHERE UserID = ?");
 $stmt->bind_param("i", $ID);
 $stmt->execute();
-$stmt->bind_result($currentProfilePicture);
+$stmt->bind_result($currentProfilePicture, $role);
 $stmt->fetch();
 $stmt->close();
 
@@ -71,6 +71,19 @@ if ($profilePicturePath) {
     $stmt->close();
 }
 
+if($role == 'trainer'){
+    $specialization = $_POST['specialization'] ?? '';
+    $bio = $_POST['bio'] ?? '';
+    $hourlyRate = $_POST['hourly-rate'] ?? '';
+
+    $query = "UPDATE trainers SET Specialization = ?, Bio = ?, HourlyRate = ? WHERE UserID = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("ssdi", $specialization, $bio, $hourlyRate, $ID);
+    if(!$stmt->execute()) {
+        die("Błąd podczas aktualizacji danych: " . $stmt->error);
+    }
+    $stmt->close();
+}
 header('Location: ../../frontend/sites/profile.html');
 exit();
 ?>
