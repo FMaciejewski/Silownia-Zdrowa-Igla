@@ -41,8 +41,9 @@
         <section class="hero">
             <blockquote>"Najlepszy czas na zasadzenie drzewa był 20 lat temu, drugi najlepszy jest dziś"</blockquote>
         </section>
-        <article class="treners" id="trenerzy">
+        <article class="treners">
             <h3>Nasi trenerzy</h3>
+            <div id="trenerzy"></div>     
         </article>
         <aside>
             <!--
@@ -135,7 +136,7 @@
       </div>
     </footer>
 </body>
-<script>
+<script defer>
     fetch("../backend/api/session.php" , { cache: "no-store" })
     .then(response => response.json())
     .then(data => {
@@ -151,6 +152,25 @@
                 <a class="signin-btn" href="sites/sign-in.html">Zarejestruj się</a>
                 <a class="login-btn" href="sites/log-in.html">Zaloguj się</a>`;
         }
+    })
+
+    fetch("../backend/api/trainers.php")
+    .then(response => response.json())
+    .then(data => {
+      data.forEach(trener => {
+        const trenerDiv = document.createElement('div');
+        trenerDiv.classList.add('trener');
+        trenerDiv.innerHTML = `
+          <img src="${trener.ProfilePicture}" alt="${trener.FirstName} ${trener.LastName}" />
+          <h4>${trener.FirstName} ${trener.LastName}</h4>
+          <h3>${trener.Specialization}</h3>
+          <p>${trener.Bio}</p>
+          <p>Telefon: ${trener.PhoneNumber}</p>
+          <p>Email: <a href="mailto:${trener.Email}">${trener.Email}</a></p>
+          <p>Cena: ${trener.HourlyRate} zł/h</p>
+        `;
+        document.getElementById("trenerzy").appendChild(trenerDiv);
+      });
     })
 </script>
 </html>
