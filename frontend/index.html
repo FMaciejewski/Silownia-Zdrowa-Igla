@@ -10,6 +10,8 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.css">
+    
     <script
       src="https://kit.fontawesome.com/your-fontawesome-kit.js"
       crossorigin="anonymous"
@@ -30,7 +32,7 @@
                 <li><a href="#">O nas</a></li>
                 <li><a href="#trenerzy">Trenerzy</a></li>
                 <li><a href="#cennik">Cennik</a></li>
-                <li><a href="#">Zajęcia</a></li>
+                <li><a href="#calendar">Zajęcia</a></li>
                 <li><a href="#kontakt">Kontakt</a></li>
             </ul>
             
@@ -45,11 +47,64 @@
             <h3>Nasi trenerzy</h3>
             <div id="trenerzy"></div>     
         </article>
-        <aside>
-            <!--
-            tu dać kalendarz z zajęciami
-        -->
-        </aside>
+        <div id="calendar">
+        </div>
+        <script src="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.js"></script>
+        <script>
+          const Calendar = tui.Calendar;
+
+          const calendar = new Calendar('#calendar', {
+            defaultView: 'month',
+            usageStatistics: false,
+            taskView: false,
+            scheduleView: ['time'],
+            template: {
+              monthDayname: ({ day }) => `<span class="day-name">${day}</span>`
+            }
+          });
+
+          calendar.createEvents([
+            {
+              id: '1',
+              calendarId: '1',
+              title: 'Siłka z koksem',
+              category: 'time',
+              start: '2025-05-10T10:30:00',
+              end: '2025-05-10T12:30:00',
+              color: '#fff',
+              bgColor: '#e91e63',
+              dragBgColor: '#e91e63',
+              borderColor: '#e91e63'
+            },
+            {
+              id: '2',
+              calendarId: '1',
+              title: 'Cardio z płaczem',
+              category: 'time',
+              start: '2025-05-15T14:00:00',
+              end: '2025-05-15T15:00:00',
+              bgColor: '#0077cc',
+              borderColor: '#0077cc',
+              dragBgColor: '#0077cc'
+            }
+          ]);
+
+          // Dodawanie eventów przez kliknięcie dnia (przykład na pałę)
+          calendar.on('clickDayname', e => {
+            const now = new Date();
+            const event = {
+              id: String(Date.now()),
+              calendarId: '1',
+              title: 'Nowy Event',
+              category: 'time',
+              start: new Date(now.setHours(12, 0, 0)),
+              end: new Date(now.setHours(13, 0, 0)),
+              bgColor: '#00e676',
+              borderColor: '#00e676'
+            };
+            calendar.createEvents([event]);
+          });
+        </script>
         <article class="cennik" id="cennik">
             <h2>Plany karnetów</h2>
             <table>
@@ -172,5 +227,8 @@
         document.getElementById("trenerzy").appendChild(trenerDiv);
       });
     })
+    
+
+
 </script>
 </html>

@@ -380,4 +380,12 @@ footer {
   max-width: 600px;
 }
 
+#calendar {
+  margin: 30px auto;
+  max-width: 1000px;
+  height: 1000px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #00ffd5;
+}
+
 /*# sourceMappingURL=style.css.map */
