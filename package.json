@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch-scss": "sass --watch frontend/src/style.scss:frontend/dist/style.css",
-    "build-scss": "sass frontend/src/style.scss:frontend/dist/style.css --style=compressed",
+    "watch-scss": "sass --watch frontend/src:frontend/dist",
+    "build-scss": "sass frontend/src/style.scss:frontend/dist/style.css --style=compressed"
     "prettier": "prettier --write ."
   },
   "keywords": [],

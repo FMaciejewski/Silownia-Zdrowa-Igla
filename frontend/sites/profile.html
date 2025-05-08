@@ -3,29 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <title>Siłownia Zdrowa Igła</title>
-    <link rel="stylesheet" href="../dist/style.css" />
+    <link rel="stylesheet" href="../dist/profile.css">
     <script type="module" src="js/main.js"></script>
-    <link rel="icon" href="../assets/images/logo.png" type="image/x-icon" />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-      rel="stylesheet"
-    />
-    <script
-      src="https://kit.fontawesome.com/your-fontawesome-kit.js"
-      crossorigin="anonymous"
-    ></script>
-  </head>
-  <body>
+    <link rel="icon" href="../assets/images/logo.png" type="image/x-icon">
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+</head>
+<body>
     <header>
-      <nav calss="navbar">
-        <div class="logging">
-          <a class="signin-btn" href="../index.html">Strona Główna</a>
-        </div>
-        <div class="navbar-logo">
-          <img class="logo" src="../assets/images/logo.png" alt="logo" />
-          <h1 class="logo-name">Siłownia Zdrowa Igła</h1>
-        </div>
-      </nav>
+        <nav class="navbar">
+            <div class="logging">
+                <a class="signin-btn" href="../index.html">Strona Główna</a>
+            </div>
+            <div class="navbar-logo">
+                <img class="logo" src="../assets/images/logo.png" alt="logo">
+                <h1 class="logo-name">Siłownia Zdrowa Igła</h1>
+            </div>
+        </nav>
     </header>
     <div class="success-msg" id="success-message"></div>
     <script defer>
@@ -45,44 +40,26 @@
       }
     </script>
     <main>
-      <section>
-        <h2>Witaj, [Imię]!</h2>
-        <p>Twoje dane:</p>
-        <ul>
-          <li>Nazwa użytkownika: [Nazwa użytkownika]</li>
-          <li>Email: [Email]</li>
-          <li>Numer telefonu:</li>
-          <li>Rodzaj konta:</li>
-        </ul>
-        <button id="edit-profile">Edytuj profil</button>
-      </section>
-      <article>
-        <h2>Dokumenty</h2>
-        <p>Wszystkie dokumenty są dostępne w formacie PDF.</p>
-        <ul>
-          <li>
-            <a href="../assets/documents/umowa.pdf" target="_blank">Umowa</a>
-          </li>
-          <li>
-            <a href="../assets/documents/zgoda.pdf" target="_blank"
-              >Zgoda na przetwarzanie danych osobowych</a
-            >
-          </li>
-          <li>
-            <a href="../assets/documents/zdrowie.pdf" target="_blank"
-              >Oświadczenie o stanie zdrowia</a
-            >
-          </li>
-          <li>
-            <a href="../assets/documents/zasady.pdf" target="_blank"
-              >Regulamin</a
-            >
-          </li>
-        </ul>
-      </article>
+        <section class="profile-section">
+            <div id="profile-info"></div>
+            <button id="edit-profile" onclick="zamiana()">Edytuj profil</button>
+        </section>
+        <section class="profile-section" style="display: none;">
+            <div id="profile-form"></div>
+        </section>
+        <article>
+            <h2>Dokumenty</h2>
+            <p>Wszystkie dokumenty są dostępne w formacie PDF.</p>
+            <ul>
+                <li><a href="../assets/documents/umowa.pdf" target="_blank">Umowa</a></li>
+                <li><a href="../assets/documents/zgoda.pdf" target="_blank">Zgoda na przetwarzanie danych osobowych</a></li>
+                <li><a href="../assets/documents/zdrowie.pdf" target="_blank">Oświadczenie o stanie zdrowia</a></li>
+                <li><a href="../assets/documents/zasady.pdf" target="_blank">Regulamin</a></li>
+            </ul>
+        </article>
     </main>
-    <footer>
-      <section class="footer-upper">
+    <footer id="kontakt">
+        <section class="footer-upper">
         <div class="footer1">
           <div class="footer-logo">
             <img class="logo" src="../assets/images/logo.png" alt="logo" />
@@ -100,29 +77,22 @@
           <p>Wszystkie zajęcia odbywają się w godzinach otwarcia siłowni</p>
         </div>
         <div class="footer2">
-          <div class="social-media">
-            <a href="https://www.facebook.com/" target="_blank"
-              ><i class="fab fa-facebook-f"></i
-            ></a>
-            <a href="https://www.instagram.com/" target="_blank"
-              ><i class="fab fa-instagram"></i
-            ></a>
-            <a href="https://www.youtube.com/" target="_blank"
-              ><i class="fab fa-youtube"></i
-            ></a>
-            <a href="https://www.tiktok.com/" target="_blank"
-              ><i class="fab fa-tiktok"></i
-            ></a>
-          </div>
-          <div class="contact">
-            <p>W razie pytań:</p>
-            <p>
-              <a href="mailto:silowniaZdrowaIgla@gmail.com"
-                >silowniazdrowaigla@gmail.com</a
-              >
-            </p>
-            <p><a href="tel:+48999999999">+48 999 999 999</a></p>
-          </div>
+            <div class="social-media">
+                <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.tiktok.com/" target="_blank"><i class="fab fa-tiktok"></i></a>
+            </div>
+            <div class="contact">
+                <p>W razie pytań: </p>
+                <p><a href="mailto:silownia.zdrowa.igla@gmail.com">silowniazdrowaigla@gmail.com</a></p>
+                <p><a href="tel:+48999999999">+48 999 999 999</a></p>
+            </div>
+        </div>
+</section>
+        <div class="copyright">
+            <p>Siłownia Zdrowa Igła &copy; 2023 Wszelkie prawa zastrzeżone</p>
+            <p>Wykonanie: Filip Maciejewski, Adrian Cichocki</p>
         </div>
       </section>
       <div class="copyright">
@@ -130,5 +100,66 @@
         <p>Wykonanie: Filip Maciejewski, Adrian Cichocki</p>
       </div>
     </footer>
-  </body>
+    <script>
+        fetch("../../backend/api/profile.php")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Nieautoryzowany dostęp albo błąd serwera');
+            }
+            return response.json();
+        })
+        .then(data => {
+            const profileSection = document.getElementById('profile-info');
+            const profileForm = document.getElementById('profile-form');
+            profileSection.innerHTML = `
+                <h2>Profil użytkownika</h2>
+                <img src="../${data.ProfilePicture}" alt="Profile Image" class="profile-image">
+                <p><strong>Imię:</strong> ${data.FirstName}</p>
+                <p><strong>Nazwisko:</strong> ${data.LastName}</p>
+                <p><strong>Login:</strong> ${data.Login}</p>
+                <p><strong>Email:</strong> ${data.Email}</p>
+                <p><strong>Numer telefonu:</strong> ${data.PhoneNumber}</p>
+            `;
+            const nrTelefonu = data.PhoneNumber.slice(3, 12);
+            profileForm.innerHTML = `
+                <h2>Edytuj profil</h2>
+                <form id="edit-profile-form" method="POST" action="../../backend/api/edit_profile.php" enctype="multipart/form-data">
+                    <label for="profile-picture">Zdjęcie profilowe:</label>
+                    <input type="file" id="profile-picture" name="profile-picture" accept=".jpg, .jpeg, .png">
+                    <label for="first-name">Imię:</label>
+                    <input type="text" id="first-name" name="first-name" value="${data.FirstName}" class="profile-input" required>
+                    <label for="last-name">Nazwisko:</label>
+                    <input type="text" id="last-name" name="last-name" value="${data.LastName}" class="profile-input" required>
+                    <label for="login">Login:</label>
+                    <input type="text" id="login" name="login" value="${data.Login}" class="profile-input" required>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" value="${data.Email}" class="profile-input" required>
+                    <label for="phone-number">Numer telefonu:</label>
+                    <input type="tel" required pattern="[0-9]{3}[0-9]{3}[0-9]{3}" id="phone-number" name="phone-number" value="${nrTelefonu}" class="profile-input" required>
+                    <button type="submit" id="save-profile-btn">Zapisz zmiany</button>
+                </form>`;
+            if(data.typ_konta === 'trener'){
+                profileSection.innerHTML += `	
+                    <p><strong>Specjalizacja:</strong> ${data.Specialization}</p>
+                    <p><strong>Biografia:</strong> ${data.Bio}</p>
+                    <p><strong>Godzinówka:</strong> ${data.HourlyRate}</p>`;
+                profileForm.innerHTML += `
+                    <label for="specialization">Specjalizacja:</label>
+                    <input type="text" id="specialization" name="specialization" value="${data.Specialization}" required>
+                    <label for="bio">Biografia:</label>
+                    <textarea id="bio" name="bio" required>${data.Bio}</textarea>
+                    <label for="hourly-rate">Godzinówka:</label>
+                    <input type="number" id="hourly-rate" name="hourly-rate" value="${data.HourlyRate}" required>
+                `;
+            }
+        });
+
+        function zamiana() {
+            const profileSection = document.querySelector('.profile-section:nth-of-type(1)');
+            const profileForm = document.querySelector('.profile-section:nth-of-type(2)');
+            profileSection.style.display = 'none';
+            profileForm.style.display = 'block';
+        }
+    </script>
+</body>
 </html>

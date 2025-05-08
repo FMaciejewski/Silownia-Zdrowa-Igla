@@ -3,40 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <title>Siłownia Zdrowa Igła</title>
-    <link rel="stylesheet" href="../dist/style.css" />
-    <script
-      src="/Silownia-Zdrowa-Igla/frontend/js/main.js"
-      type="module"
-    ></script>
-    <link rel="icon" href="../assets/images/logo.png" type="image/x-icon" />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-      rel="stylesheet"
-    />
-    <script
-      src="https://kit.fontawesome.com/your-fontawesome-kit.js"
-      crossorigin="anonymous"
-    ></script>
-  </head>
-  <body>
+    <link rel="stylesheet" href="../dist/logging.css">
+    <script src="/Silownia-Zdrowa-Igla/frontend/js/main.js" type="module"></script>
+    <link rel="icon" href="../assets/images/logo.png" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+</head>
+<body>
     <header>
-      <nav calss="navbar">
-        <div class="logging">
-          <a class="signin-btn" href="../index.html">Strona Główna</a>
-          <a class="login-btn" href="log-in.html">Zaloguj się</a>
-        </div>
-        <div class="navbar-logo">
-          <img class="logo" src="../assets/images/logo.png" alt="logo" />
-          <h1 class="logo-name">Siłownia Zdrowa Igła</h1>
-        </div>
-      </nav>
+        <nav class="navbar">
+            <div class="logging">
+                <a class="signin-btn" href="../index.html">Strona Główna</a>
+                <a class="login-btn" href="log-in.html">Zaloguj się</a>
+            </div>
+            <div class="navbar-logo">
+                <img class="logo" src="../assets/images/logo.png" alt="logo">
+                <h1 class="logo-name">Siłownia Zdrowa Igła</h1>
+            </div>
+        </nav>
     </header>
     <main>
-      <article>
-        <h2>Rejestracja</h2>
-        <form action="../../backend/api/register.php" method="POST">
-          <label for="imie">Imię:</label>
-          <input type="text" id="imie" name="firstName" required />
+        <article class="main-loging">
+            <h2>Rejestracja</h2>
+            <form action="../../backend/api/register.php" method="POST" class="register-form">
+                <label for="imie">Imię:</label>
+                <input type="text" id="imie" name="firstName" required>
 
           <label for="nazwisko">Nazwisko:</label>
           <input type="text" id="nazwisko" name="lastName" required />
