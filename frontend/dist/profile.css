@@ -301,7 +301,7 @@ main section {
   font-weight: 700;
 }
 
-#edit-profile {
+.profile-button {
   margin-top: 2rem;
   padding: 0.75rem 1.5rem;
   background: linear-gradient(135deg, #4a90e2, #005caa);
@@ -313,7 +313,7 @@ main section {
   cursor: pointer;
   transition: background 0.3s ease, transform 0.3s ease;
 }
-#edit-profile:hover {
+.profile-button:hover {
   background: linear-gradient(135deg, #005caa, #003f7f);
   transform: scale(1.05);
 }
@@ -373,23 +373,6 @@ main article ul li a:hover {
   outline: none;
 }
 
-#save-profile-btn {
-  margin-top: 2rem;
-  padding: 0.75rem 1.5rem;
-  background: linear-gradient(135deg, #4a90e2, #005caa);
-  color: #fff;
-  border: none;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.3s ease;
-}
-#save-profile-btn:hover {
-  background: linear-gradient(135deg, #005caa, #003f7f);
-  transform: scale(1.05);
-}
-
 label {
   color: #4a90e2;
   font-weight: 700;
@@ -397,6 +380,13 @@ label {
   font-size: 1rem;
   display: block;
   text-align: left;
+}
+
+#button-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 /*# sourceMappingURL=profile.css.map */
