@@ -3,12 +3,12 @@ header('Content-Type: text/plain; charset=utf-8');
 
 $to = urldecode($_GET['to'] ?? '');
 $subject = urldecode($_GET['subject'] ?? '');
-$body = urldecode($_GET['body'] ?? '');
+$text = urldecode($_GET['body'] ?? '');
 
 $fromEmail = 'silownia.zdrowa.igla@gmail.com';
 $appPassword = 'uxbpnndgujrvqbkg';
 
-function sendEmail($to, $subject, $body, $fromEmail, $appPassword) {
+function sendEmail($to, $subject, $body, $fromEmail, $appPassword, $text) {
     $host = 'smtp.gmail.com';
     $port = 587;
     $timeout = 30;
@@ -60,14 +60,41 @@ function sendEmail($to, $subject, $body, $fromEmail, $appPassword) {
     $response = fgets($socket, 512);
     if (substr($response, 0, 3) != '354') return "DATA failed: $response";
 
+
     $headers = "From: Siłownia Zdrowa Igła <$fromEmail>\r\n";
     $headers .= "Reply-To: $fromEmail\r\n";
-    $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
     $headers .= "MIME-Version: 1.0\r\n";
     $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+    $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
     $headers .= "Date: " . date('r') . "\r\n";
+    $headers .= "Message-ID: <" . time() . "@localhost>\r\n";
 
-    $fullMessage = $headers . "\r\n" . $body . "\r\n.\r\n";
+
+    $body = <<<HTML
+    <!DOCTYPE html>
+    <html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <title>Witamy!</title>
+    </head>
+    <body style="font-family: Arial, sans-serif; line-height: 1.6;">
+        <h2>$subject Siłownia Zdrowa Igła!</h2>
+        <p>$text</p>
+
+        <hr>
+        <p>
+            <strong>Siłownia Zdrowa Igła</strong><br>
+            ul. Przykładowa 123<br>
+            00-000 Warszawa<br>
+            Tel: +48 123 456 789
+        </p>
+    </body>
+    </html>
+    HTML;
+
+    $fullMessage = "Subject: $subject\r\n" . $headers . "\r\n" . $body . "\r\n.\r\n";
+
+    
     fputs($socket, $fullMessage);
     $response = fgets($socket, 512);
     if (substr($response, 0, 3) != '250') return "Message rejected: $response";
@@ -77,6 +104,6 @@ function sendEmail($to, $subject, $body, $fromEmail, $appPassword) {
     return true;
 }
 
-$result = sendEmail($to, $subject, $body, $fromEmail, $appPassword);
+$result = sendEmail($to, $subject, $fullMessage , $fromEmail, $appPassword, $text);
 echo $result === true ? 'Message sent successfully' : 'Error: ' . $result;
 ?>

@@ -27,6 +27,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = $result->fetch_assoc();
 
     if ($user && password_verify($password, $user['PasswordHash'])) {
+        $stmt = $conn->prepare("UPDATE Users SET LastLogin = NOW() WHERE UserID = ?");
+        $stmt->bind_param("i", $user['UserID']);
+        $stmt->execute();
+        $stmt->close();
         $_SESSION['user_id'] = $user['UserID'];
         header("Location: ../../frontend/sites/profile.html?success=1");
         exit;

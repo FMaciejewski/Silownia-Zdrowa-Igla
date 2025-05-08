@@ -56,7 +56,7 @@ if ($stmt->execute()) {
     $to = urlencode($email);
     $name = urlencode($firstName . ' ' . $lastName);
     $subject = urlencode('Witamy na naszej stronie');
-    $message = urlencode('Dziękujemy za rejestrację! Cieszymy się, że jesteś z nami.');
+    $message = urlencode($firstName . ' ' . $lastName.' Dziękujemy za rejestrację! Cieszymy się, że jesteś z nami.');
 
     file_get_contents("http://localhost/Silownia-Zdrowa-Igla/backend/api/mail.php?to=$to&name=$name&subject=$subject&body=$message");
 

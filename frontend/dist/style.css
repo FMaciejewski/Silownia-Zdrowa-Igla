@@ -65,7 +65,10 @@ header {
   border-radius: 5px;
   text-decoration: none;
   font-weight: bold;
-  transition: background 0.3s, color 0.3s, border 0.3s;
+  transition:
+    background 0.3s,
+    color 0.3s,
+    border 0.3s;
   border: 2px solid #ffffff;
 }
 
@@ -149,7 +152,9 @@ footer {
 .social-media a {
   color: #ffffff;
   font-size: 1.8rem;
-  transition: transform 0.3s, color 0.3s;
+  transition:
+    transform 0.3s,
+    color 0.3s;
 }
 
 .social-media a:hover {

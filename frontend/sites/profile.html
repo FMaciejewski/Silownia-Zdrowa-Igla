@@ -1,7 +1,7 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pl">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Siłownia Zdrowa Igła</title>
     <link rel="stylesheet" href="../dist/profile.css">
     <script type="module" src="js/main.js"></script>
@@ -23,17 +23,21 @@
         </nav>
     </header>
     <div class="success-msg" id="success-message"></div>
-        <script defer>
-        const params = new URLSearchParams(window.location.search);
-    if (params.get("success") === "1") {
-        const successMessage = document.getElementById("success-message");
+    <script defer>
+      const params = new URLSearchParams(window.location.search);
+      const successMessage = document.getElementById("success-message");
+      if (params.get("success") === "1") {
         successMessage.textContent = "Zalogowano pomyślnie!";
-        successMessage.style.opacity = '1';
+        successMessage.style.opacity = "1";
         setTimeout(() => {
-            successMessage.style.opacity = '0';
-            successMessage.style.display = 'none';
+          successMessage.style.opacity = "0";
+          successMessage.style.display = "none";
         }, 6000);
-    }
+      } else {
+        successMessage.style.opacity = "0";
+        successMessage.style.display = "none";
+        successMessage.style.visibility = "hidden";
+      }
     </script>
     <main>
         <section class="profile-section">
@@ -57,20 +61,20 @@
     <footer id="kontakt">
         <section class="footer-upper">
         <div class="footer1">
-            <div class="footer-logo">
-                <img class="logo" src="../assets/images/logo.png" alt="logo">
-                <h1 class="logo-name">Siłownia Zdrowa Igła</h1>
-            </div>
-            <div class="addres">
-                <p>ul. Zdrowa 1</p>
-                <p>00-000 Warszawa</p>
-            </div>
+          <div class="footer-logo">
+            <img class="logo" src="../assets/images/logo.png" alt="logo" />
+            <h1 class="logo-name">Siłownia Zdrowa Igła</h1>
+          </div>
+          <div class="addres">
+            <p>ul. Zdrowa 1</p>
+            <p>00-000 Warszawa</p>
+          </div>
         </div>
         <div class="opens">
-            <p>Godziny techniczne:</p>
-            <p>Poniedziałek - Piątek: 3:00 - 4:00</p>
-            <p>Sobota - Niedziela: 2:00 - 3:00</p>
-            <p>Wszystkie zajęcia odbywają się w godzinach otwarcia siłowni</p>
+          <p>Godziny techniczne:</p>
+          <p>Poniedziałek - Piątek: 3:00 - 4:00</p>
+          <p>Sobota - Niedziela: 2:00 - 3:00</p>
+          <p>Wszystkie zajęcia odbywają się w godzinach otwarcia siłowni</p>
         </div>
         <div class="footer2">
             <div class="social-media">
@@ -90,6 +94,11 @@
             <p>Siłownia Zdrowa Igła &copy; 2023 Wszelkie prawa zastrzeżone</p>
             <p>Wykonanie: Filip Maciejewski, Adrian Cichocki</p>
         </div>
+      </section>
+      <div class="copyright">
+        <p>Siłownia Zdrowa Igła &copy; 2023 Wszelkie prawa zastrzeżone</p>
+        <p>Wykonanie: Filip Maciejewski, Adrian Cichocki</p>
+      </div>
     </footer>
     <script>
         fetch("../../backend/api/profile.php")

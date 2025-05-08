@@ -1,7 +1,7 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pl">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Siłownia Zdrowa Igła</title>
     <link rel="stylesheet" href="../dist/logging.css">
     <script src="/Silownia-Zdrowa-Igla/frontend/js/main.js" type="module"></script>
@@ -29,91 +29,110 @@
                 <label for="imie">Imię:</label>
                 <input type="text" id="imie" name="firstName" required>
 
-                <label for="nazwisko">Nazwisko:</label>
-                <input type="text" id="nazwisko" name="lastName" required>
+          <label for="nazwisko">Nazwisko:</label>
+          <input type="text" id="nazwisko" name="lastName" required />
 
-                <label for="username">Login:</label>
-                <input type="text" id="username" name="login" required>
-                
-                <label for="email">Adres e-mail:</label>
-                <input type="email" id="email" name="email" required>
+          <label for="username">Login:</label>
+          <input type="text" id="username" name="login" required />
 
-                <label for="tel">Numer telefonu:</label>
-                <input type="tel" id="tel" name="tel" required pattern="[0-9]{3}[0-9]{3}[0-9]{3}" placeholder="123 456 789">
-                
-                <label for="password">Hasło:</label>
-                <input type="password" id="password" name="password" required>
-                
-                <label for="confirm_password">Potwierdź hasło:</label>
-                <input type="password" id="confirm_password" name="confirmPassword" required>
+          <label for="email">Adres e-mail:</label>
+          <input type="email" id="email" name="email" required />
 
-                <label for="account_type">Typ konta: </label>
-                <select id="account_type" name="role" required>
-                    <option value="client">Klient</option>
-                    <option value="trainer">Trener</option>
-                    <option value="fizjo">Fizjoterapeuta</option>
-                </select>
+          <label for="tel">Numer telefonu:</label>
+          <input
+            type="tel"
+            id="tel"
+            name="tel"
+            required
+            pattern="[0-9]{3}[0-9]{3}[0-9]{3}"
+            placeholder="123 456 789"
+          />
 
-                <div class="error-msg">
-                    <p id="error-message"></p>
-                    <script>
-                        const urlParams = new URLSearchParams(window.location.search);
-                        const error = urlParams.get('error');
-                    
-                        if (error) {
-                            const errorMessage = {
-                                missmatch: 'Hasła nie pasują do siebie.',
-                                required: 'Wszystkie pola są wymagane.',
-                                already_registered: 'Login lub email już istnieje.'
-                            };
-                    
-                            const errorMsg= document.getElementById('error-message');
-                            errorMsg.textContent = errorMessage[error] || 'Wystąpił nieznany błąd.';
-                        }
-                    </script>
-                </div>
+          <label for="password">Hasło:</label>
+          <input type="password" id="password" name="password" required />
 
+          <label for="confirm_password">Potwierdź hasło:</label>
+          <input type="password" id="confirm_password" name="confirmPassword" required/>
 
-                <button type="submit">Zarejestruj się</button>
-            </form>
-        </article>
+          <label for="account_type">Typ konta: </label>
+          <select id="account_type" name="role" required>
+            <option value="client">Klient</option>
+            <option value="trainer">Trener</option>
+            <option value="fizjo">Fizjoterapeuta</option>
+          </select>
+
+          <div class="error-msg">
+            <p id="error-message"></p>
+            <script>
+              const urlParams = new URLSearchParams(window.location.search);
+              const error = urlParams.get("error");
+
+              if (error) {
+                const errorMessage = {
+                  missmatch: "Hasła nie pasują do siebie.",
+                  required: "Wszystkie pola są wymagane.",
+                  already_registered: "Login lub email już istnieje.",
+                };
+
+                const errorMsg = document.getElementById("error-message");
+                errorMsg.textContent =
+                  errorMessage[error] || "Wystąpił nieznany błąd.";
+              }
+            </script>
+          </div>
+
+          <button type="submit">Zarejestruj się</button>
+        </form>
+      </article>
     </main>
     <footer>
-        <section class="footer-upper">
+      <section class="footer-upper">
         <div class="footer1">
-            <div class="footer-logo">
-                <img class="logo" src="../assets/images/logo.png" alt="logo">
-                <h1 class="logo-name">Siłownia Zdrowa Igła</h1>
-            </div>
-            <div class="addres">
-                <p>ul. Zdrowa 1</p>
-                <p>00-000 Warszawa</p>
-            </div>
+          <div class="footer-logo">
+            <img class="logo" src="../assets/images/logo.png" alt="logo" />
+            <h1 class="logo-name">Siłownia Zdrowa Igła</h1>
+          </div>
+          <div class="addres">
+            <p>ul. Zdrowa 1</p>
+            <p>00-000 Warszawa</p>
+          </div>
         </div>
         <div class="opens">
-            <p>Godziny techniczne:</p>
-            <p>Poniedziałek - Piątek: 3:00 - 4:00</p>
-            <p>Sobota - Niedziela: 2:00 - 3:00</p>
-            <p>Wszystkie zajęcia odbywają się w godzinach otwarcia siłowni</p>
+          <p>Godziny techniczne:</p>
+          <p>Poniedziałek - Piątek: 3:00 - 4:00</p>
+          <p>Sobota - Niedziela: 2:00 - 3:00</p>
+          <p>Wszystkie zajęcia odbywają się w godzinach otwarcia siłowni</p>
         </div>
         <div class="footer2">
-            <div class="social-media">
-                <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube"></i></a>
-                <a href="https://www.tiktok.com/" target="_blank"><i class="fab fa-tiktok"></i></a>
-            </div>
-            <div class="contact">
-                <p>W razie pytań: </p>
-                <p><a href="mailto:silowniaZdrowaIgla@gmail.com">silowniazdrowaigla@gmail.com</a></p>
-                <p><a href="tel:+48999999999">+48 999 999 999</a></p>
-            </div>
+          <div class="social-media">
+            <a href="https://www.facebook.com/" target="_blank"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="https://www.instagram.com/" target="_blank"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="https://www.youtube.com/" target="_blank"
+              ><i class="fab fa-youtube"></i
+            ></a>
+            <a href="https://www.tiktok.com/" target="_blank"
+              ><i class="fab fa-tiktok"></i
+            ></a>
+          </div>
+          <div class="contact">
+            <p>W razie pytań:</p>
+            <p>
+              <a href="mailto:silowniaZdrowaIgla@gmail.com"
+                >silowniazdrowaigla@gmail.com</a
+              >
+            </p>
+            <p><a href="tel:+48999999999">+48 999 999 999</a></p>
+          </div>
         </div>
-</section>
-        <div class="copyright">
-            <p>Siłownia Zdrowa Igła &copy; 2023 Wszelkie prawa zastrzeżone</p>
-            <p>Wykonanie: Filip Maciejewski, Adrian Cichocki</p>
-        </div>
+      </section>
+      <div class="copyright">
+        <p>Siłownia Zdrowa Igła &copy; 2023 Wszelkie prawa zastrzeżone</p>
+        <p>Wykonanie: Filip Maciejewski, Adrian Cichocki</p>
+      </div>
     </footer>
-</body>
+  </body>
 </html>
