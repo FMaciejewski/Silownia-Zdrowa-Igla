@@ -21,6 +21,9 @@
     animation: showMessage 5s forwards;
     z-index: 1000;
 }
+.success-msg:empty {
+    display: none;
+}
 
 
 @keyframes showMessage {
