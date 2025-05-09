@@ -211,6 +211,10 @@ footer {
   z-index: 1000;
 }
 
+.success-msg:empty {
+  display: none;
+}
+
 @keyframes showMessage {
   0% {
     opacity: 0;

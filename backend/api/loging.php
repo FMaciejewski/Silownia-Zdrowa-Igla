@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute();
         $stmt->close();
         $_SESSION['user_id'] = $user['UserID'];
-        header("Location: ../../frontend/sites/profile.html?success=1");
+        header("Location: ../../frontend/sites/profile.html?success=4");
         exit;
     } else {
         header("Location: ../../frontend/sites/log-in.html?error=wrong");

@@ -24,32 +24,7 @@
     </header>
     <main>
       <div class="success-msg" id="success-message"></div>
-      <script defer>
-        const params = new URLSearchParams(window.location.search);
-        const successMessage = document.getElementById("success-message");
-          if (params.get("success") === "1") {
-                successMessage.textContent =
-                  "Rejestracja przebiegła pomyślnie. Możesz się teraz zalogować.";
-                successMessage.style.opacity = "1";
-                setTimeout(() => {
-                  successMessage.style.opacity = "0";
-                  successMessage.style.display = "none";
-                }, 6000);
-              } else if (params.get("success") === "2") {
-                const successMessage = document.getElementById("success-message");
-                successMessage.textContent =
-                  "Hasło zostało zmienione. Możesz się teraz zalogować.";
-                successMessage.style.opacity = "1";
-                setTimeout(() => {
-                  successMessage.style.opacity = "0";
-                  successMessage.style.display = "none";
-                }, 6000);
-              } else {
-                successMessage.style.opacity = "0";
-                successMessage.style.display = "none";
-                successMessage.style.visibility = "hidden";
-              }
-      </script>
+      <script src="../js/scripts/success-alert.js"></script>
         <article class="main-loging">
             <h2>Logowanie</h2>
             <form action="../../backend/api/loging.php" method="POST" class="register-form">
@@ -60,21 +35,7 @@
                 <input type="password" id="password" name="password" required>
                 <div class="error-msg">
                     <p id="error-message"></p>
-                <script>
-                    const urlParams = new URLSearchParams(window.location.search);
-                    const error = urlParams.get('error');
-                
-                    if (error) {
-                        const errorMessage = {
-                            empty: 'Hasła nie pasują do siebie.',
-                            wrong: 'Hasło lub login są błędne.',
-                        };
-
-                const errorMsg = document.getElementById("error-message");
-                errorMsg.textContent =
-                  errorMessage[error] || "Wystąpił nieznany błąd.";
-              }
-            </script>
+                <script src="../js/scripts/err-msg.js"></script>
           </div>
 
           <button type="submit">Zaloguj się</button>

@@ -166,6 +166,28 @@ if ($tableCheck->num_rows === 0) {
     FOREIGN KEY (TrainingID) REFERENCES Trainings(TrainingID)
 ) ENGINE=InnoDB;
     ";
+
+
+$tableCheck = $conn->query("SHOW COLUMNS FROM Payments LIKE 'pass_types'");
+if ($tableCheck->num_rows === 0) {
+    $sql = "
+        CREATE TABLE pass_types (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    type VARCHAR(50) NOT NULL UNIQUE,
+    month DECIMAL(10,2),
+    three_months DECIMAL(10,2),
+    year DECIMAL(10,2)
+);
+
+    ";
+    if (!$conn->query($sql)) {
+        http_response_code(500);
+        echo json_encode(['error' => 'Błąd SQL(pass_types): ' . $conn->error]);
+        exit;
+    }
+}
+
+
 if (!$conn->query($sql)) {
     http_response_code(500);
     echo json_encode(['error' => 'Błąd SQL(Payments): ' . $conn->error]);

@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: ../../frontend/sites/pass-forget.html?success=3");
         exit;
     } else {
-        header("Location: ../../frontend/sites/pass-forget.html?error=wrong");
+        header("Location: ../../frontend/sites/pass-forget.html?error=wronglogin");
         exit;
     }
 
