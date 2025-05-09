@@ -14,10 +14,7 @@ $currentPassword = $_POST['old-password'];
 $newPassword = $_POST['new-password'];
 $confirmPassword = $_POST['confirm-new-password'];
 
-if ($newPassword !== $confirmPassword) {
-    header('Location: ../../frontend/sites/profile.html?error=missmatch');
-    exit;
-}
+
 
 $userId = $_SESSION['user_id'];
 
@@ -29,16 +26,21 @@ $stmt->fetch();
 $stmt->close();
 
 if (password_verify($currentPassword, $hashedPassword)) {
-    $newHashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
-    $stmt = $conn->prepare("UPDATE users SET PasswordHash = ? WHERE UserID = ?");
-    $stmt->bind_param("si", $newHashedPassword, $userId);
-    if (!$stmt->execute()) {
-        die("Error updating password: " . $stmt->error);
+    if ($newPassword !== $confirmPassword) {
+        header('Location: ../../frontend/sites/profile.html?error=missmatch');
+        exit;
     }
-    $stmt->close();
-    header('Location: ../../frontend/sites/profile.html');
-    exit;
-    
+    else{
+        $newHashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
+        $stmt = $conn->prepare("UPDATE users SET PasswordHash = ? WHERE UserID = ?");
+        $stmt->bind_param("si", $newHashedPassword, $userId);
+        if (!$stmt->execute()) {
+            die("Error updating password: " . $stmt->error);
+        }
+        $stmt->close();
+        header('Location: ../../frontend/sites/profile.html');
+        exit;
+    }
 } else {
     header('Location: ../../frontend/sites/profile.html?error=wrongpassword');
     exit;
