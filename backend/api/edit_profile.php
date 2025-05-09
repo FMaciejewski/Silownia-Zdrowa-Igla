@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 session_start();
 
 $db_host = 'localhost';
@@ -10,7 +13,6 @@ $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
 
 $firstName = $_POST['first-name'] ?? '';
 $lastName = $_POST['last-name'] ?? '';
-$login = $_POST['login'] ?? '';
 $email = $_POST['email'] ?? '';
 $phoneNumber = "+48" . $_POST['phone-number'] ?? '';
 $profilePicture = $_FILES['profile-picture'] ?? null;
@@ -48,9 +50,9 @@ if ($profilePicture && $profilePicture['error'] === 0) {
 
 if ($profilePicturePath) {
     $relativePath = 'assets/images/' . basename($profilePicturePath);
-    $query = "UPDATE users SET FirstName = ?, LastName = ?, Login = ?, Email = ?, PhoneNumber = ?, ProfilePicture = ? WHERE UserID = ?";
+    $query = "UPDATE users SET FirstName = ?, LastName = ?, Email = ?, PhoneNumber = ?, ProfilePicture = ? WHERE UserID = ?";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("ssssssi",$firstName, $lastName, $login, $email, $phoneNumber, $relativePath, $ID);
+    $stmt->bind_param("sssssi",$firstName, $lastName, $email, $phoneNumber, $relativePath, $ID);
     if(!$stmt->execute()) {
         die("Błąd podczas aktualizacji danych: " . $stmt->error);
     }
@@ -62,9 +64,9 @@ if ($profilePicturePath) {
     }
     $stmt->close();
 } else {
-    $query = "UPDATE users SET FirstName = ?, LastName = ?, Login = ?, Email = ?, PhoneNumber = ? WHERE UserID = ?";
+    $query = "UPDATE users SET FirstName = ?, LastName = ?, Email = ?, PhoneNumber = ? WHERE UserID = ?";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("sssssi",$firstName, $lastName, $login, $email, $phoneNumber, $ID);
+    $stmt->bind_param("ssssi",$firstName, $lastName, $email, $phoneNumber, $ID);
     if(!$stmt->execute()) {
         die("Błąd podczas aktualizacji danych: " . $stmt->error);
     }
