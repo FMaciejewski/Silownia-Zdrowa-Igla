@@ -37,10 +37,7 @@
               <label for="data_rozpoczecia">Data rozpoczęcia:</label>
               <input type="date" id="data_rozpoczecia" name="data_rozpoczecia" required />
       
-              <script>
-                const today = new Date().toISOString().split('T')[0];
-                document.getElementById('data_rozpoczecia').value = today;
-              </script>
+              <script src="../js/scripts/date.js"></script>
 
           <button type="submit">Przejdź do płatnosci</button>
         </form>
