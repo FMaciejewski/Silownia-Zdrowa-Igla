@@ -7,7 +7,6 @@
     <script type="module" src="js/main.js"></script>
     <link rel="icon" href="../assets/images/logo.png" type="image/x-icon">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <script>
@@ -86,22 +85,7 @@
         </nav>
     </header>
     <div class="success-msg" id="success-message"></div>
-    <script defer>
-      const params = new URLSearchParams(window.location.search);
-      const successMessage = document.getElementById("success-message");
-      if (params.get("success") === "1") {
-        successMessage.textContent = "Zalogowano pomyślnie!";
-        successMessage.style.opacity = "1";
-        setTimeout(() => {
-          successMessage.style.opacity = "0";
-          successMessage.style.display = "none";
-        }, 6000);
-      } else {
-        successMessage.style.opacity = "0";
-        successMessage.style.display = "none";
-        successMessage.style.visibility = "hidden";
-      }
-    </script>
+    <script src="../js/scripts/success-alert.js"></script>
     <main>
         <section class="profile-section">
             <div id="profile-info"></div>

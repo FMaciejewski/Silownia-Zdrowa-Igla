@@ -3,62 +3,55 @@
   <head>
     <meta charset="UTF-8" />
     <title>Siłownia Zdrowa Igła</title>
-    <link rel="stylesheet" href="../dist/style.css">
-    <script
-      type="module"
-      src="/Silownia-Zdrowa-Igla/frontend/js/main.js"
-    ></script>
-    <link rel="icon" href="../assets/images/logo.png" type="image/x-icon" />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
+    <link rel="stylesheet" href="../dist/logging.css">
+    <script type="module" src="/Silownia-Zdrowa-Igla/frontend/js/main.js"></script>
+    <link rel="icon" href="../assets/images/logo.png" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+</head>
+<body>
     <header>
-      <nav calss="navbar">
-        <div class="logging">
-          <a class="signin-btn" href="../index.html">Strona Główna</a>
-          <a class="login-btn" href="../sites/sign-in.html">Zarejestruj się</a>
-        </div>
-        <div class="navbar-logo">
-          <img class="logo" src="../assets/images/logo.png" alt="logo" />
-          <h1 class="logo-name">Siłownia Zdrowa Igła</h1>
-        </div>
-      </nav>
+        <nav class="navbar">
+            <div class="logging">
+                <a class="signin-btn" href="../index.html">Strona Główna</a>
+                <a class="login-btn" href="sign-in.html">Zarejestruj się</a>
+            </div>
+            <div class="navbar-logo">
+                <img class="logo" src="../assets/images/logo.png" alt="logo">
+                <h1 class="logo-name">Siłownia Zdrowa Igła</h1>
+            </div>
+        </nav>
     </header>
     <main>
       <div class="success-msg" id="success-message"></div>
-      <script src="../js/scripts/validateToken.js"></script>
-      <article class="main-loging new-pass">
-        <h2>Podaj nowe hasło</h2>
-        <form action="../../backend/api/new-pass.php" method="POST" class="register-form">
-          <input type="hidden" name="token" id="token" />
-          <label for="password">Hasło:</label>
-          <input type="password" id="password" name="password" required />
+        <article class="main-loging">
+            <h2>Kup karnet</h2>
+            <form action="../../backend/api/auth.php" method="POST">
+              <label for="rodzaj">Wybierz rodzaj karnetu: </label>
+              <select id="rodzaj" name="rodzaj" required>
+                <option value="normalny">Normalny</option>
+                <option value="premium">Premium</option>
+                <option value="vip">VIP</option>
+              </select>
+      
+              <label for="data_rozpoczecia">Data rozpoczęcia:</label>
+              <input type="date" id="data_rozpoczecia" name="data_rozpoczecia" required />
+      
+              <script>
+                const today = new Date().toISOString().split('T')[0];
+                document.getElementById('data_rozpoczecia').value = today;
+              </script>
 
-          <label for="confirm_password">Potwierdź hasło:</label>
-          <input type="password" id="confirm_password" name="confirmPassword" required/>
-          </select>
-
-          <div class="error-msg">
-            <p id="error-message"></p>
-            <script src="../js/scripts/err-msg.js"></script>
-          </div>
-
-          <button type="submit">Zmień hasło</button>
+          <button type="submit">Przejdź do płatnosci</button>
         </form>
-        <div class="adds">
-          <p class="new-acc">
-            Nie masz jeszcze konta?
-            <a href="../sites/sign-in.html">Zarejestruj się</a>
-          </p>
-          <p class="no-pass">
-            Nie pamiętasz hasła?
-            <a href="../sites/pass-forget.html">Odzyskaj hasło</a>
-          </p>
-        </div>
       </article>
+      <aside class="summary">
+        <h2>Podsumowanie</h2>
+        <div class="summary-content">
+            <p class="price"></p>
+            <p>Mam kod rabatowy</p>
+        </div>
+      </aside>
     </main>
     <footer>
       <section class="footer-upper">

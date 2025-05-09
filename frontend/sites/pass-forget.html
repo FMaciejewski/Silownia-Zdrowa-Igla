@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Siłownia Zdrowa Igła</title>
-    <link rel="stylesheet" href="../dist/style.css" />
+    <link rel="stylesheet" href="../dist/style.css">
     <script
       type="module"
       src="/Silownia-Zdrowa-Igla/frontend/js/main.js"
@@ -33,62 +33,16 @@
     </header>
     <main>
       <div class="success-msg" id="success-message"></div>
-      <script defer>
-        const params = new URLSearchParams(window.location.search);
-        const successMessage = document.getElementById("success-message");
-        if (params.get("success") === "1") {
-          successMessage.textContent =
-            "Rejestracja przebiegła pomyślnie. Możesz się teraz zalogować.";
-          successMessage.style.opacity = "1";
-          setTimeout(() => {
-            successMessage.style.opacity = "0";
-            successMessage.style.display = "none";
-          }, 6000);
-        } else if (params.get("success") === "2") {
-          const successMessage = document.getElementById("success-message");
-          successMessage.textContent =
-            "Hasło zostało zmienione. Możesz się teraz zalogować.";
-          successMessage.style.opacity = "1";
-          setTimeout(() => {
-            successMessage.style.opacity = "0";
-            successMessage.style.display = "none";
-          }, 6000);
-        } else if (params.get("success") === "3") {
-          const successMessage = document.getElementById("success-message");
-          successMessage.textContent =
-            "Na podany adres email został wysłany link do zmiany hasła.";
-          successMessage.style.opacity = "1";
-          setTimeout(() => {
-            successMessage.style.opacity = "0";
-            successMessage.style.display = "none";
-          }, 6000);
-        } else {
-          successMessage.style.opacity = "0";
-          successMessage.style.display = "none";
-          successMessage.style.visibility = "hidden";
-        }
-      </script>
-      <article>
+      <script src="../js/scripts/success-alert.js"></script></script>
+      <article class="main-loging">
         <h2>Odzyskaj hasło</h2>
-        <form action="../../backend/api/forgotten.php" method="POST">
+        <form action="../../backend/api/forgotten.php" method="POST" class="register-form">
           <label for="username">Nazwa użytkownika:</label>
           <input type="text" id="username" name="username" required />
 
           <div class="error-msg">
             <p id="error-message"></p>
-            <script>
-              const urlParams = new URLSearchParams(window.location.search);
-              const error = urlParams.get("error");
-              if (error) {
-                const errorMessage = {
-                  wrong: "Brak takiego loginu.",
-                };
-
-                const errorMsg = document.getElementById("error-message");
-                errorMsg.textContent =
-                  errorMessage[error] || "Wystąpił nieznany błąd.";
-              }
-            </script>
+            <script src="../js/scripts/err-msg.js"></script>
           </div>
 
           <button type="submit">Wyślij email</button>

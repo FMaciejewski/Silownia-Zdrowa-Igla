@@ -120,6 +120,11 @@
         </script>
         <article class="cennik" id="cennik">
             <h2>Plany karnetów</h2>
+            <div class="period">
+                <div class="period-btn active" onclick="priceChange(this, '1')"></ponclick>1 miesiąc</div>
+                <div class="period-btn " onclick="priceChange(this, '3')">3 miesiące</div>
+                <div class="period-btn " onclick="priceChange(this, '12')">12 miesięcy</div>
+            </div>
             <table>
                 <tr>
                     <th>Usługa</th>
@@ -128,10 +133,10 @@
                     <th>Pakiet VIP</th>
                 </tr>
                 <tr>
-                    <td>1 miesiąc</td>
-                    <td>100zł</td>
-                    <td>200zł</td>
-                    <td>300zł</td>
+                    <td>Cena</td>
+                    <td id="price-normal"></td>
+                    <td id="price-premium"></td>
+                    <td id="price-vip"></td>
                 </tr>
                 <tr>
                     <td>Dostęp do siłowni </td>
@@ -153,6 +158,8 @@
                 </tr>
             </table>
         </article>
+        <script src="js/scripts/prices.js"></script>
+           
     </main>
     <footer id="kontakt">
         <section class="footer-upper">
@@ -244,4 +251,5 @@
 
 
 </script>
+<script src="js/scripts/session.js"></script>
 </html>

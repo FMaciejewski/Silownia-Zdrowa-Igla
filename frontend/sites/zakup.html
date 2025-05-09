@@ -30,12 +30,12 @@
         </select>
 
         <label for="data_rozpoczecia">Data rozpoczęcia:</label>
-        <input
-          type="date"
-          id="data_rozpoczecia"
-          name="data_rozpoczecia"
-          required
-        />
+        <input type="date" id="data_rozpoczecia" name="data_rozpoczecia" required />
+
+        <script>
+          const today = new Date().toISOString().split('T')[0];
+          document.getElementById('data_rozpoczecia').value = today;
+        </script>
 
         <label for="imie">Imię właściciela karty: </label>
         <input type="text" id="imie" name="imie" required />

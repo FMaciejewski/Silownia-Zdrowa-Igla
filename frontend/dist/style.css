@@ -211,6 +211,10 @@ footer {
   z-index: 1000;
 }
 
+.success-msg:empty {
+  display: none;
+}
+
 @keyframes showMessage {
   0% {
     opacity: 0;
@@ -386,6 +390,37 @@ footer {
   height: 500px;
   border-radius: 10px;
   box-shadow: 0 0 10px #00ffd5;
+  
+.period {
+  width: 36%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  background-color: #808080;
+  border-radius: 50px;
+  border: #333 solid 3px;
+}
+
+.period-btn {
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  background-color: white;
+  transition: 0.3s;
+}
+
+.period-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.period-btn.active {
+  background-color: #4a90e2;
+  color: white;
+}
+
+.period-btn.active:hover {
+  background-color: #357ABD;
 }
 
 /*# sourceMappingURL=style.css.map */
