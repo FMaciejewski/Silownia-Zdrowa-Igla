@@ -49,22 +49,6 @@
 
                     <div class="error-msg">
                         <p id="error-message"></p>
-                        <script>
-                          const urlParams = new URLSearchParams(window.location.search);
-                          const error = urlParams.get("error");
-            
-                          if (error) {
-                            const errorMessage = {
-                              missmatch: "Hasła nie pasują do siebie.",
-                              wrongpassword: "Stare hasło jest błędne.",
-                            };
-            
-                            const errorMsg = document.getElementById("error-message");
-                            errorMsg.textContent =
-                              errorMessage[error] || "Wystąpił nieznany błąd.";
-                              zamiana(1, 3);	
-                          }
-                        </script>
                     </div>
 
                     <button type="submit" class="profile-button">Zmień hasło</button>

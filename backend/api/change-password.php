@@ -14,11 +14,6 @@ $currentPassword = $_POST['old-password'];
 $newPassword = $_POST['new-password'];
 $confirmPassword = $_POST['confirm-new-password'];
 
-if ($newPassword !== $confirmPassword) {
-    header('Location: ../../frontend/sites/profile.html?error=missmatch');
-    exit;
-}
-
 $userId = $_SESSION['user_id'];
 
 $stmt = $conn->prepare("SELECT PasswordHash FROM users WHERE UserID = ?");
@@ -29,6 +24,10 @@ $stmt->fetch();
 $stmt->close();
 
 if (password_verify($currentPassword, $hashedPassword)) {
+    if ($newPassword !== $confirmPassword) {
+    header('Location: ../../frontend/sites/profile.html?error=missmatch');
+    exit;
+    }
     $newHashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
     $stmt = $conn->prepare("UPDATE users SET PasswordHash = ? WHERE UserID = ?");
     $stmt->bind_param("si", $newHashedPassword, $userId);

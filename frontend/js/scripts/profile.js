@@ -1,3 +1,10 @@
+function zamiana($a, $b) {
+    const section1 = document.querySelector('.profile-section:nth-of-type(' + $a + ')');
+    const section2 = document.querySelector('.profile-section:nth-of-type(' + $b + ')');
+    section1.style.display = 'none';
+    section2.style.display = 'block';
+}
+document.addEventListener("DOMContentLoaded", () => {
 fetch("../../backend/api/profile.php")
 .then(response => {
     if (!response.ok) {
@@ -53,10 +60,18 @@ fetch("../../backend/api/profile.php")
     
     profileForm.innerHTML = innerForm;
 });
+const urlParams = new URLSearchParams(window.location.search);
+const error = urlParams.get("error");
+            
+if (error) {
+    const errorMessage = {
+    missmatch: "Hasła nie pasują do siebie.",
+    wrongpassword: "Stare hasło jest błędne.",
+};
 
-function zamiana($a, $b) {
-    const section1 = document.querySelector('.profile-section:nth-of-type(' + $a + ')');
-    const section2 = document.querySelector('.profile-section:nth-of-type(' + $b + ')');
-    section1.style.display = 'none';
-    section2.style.display = 'block';
+const errorMsg = document.getElementById("error-message");
+errorMsg.textContent =
+    errorMessage[error] || "Wystąpił nieznany błąd.";
+    zamiana(1, 3);	
 }
+});
