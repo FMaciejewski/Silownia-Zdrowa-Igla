@@ -50,11 +50,12 @@
         <div id="calendar">
         </div>
         <script src="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.js"></script>
+        <button onclick="addEvent()">Dodaj event</button>
         <script>
           const Calendar = tui.Calendar;
 
           const calendar = new Calendar('#calendar', {
-            defaultView: 'month',
+            defaultView: 'week',
             usageStatistics: false,
             taskView: false,
             scheduleView: ['time'],
@@ -74,7 +75,8 @@
               color: '#fff',
               bgColor: '#e91e63',
               dragBgColor: '#e91e63',
-              borderColor: '#e91e63'
+              borderColor: '#e91e63',
+              isReadOnly: false
             },
             {
               id: '2',
@@ -89,21 +91,32 @@
             }
           ]);
 
-          // Dodawanie eventów przez kliknięcie dnia (przykład na pałę)
-          calendar.on('clickDayname', e => {
-            const now = new Date();
-            const event = {
-              id: String(Date.now()),
-              calendarId: '1',
-              title: 'Nowy Event',
-              category: 'time',
-              start: new Date(now.setHours(12, 0, 0)),
-              end: new Date(now.setHours(13, 0, 0)),
-              bgColor: '#00e676',
-              borderColor: '#00e676'
-            };
-            calendar.createEvents([event]);
+          calendar.setOptions({
+            week: {
+              startDayOfWeek: 1,
+              visibleWeeksCount: 2,
+              dayNames: ['Ndz' ,'Pon', 'Wt', 'Śr', 'Czw', 'Pt', 'Sob'],
+              taskView: false,
+              milestoneView: false,
+            }
           });
+
+          function addEvent() {
+            const nazwa = prompt("Podaj nazwę wydarzenia:");
+            calendar.createEvents([{
+              id: '3',
+              calendarId: '1',
+              title: nazwa,
+              category: 'time',
+              start: '2025-05-10T12:30:00',
+              end: '2025-05-10T15:30:00',
+              color: '#fff',
+              bgColor: '#e91e63',
+              dragBgColor: '#e91e63',
+              borderColor: '#e91e63',
+              isReadOnly: false
+            }]);
+          }
         </script>
         <article class="cennik" id="cennik">
             <h2>Plany karnetów</h2>
