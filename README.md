@@ -4,7 +4,7 @@ Nasz projekt ma spelniac podane zalozenia:
 
 -Stworzenie strony dla klubu sportowego/silowni, który pomoże w jej zarzadzaniu
 
--Frontend: HTML5, SCSS, Vanilla JS lub jQuery
+-Frontend: HTML5, SCSS
 
 -Backend: PHP, MySQL
 
@@ -12,18 +12,18 @@ Nasz projekt ma spelniac podane zalozenia:
 
 -Działanie strony:
 
-&emsp;1) Założenie konta
+&emsp;<del>1) Założenie konta </del>
 
-&emsp;2) Logowanie
+&emsp;<del>2) Logowanie</del>
 
 &emsp;3) Kupno karnetu
 
 &emsp;4) Umówienie się na zajęcia
 
-&emsp;5) Utworzenie zajęcia(trenerzy)
+&emsp;<del>5) Utworzenie zajęcia(trenerzy)</del>
 
 &emsp;6) Umówienie wizyty z fizjoterapetą/lekarzem
 
 &emsp;7) Zarządzanie wizytami(fizjo)
 
-&emsp;8) Wysyłanie wiadomości
+&emsp;<del>8) Wysyłanie wiadomości</del>
