@@ -51,73 +51,7 @@
         </div>
         <script src="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.js"></script>
         <button onclick="addEvent()">Dodaj event</button>
-        <script>
-          const Calendar = tui.Calendar;
-
-          const calendar = new Calendar('#calendar', {
-            defaultView: 'week',
-            usageStatistics: false,
-            taskView: false,
-            scheduleView: ['time'],
-            template: {
-              monthDayname: ({ day }) => `<span class="day-name">${day}</span>`
-            }
-          });
-
-          calendar.createEvents([
-            {
-              id: '1',
-              calendarId: '1',
-              title: 'Siłka z koksem',
-              category: 'time',
-              start: '2025-05-10T10:30:00',
-              end: '2025-05-10T12:30:00',
-              color: '#fff',
-              bgColor: '#e91e63',
-              dragBgColor: '#e91e63',
-              borderColor: '#e91e63',
-              isReadOnly: false
-            },
-            {
-              id: '2',
-              calendarId: '1',
-              title: 'Cardio z płaczem',
-              category: 'time',
-              start: '2025-05-15T14:00:00',
-              end: '2025-05-15T15:00:00',
-              bgColor: '#0077cc',
-              borderColor: '#0077cc',
-              dragBgColor: '#0077cc'
-            }
-          ]);
-
-          calendar.setOptions({
-            week: {
-              startDayOfWeek: 1,
-              visibleWeeksCount: 2,
-              dayNames: ['Ndz' ,'Pon', 'Wt', 'Śr', 'Czw', 'Pt', 'Sob'],
-              taskView: false,
-              milestoneView: false,
-            }
-          });
-
-          function addEvent() {
-            const nazwa = prompt("Podaj nazwę wydarzenia:");
-            calendar.createEvents([{
-              id: '3',
-              calendarId: '1',
-              title: nazwa,
-              category: 'time',
-              start: '2025-05-10T12:30:00',
-              end: '2025-05-10T15:30:00',
-              color: '#fff',
-              bgColor: '#e91e63',
-              dragBgColor: '#e91e63',
-              borderColor: '#e91e63',
-              isReadOnly: false
-            }]);
-          }
-        </script>
+        <script src="js/scripts/calendar.js"></script>
         <article class="cennik" id="cennik">
             <h2>Plany karnetów</h2>
             <div class="period">
@@ -211,45 +145,6 @@
       </div>
     </footer>
 </body>
-<script defer>
-    fetch("../backend/api/session.php" , { cache: "no-store" })
-    .then(response => response.json())
-    .then(data => {
-        const sesja = data.sesja;
-        const buttons = document.querySelector('.logging');
-        if(sesja !== null){
-            buttons.innerHTML = `
-                <a class="signin-btn" href="sites/profile.html">Profil</a>
-                <a class="login-btn" href="../backend/api/logout.php">Wyloguj się</a>`;
-        }
-        else{
-             buttons.innerHTML = `
-                <a class="signin-btn" href="sites/sign-in.html">Zarejestruj się</a>
-                <a class="login-btn" href="sites/log-in.html">Zaloguj się</a>`;
-        }
-    })
-
-    fetch("../backend/api/trainers.php")
-    .then(response => response.json())
-    .then(data => {
-      data.forEach(trener => {
-        const trenerDiv = document.createElement('div');
-        trenerDiv.classList.add('trener');
-        trenerDiv.innerHTML = `
-          <img src="${trener.ProfilePicture}" alt="${trener.FirstName} ${trener.LastName}" />
-          <h4>${trener.FirstName} ${trener.LastName}</h4>
-          <h3>${trener.Specialization}</h3>
-          <p>${trener.Bio}</p>
-          <p>Telefon: ${trener.PhoneNumber}</p>
-          <p>Email: <a href="mailto:${trener.Email}">${trener.Email}</a></p>
-          <p>Cena: ${trener.HourlyRate} zł/h</p>
-        `;
-        document.getElementById("trenerzy").appendChild(trenerDiv);
-      });
-    })
-    
-
-
-</script>
+<script src="js/scripts/trainers.js"></script>
 <script src="js/scripts/session.js"></script>
 </html>
