@@ -10,6 +10,12 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.css">
+    
+    <script
+      src="https://kit.fontawesome.com/your-fontawesome-kit.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <header>
@@ -26,7 +32,7 @@
                 <li><a href="#">O nas</a></li>
                 <li><a href="#trenerzy">Trenerzy</a></li>
                 <li><a href="#cennik">Cennik</a></li>
-                <li><a href="#">Zajęcia</a></li>
+                <li><a href="#calendar">Zajęcia</a></li>
                 <li><a href="#kontakt">Kontakt</a></li>
             </ul>
             
@@ -37,14 +43,81 @@
         <section class="hero">
             <blockquote>"Najlepszy czas na zasadzenie drzewa był 20 lat temu, drugi najlepszy jest dziś"</blockquote>
         </section>
-        <article class="treners" id="trenerzy">
+        <article class="treners">
             <h3>Nasi trenerzy</h3>
+            <div id="trenerzy"></div>     
         </article>
-        <aside>
-            <!--
-            tu dać kalendarz z zajęciami
-        -->
-        </aside>
+        <div id="calendar">
+        </div>
+        <script src="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.js"></script>
+        <button onclick="addEvent()">Dodaj event</button>
+        <script>
+          const Calendar = tui.Calendar;
+
+          const calendar = new Calendar('#calendar', {
+            defaultView: 'week',
+            usageStatistics: false,
+            taskView: false,
+            scheduleView: ['time'],
+            template: {
+              monthDayname: ({ day }) => `<span class="day-name">${day}</span>`
+            }
+          });
+
+          calendar.createEvents([
+            {
+              id: '1',
+              calendarId: '1',
+              title: 'Siłka z koksem',
+              category: 'time',
+              start: '2025-05-10T10:30:00',
+              end: '2025-05-10T12:30:00',
+              color: '#fff',
+              bgColor: '#e91e63',
+              dragBgColor: '#e91e63',
+              borderColor: '#e91e63',
+              isReadOnly: false
+            },
+            {
+              id: '2',
+              calendarId: '1',
+              title: 'Cardio z płaczem',
+              category: 'time',
+              start: '2025-05-15T14:00:00',
+              end: '2025-05-15T15:00:00',
+              bgColor: '#0077cc',
+              borderColor: '#0077cc',
+              dragBgColor: '#0077cc'
+            }
+          ]);
+
+          calendar.setOptions({
+            week: {
+              startDayOfWeek: 1,
+              visibleWeeksCount: 2,
+              dayNames: ['Ndz' ,'Pon', 'Wt', 'Śr', 'Czw', 'Pt', 'Sob'],
+              taskView: false,
+              milestoneView: false,
+            }
+          });
+
+          function addEvent() {
+            const nazwa = prompt("Podaj nazwę wydarzenia:");
+            calendar.createEvents([{
+              id: '3',
+              calendarId: '1',
+              title: nazwa,
+              category: 'time',
+              start: '2025-05-10T12:30:00',
+              end: '2025-05-10T15:30:00',
+              color: '#fff',
+              bgColor: '#e91e63',
+              dragBgColor: '#e91e63',
+              borderColor: '#e91e63',
+              isReadOnly: false
+            }]);
+          }
+        </script>
         <article class="cennik" id="cennik">
             <h2>Plany karnetów</h2>
             <div class="period">
@@ -138,5 +211,45 @@
       </div>
     </footer>
 </body>
+<script defer>
+    fetch("../backend/api/session.php" , { cache: "no-store" })
+    .then(response => response.json())
+    .then(data => {
+        const sesja = data.sesja;
+        const buttons = document.querySelector('.logging');
+        if(sesja !== null){
+            buttons.innerHTML = `
+                <a class="signin-btn" href="sites/profile.html">Profil</a>
+                <a class="login-btn" href="../backend/api/logout.php">Wyloguj się</a>`;
+        }
+        else{
+             buttons.innerHTML = `
+                <a class="signin-btn" href="sites/sign-in.html">Zarejestruj się</a>
+                <a class="login-btn" href="sites/log-in.html">Zaloguj się</a>`;
+        }
+    })
+
+    fetch("../backend/api/trainers.php")
+    .then(response => response.json())
+    .then(data => {
+      data.forEach(trener => {
+        const trenerDiv = document.createElement('div');
+        trenerDiv.classList.add('trener');
+        trenerDiv.innerHTML = `
+          <img src="${trener.ProfilePicture}" alt="${trener.FirstName} ${trener.LastName}" />
+          <h4>${trener.FirstName} ${trener.LastName}</h4>
+          <h3>${trener.Specialization}</h3>
+          <p>${trener.Bio}</p>
+          <p>Telefon: ${trener.PhoneNumber}</p>
+          <p>Email: <a href="mailto:${trener.Email}">${trener.Email}</a></p>
+          <p>Cena: ${trener.HourlyRate} zł/h</p>
+        `;
+        document.getElementById("trenerzy").appendChild(trenerDiv);
+      });
+    })
+    
+
+
+</script>
 <script src="js/scripts/session.js"></script>
 </html>

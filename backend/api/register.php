@@ -23,6 +23,9 @@ $password = $_POST['password'] ?? null;
 $confirmPassword = $_POST['confirmPassword'] ?? null;
 $phone = $_POST['tel'] ?? null;
 $role = $_POST['role'] ?? 'client';
+if($role !== 'client'){
+    
+}
 
 $phone = "+48" . $phone;
 if ($password !== $confirmPassword) {
@@ -52,6 +55,22 @@ $stmt = $conn->prepare("INSERT INTO Users (Login, PasswordHash, FirstName, LastN
 $stmt->bind_param("sssssss", $login, $hash, $firstName, $lastName, $email, $phone, $role);
 
 if ($stmt->execute()) {
+    if($role !== 'client'){
+        $specialization = $_POST['specialization'] ?? null;
+        $bio = $_POST['bio'] ?? null;
+        $hourlyRate = $_POST['hourlyRate'] ?? null;
+        $lastID = $conn->insert_id;
+        $stmtTrain = $conn->prepare("INSERT INTO Trainers (UserID, Specialization, Bio, HourlyRate) VALUES (?, ?, ?, ?)");
+        $stmtTrain->bind_param("issd", $lastID, $specialization, $bio, $hourlyRate);
+        if (!$stmtTrain->execute()) {
+            http_response_code(500);
+            echo json_encode(['error' => 'Błąd rejestracji trenera: ' . $stmtTrain->error]);
+            header('Location: ../../frontend/sites/register.html?error=błąd_sql');
+            exit;
+        }
+        $stmtTrain->close();
+    }
+    
     echo json_encode(['success' => true, 'message' => 'Rejestracja zakończona sukcesem']);
     $to = urlencode($email);
     $name = urlencode($firstName . ' ' . $lastName);

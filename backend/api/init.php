@@ -36,8 +36,8 @@ if ($tableCheck->num_rows === 0) {
     Role ENUM('client', 'trainer', 'admin', 'fizjo') DEFAULT 'client',
     CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     LastLogin TIMESTAMP NULL,
-    ProfilePicture VARCHAR(255) DEAFULT 'assets/images/default_profile.png'
-    Token VARCHAR(8) DEFAULT NULL;
+    ProfilePicture VARCHAR(255) DEAFULT 'assets/images/default_profile.png',
+    Token VARCHAR(8) DEFAULT NULL,
     TokenCreatedAt TIMESTAMP NULL
 ) ENGINE=InnoDB;
     ";

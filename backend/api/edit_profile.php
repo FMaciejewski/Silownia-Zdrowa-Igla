@@ -15,6 +15,15 @@ $email = $_POST['email'] ?? '';
 $phoneNumber = "+48" . $_POST['phone-number'] ?? '';
 $profilePicture = $_FILES['profile-picture'] ?? null;
 
+$ID = $_SESSION['user_id'];
+
+$stmt = $conn->prepare("SELECT PRofilePicture, Role FROM users WHERE UserID = ?");
+$stmt->bind_param("i", $ID);
+$stmt->execute();
+$stmt->bind_result($currentProfilePicture, $role);
+$stmt->fetch();
+$stmt->close();
+
 if ($profilePicture && $profilePicture['error'] === 0) {
     $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
     $fileName = $profilePicture['name'];
@@ -37,8 +46,6 @@ if ($profilePicture && $profilePicture['error'] === 0) {
     $profilePicturePath = null;
 }
 
-$ID = $_SESSION['user_id'];
-
 if ($profilePicturePath) {
     $relativePath = 'assets/images/' . basename($profilePicturePath);
     $query = "UPDATE users SET FirstName = ?, LastName = ?, Login = ?, Email = ?, PhoneNumber = ?, ProfilePicture = ? WHERE UserID = ?";
@@ -46,6 +53,12 @@ if ($profilePicturePath) {
     $stmt->bind_param("ssssssi",$firstName, $lastName, $login, $email, $phoneNumber, $relativePath, $ID);
     if(!$stmt->execute()) {
         die("Błąd podczas aktualizacji danych: " . $stmt->error);
+    }
+    if ($currentProfilePicture && $currentProfilePicture !== 'assets/images/default_profile.png') {
+        $oldFilePath = '../../frontend/' . $currentProfilePicture;
+        if (file_exists($oldFilePath)) {
+            unlink($oldFilePath);
+        }
     }
     $stmt->close();
 } else {
@@ -58,6 +71,19 @@ if ($profilePicturePath) {
     $stmt->close();
 }
 
+if($role == 'trainer'){
+    $specialization = $_POST['specialization'] ?? '';
+    $bio = $_POST['bio'] ?? '';
+    $hourlyRate = $_POST['hourly-rate'] ?? '';
+
+    $query = "UPDATE trainers SET Specialization = ?, Bio = ?, HourlyRate = ? WHERE UserID = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("ssdi", $specialization, $bio, $hourlyRate, $ID);
+    if(!$stmt->execute()) {
+        die("Błąd podczas aktualizacji danych: " . $stmt->error);
+    }
+    $stmt->close();
+}
 header('Location: ../../frontend/sites/profile.html');
 exit();
 ?>

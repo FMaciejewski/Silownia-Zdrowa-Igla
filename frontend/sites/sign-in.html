@@ -59,12 +59,26 @@
             <option value="trainer">Trener</option>
             <option value="fizjo">Fizjoterapeuta</option>
           </select>
+          <div id="additional-fields" style="display: none;">
+            <label for="specialization">Specjalizacja:</label>
+            <input type="text" id="specialization" name="specialization"/>
 
+            <label for="bio">Bio:</label>
+            <textarea id="bio" name="bio" rows="4" cols="50"></textarea>
+
+            <label for="hourly-rate">Wynagrodzenie godzinowe:</label>
+            <input
+              type="number"
+              id="hourly-rate"
+              name="hourlyRate"
+              min="0"
+              step="0.01"
+            >
+          </div>
           <div class="error-msg">
             <p id="error-message"></p>
             <script src="../js/scripts/err-msg.js"></script>
           </div>
-
           <button type="submit">Zarejestruj się</button>
         </form>
       </article>
@@ -118,5 +132,22 @@
         <p>Wykonanie: Filip Maciejewski, Adrian Cichocki</p>
       </div>
     </footer>
+    <script>
+      const accountType = document.getElementById("account_type");
+      const additionalFields = document.getElementById("additional-fields");
+      accountType.addEventListener("change", function () {
+        if (this.value === "trainer" || this.value === "fizjo") {
+          additionalFields.style.display = "block";
+          document.getElementById("specialization").required = true;
+          document.getElementById("bio").required = true;
+          document.getElementById("hourly-rate").required = true;
+        } else {
+          additionalFields.style.display = "none";
+          document.getElementById("specialization").required = false;
+          document.getElementById("bio").required = false;
+          document.getElementById("hourly-rate").required = false;
+        }
+      });
+    </script>
   </body>
 </html>
