@@ -390,7 +390,8 @@ footer {
   height: 500px;
   border-radius: 10px;
   box-shadow: 0 0 10px #00ffd5;
-  
+}
+
 .period {
   width: 36%;
   display: flex;
