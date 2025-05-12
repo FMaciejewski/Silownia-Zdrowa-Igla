@@ -1,6 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const rodzajSelect = document.getElementById("rodzaj");
-    const okresSelect = document.getElementById("okres");
+    let rodzajSelect;
+    let okresSelect;
+
+    if (document.getElementById("rodzaj") === null || document.getElementById("okres") === null) {
+        const params = new URLSearchParams(window.location.search);
+        rodzajSelect = { value: params.get("rodzaj") };
+        okresSelect = { value: params.get("okres") };
+    } else {
+        rodzajSelect = document.getElementById("rodzaj");
+        okresSelect = document.getElementById("okres");
+    }
+
     const priceElement = document.querySelector(".price");
 
     async function fetchPrice() {
@@ -23,8 +33,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    rodzajSelect.addEventListener("change", fetchPrice);
-    okresSelect.addEventListener("change", fetchPrice);
+    if (rodzajSelect instanceof HTMLElement && okresSelect instanceof HTMLElement) {
+        rodzajSelect.addEventListener("change", fetchPrice);
+        okresSelect.addEventListener("change", fetchPrice);
+    }
 
     fetchPrice();
 });
