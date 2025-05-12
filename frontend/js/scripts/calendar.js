@@ -1,65 +1,62 @@
-const Calendar = tui.Calendar;
+$(document).ready(function () {
+  $('#calendar').fullCalendar({
+    header: {
+      left: 'prev,next today',
+      center: 'title',
+      right: ''
+    },
+    defaultView: 'agendaWeek',
+    allDaySlot: false,
+    minTime: '06:00:00',
+    maxTime: '23:59:00',
+    editable: true,
+    selectable: true,
+    selectHelper: true,
 
-const calendar = new Calendar('#calendar', {
-defaultView: 'week',
-usageStatistics: false,
-taskView: false,
-scheduleView: ['time'],
-template: {
-    monthDayname: ({ day }) => `<span class="day-name">${day}</span>`
-}
+    eventRender: function(event, element) {
+    if (event.createdBy || event.maxParticipants) {
+        element.find('.fc-title').append(
+        "<br/><small>Twórca: " + event.createdBy + "</small>" +
+        "<br/><small>Limit: " + event.maxParticipants + " osób</small>"
+        );
+    }
+    },
+
+    select: function (start, end) {
+        const title = prompt('Wpisz tytuł wydarzenia:');
+        const createdBy = prompt('Kto to stworzył?');
+        const maxParticipants = prompt('Ile osób max?');
+
+      if (title) {
+        $('#calendar').fullCalendar('renderEvent', {
+          title: title,
+          start: start,
+          end: end,
+          allDay: false,
+          createdBy: createdBy,
+            maxParticipants: maxParticipants
+        }, true);
+      }
+
+      $('#calendar').fullCalendar('unselect');
+    },
+
+    events: [
+      {
+        title: 'Trening nóg',
+        start: '2025-05-12T10:00:00',
+        end: '2025-05-12T11:00:00',
+        createdBy: 'user1',
+        maxParticipants: 5,
+      },
+      {
+        title: 'Kac morderca',
+        start: '2025-05-13T13:00:00',
+        end: '2025-05-13T14:30:00',
+        createdBy: 'user2',
+        maxParticipants: 10,
+      }
+    ]
+     
+  });
 });
-
-calendar.createEvents([
-{
-    id: '1',
-    calendarId: '1',
-    title: 'Siłka z koksem',
-    category: 'time',
-    start: '2025-05-10T10:30:00',
-    end: '2025-05-10T12:30:00',
-    color: '#fff',
-    bgColor: '#e91e63',
-    dragBgColor: '#e91e63',
-    borderColor: '#e91e63',
-    isReadOnly: false
-},
-{
-    id: '2',
-    calendarId: '1',
-    title: 'Cardio z płaczem',
-    category: 'time',
-    start: '2025-05-15T14:00:00',
-    end: '2025-05-15T15:00:00',
-    bgColor: '#0077cc',
-    borderColor: '#0077cc',
-    dragBgColor: '#0077cc'
-}
-]);
-
-calendar.setOptions({
-week: {
-    startDayOfWeek: 1,
-    visibleWeeksCount: 2,
-    dayNames: ['Ndz' ,'Pon', 'Wt', 'Śr', 'Czw', 'Pt', 'Sob'],
-    taskView: false,
-    milestoneView: false,
-}
-});
-
-function addEvent() {
-const nazwa = prompt("Podaj nazwę wydarzenia:");
-calendar.createEvents([{
-    id: '3',
-    calendarId: '1',
-    title: nazwa,
-    category: 'time',
-    start: '2025-05-10T12:30:00',
-    end: '2025-05-10T15:30:00',
-    color: '#fff',
-    bgColor: '#e91e63',
-    dragBgColor: '#e91e63',
-    borderColor: '#e91e63',
-    isReadOnly: false
-}]);
-}
