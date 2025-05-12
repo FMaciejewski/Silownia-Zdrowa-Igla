@@ -1,3 +1,6 @@
+let tempStart = null;
+let tempEnd = null;
+
 $(document).ready(function () {
   $('#calendar').fullCalendar({
     header: {
@@ -13,50 +16,53 @@ $(document).ready(function () {
     selectable: true,
     selectHelper: true,
 
-    eventRender: function(event, element) {
-    if (event.createdBy || event.maxParticipants) {
-        element.find('.fc-title').append(
-        "<br/><small>Twórca: " + event.createdBy + "</small>" +
-        "<br/><small>Limit: " + event.maxParticipants + " osób</small>"
-        );
-    }
-    },
-
     select: function (start, end) {
-        const title = prompt('Wpisz tytuł wydarzenia:');
-        const createdBy = prompt('Kto to stworzył?');
-        const maxParticipants = prompt('Ile osób max?');
-
-      if (title) {
-        $('#calendar').fullCalendar('renderEvent', {
-          title: title,
-          start: start,
-          end: end,
-          allDay: false,
-          createdBy: createdBy,
-            maxParticipants: maxParticipants
-        }, true);
-      }
-
-      $('#calendar').fullCalendar('unselect');
+        tempStart = start;
+        tempEnd = end;
+        $('#eventPopup').show();
     },
 
-    events: [
-      {
-        title: 'Trening nóg',
-        start: '2025-05-12T10:00:00',
-        end: '2025-05-12T11:00:00',
-        createdBy: 'user1',
-        maxParticipants: 5,
-      },
-      {
-        title: 'Kac morderca',
-        start: '2025-05-13T13:00:00',
-        end: '2025-05-13T14:30:00',
-        createdBy: 'user2',
-        maxParticipants: 10,
+    eventRender: function (event, element) {
+      if (event.createdBy || event.maxParticipants) {
+        element.find('.fc-title').append(
+          "<br/><small>Twórca: " + event.createdBy + "</small>" +
+          "<br/><small>Limit: " + event.maxParticipants + " osób</small>"
+        );
       }
-    ]
-     
+    },
+
+    events: []
+  });
+
+  $('#saveEventBtn').click(function (e) {
+    e.preventDefault();
+
+    const title = $('#eventTitle').val();
+    const creator = $('#eventCreator').val();
+    const max = $('#eventMax').val();
+
+    if (title && creator && max) {
+      $('#calendar').fullCalendar('renderEvent', {
+        title: title,
+        start: tempStart,
+        end: tempEnd,
+        allDay: false,
+        createdBy: creator,
+        maxParticipants: max
+      }, true);
+
+      $('#eventPopup').hide();
+      $('#eventTitle').val('');
+      $('#eventCreator').val('');
+      $('#eventMax').val('');
+      $('#calendar').fullCalendar('unselect');
+    } else {
+      alert('Proszę wypełnić wszystkie pola!');
+    }
+  });
+
+  $('#cancelEventBtn').click(function () {
+    $('#eventPopup').hide();
+    $('#calendar').fullCalendar('unselect');
   });
 });
