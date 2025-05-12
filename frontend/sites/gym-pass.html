@@ -25,28 +25,45 @@
     <main>
       <div class="success-msg" id="success-message"></div>
         <article class="main-loging">
-            <h2>Kup karnet</h2>
-            <form action="../../backend/api/auth.php" method="POST">
-              <label for="rodzaj">Wybierz rodzaj karnetu: </label>
-              <select id="rodzaj" name="rodzaj" required>
-                <option value="normalny">Normalny</option>
-                <option value="premium">Premium</option>
-                <option value="vip">VIP</option>
-              </select>
-      
-              <label for="data_rozpoczecia">Data rozpoczęcia:</label>
-              <input type="date" id="data_rozpoczecia" name="data_rozpoczecia" required />
-      
-              <script src="../js/scripts/date.js"></script>
+    <h2>Kup karnet</h2>
+    <form action="../../backend/api/auth.php" method="POST">
+        <label for="rodzaj">Wybierz rodzaj karnetu: </label>
+        <select id="rodzaj" name="rodzaj" required>
+            <option value="normal">Normalny</option>
+            <option value="premium">Premium</option>
+            <option value="vip">VIP</option>
+        </select>
 
-          <button type="submit">Przejdź do płatnosci</button>
-        </form>
-      </article>
+        <label for="miasto">Wybierz miasto:</label>
+        <select id="miasto" name="miasto" required>
+            <option value="poznan">Poznań</option>
+            <option value="wronki">Wronki</option>
+            <option value="warszawa">Warszawa</option>
+            <option value="gdansk">Gdańsk</option>
+        </select>
+
+        <label for="okres">Wybierz okres trwania karnetu:</label>
+        <select id="okres" name="okres" required>
+            <option value="1">1 miesiąc</option>
+            <option value="3">3 miesiące</option>
+            <option value="12">12 miesięcy</option>
+        </select>
+
+        <label for="data_rozpoczecia">Data rozpoczęcia:</label>
+        <input type="date" id="data_rozpoczecia" name="data_rozpoczecia" required />
+
+        <script src="../js/scripts/date.js"></script>
+
+        <button type="submit">Przejdź do płatności</button>
+    </form>
+    <script src="../js/scripts/summary.js"></script>
+</article>
       <aside class="summary">
         <h2>Podsumowanie</h2>
         <div class="summary-content">
             <p class="price"></p>
             <p>Mam kod rabatowy</p>
+            <input type="text" id="discount-code" placeholder="Wpisz kod rabatowy" />
         </div>
       </aside>
     </main>
