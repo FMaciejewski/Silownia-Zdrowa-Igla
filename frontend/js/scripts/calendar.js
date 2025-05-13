@@ -32,11 +32,32 @@ document.addEventListener('DOMContentLoaded', function () {
       const div = document.createElement('div');
       div.innerHTML = `<b>${title}</b>
         ${data.createdBy ? `<br><small>Twórca: ${data.createdBy}</small>` : ''}
-        ${data.maxParticipants ? `<br><small>Limit: ${data.maxParticipants} osób</small>` : ''}`;
+        ${data.maxParticipants ? `<br><small>Miejsca:${data.participants}/${data.maxParticipants}</small>` : ''}`;
       return { domNodes: [div] };
     },
     events: []
   });
+
+  fetch('../../backend/api/render-calendar.php')
+    .then(response => response.json())
+    .then(data => {
+      data.forEach(event => {
+        calendar.addEvent({
+          id: event.TrainingID,
+          title: event.Title,
+          start: event.StartTime,
+          end: event.EndTime,
+          extendedProps: {
+            createdBy: event.FirstName + ' ' + event.LastName,
+            description: event.Description,
+            location: event.Location,
+            price : event.Price,
+            participants: event.Participants,
+            maxParticipants: event.MaxParticipants
+          }
+        });
+      });
+    })
 
   calendar.render();
 

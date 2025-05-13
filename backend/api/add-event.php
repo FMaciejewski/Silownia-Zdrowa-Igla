@@ -12,7 +12,13 @@ if ($conn->connect_error) {
     exit;
 }
 
-$eventCreatorId = $_SESSION['user_id'] ?? null;
+$UserID = $_SESSION['user_id'] ?? null;
+$stmt = $conn->prepare("SELECT TrainerID FROM Trainers WHERE UserID = ?");
+$stmt->bind_param("i", $UserID);
+$stmt->execute();
+$stmt->bind_result($eventCreatorId);
+$stmt->fetch();
+$stmt->close();
 
 $eventName = $_POST['title'] ?? null;
 $eventDescription = $_POST['description'] ?? null;

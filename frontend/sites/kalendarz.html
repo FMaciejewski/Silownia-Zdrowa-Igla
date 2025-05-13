@@ -29,8 +29,8 @@
           <span class="close-btn" id="cancelEventBtn">&times;</span>
           <h2>Dodaj Wydarzenie</h2>
           <form id="eventForm" method="post" action="../../backend/api/add-event.php">
-            <input id="eventStart" name="eventStart" required />
-            <input id="eventEnd" name="eventEnd" required />
+            <input type="hidden" id="eventStart" name="eventStart" required />
+            <input type="hidden" id="eventEnd" name="eventEnd" required />
 
             <label for="eventTitle">Tytuł:</label>
             <input type="text" id="eventTitle" class="modal-input" required placeholder="Wpisz tytuł wydarzenia" name="title"/>
