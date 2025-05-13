@@ -26,7 +26,7 @@ yarn-error.log*
 /js/build/
 
 # === Bazy danych ===
-*.sql
+# *.sql
 *.sqlite
 /database/dumps/
 *.dump
