@@ -34,6 +34,15 @@ const params = new URLSearchParams(window.location.search);
                 successMessage.style.opacity = "0";
                 successMessage.style.display = "none";
               }, 6000);
+            }else if(params.get("success") === "6"){
+                const successMessage = document.getElementById("success-message");
+                successMessage.textContent =
+                  "Pomyślnie zapisano się na zajęcia.";
+                successMessage.style.opacity = "1";
+                setTimeout(() => {
+                  successMessage.style.opacity = "0";
+                  successMessage.style.display = "none";
+                }, 6000);
             } else {
                 successMessage.style.opacity = "0";
                 successMessage.style.display = "none";

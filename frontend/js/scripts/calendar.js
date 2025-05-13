@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const joinBtn = document.getElementById('joinBtn');
 
   const calendar = new FullCalendar.Calendar(calendarEl, {
+    locale: 'pl',
     initialView: 'timeGridWeek',
     allDaySlot: false,
     slotMinTime: '06:00:00',
@@ -20,6 +21,17 @@ document.addEventListener('DOMContentLoaded', function () {
       left: 'prev,next today',
       center: 'title',
       right: ''
+    },
+    slotLabelFormat: {
+      hour: '2-digit',
+      minute: '2-digit',
+      meridiem: false
+    },
+    buttonText: {
+      today: 'Dziś',
+      month: 'Miesiąc',
+      week: 'Tydzień',
+      day: 'Dzień'
     },
     select: function (info) {
       tempStart = info.startStr;

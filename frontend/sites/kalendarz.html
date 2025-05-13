@@ -7,9 +7,12 @@
     <link rel="icon" href="../assets/images/logo.png" type="image/x-icon" />
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/locales-all.min.js"></script>
   </head>
   <body>
     <header>
+      <div class="success-msg" id="success-message"></div>
+      <script src="../js/scripts/success-alert.js"></script>
         <nav class="navbar">
             <div class="logging">
                 <a class="signin-btn" href="../index.html">Strona Główna</a>
@@ -21,6 +24,10 @@
         </nav>
     </header>
     <main>
+      <div class="error-msg">
+        <p id="error-message"></p>
+        <script src="../js/scripts/err-msg.js"></script>
+      </div>
       <div id="calendar">
       </div>
       <script src="../js/scripts/calendar.js"></script>

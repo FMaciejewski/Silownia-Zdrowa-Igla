@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const calendarEl = document.getElementById('calendar');
 
     const calendar = new FullCalendar.Calendar(calendarEl, {
+    locale: 'pl',
     initialView: 'timeGridWeek',
     allDaySlot: false,
     slotMinTime: '06:00:00',
@@ -28,6 +29,17 @@ document.addEventListener("DOMContentLoaded", () => {
       left: 'prev,next today',
       center: 'title',
       right: ''
+    },
+    slotLabelFormat: {
+      hour: '2-digit',
+      minute: '2-digit',
+      meridiem: false
+    },
+    buttonText: {
+      today: 'Dziś',
+      month: 'Miesiąc',
+      week: 'Tydzień',
+      day: 'Dzień'
     },
     eventContent: function (arg) {
       const data = arg.event.extendedProps;
