@@ -1,68 +1,47 @@
-let tempStart = null;
-let tempEnd = null;
+document.addEventListener('DOMContentLoaded', function () {
+  let tempStart = null;
+  let tempEnd = null;
 
-$(document).ready(function () {
-  $('#calendar').fullCalendar({
-    header: {
+  const calendarEl = document.getElementById('calendar');
+  const popup = document.getElementById('eventPopup');
+  const form = document.getElementById('eventForm');
+  const cancelBtn = document.getElementById('cancelEventBtn');
+
+  const calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'timeGridWeek',
+    allDaySlot: false,
+    slotMinTime: '06:00:00',
+    slotMaxTime: '23:59:00',
+    selectable: true,
+    editable: true,
+    headerToolbar: {
       left: 'prev,next today',
       center: 'title',
       right: ''
     },
-    defaultView: 'agendaWeek',
-    allDaySlot: false,
-    minTime: '06:00:00',
-    maxTime: '23:59:00',
-    editable: true,
-    selectable: true,
-    selectHelper: true,
-
-    select: function (start, end) {
-        tempStart = start;
-        tempEnd = end;
-        $('#eventPopup').show();
+    select: function (info) {
+      tempStart = info.startStr;
+      tempEnd = info.endStr;
+      document.getElementById('eventStart').value = tempStart;
+      document.getElementById('eventEnd').value = tempEnd;
+      popup.style.display = 'block';
     },
-
-    eventRender: function (event, element) {
-      if (event.createdBy || event.maxParticipants) {
-        element.find('.fc-title').append(
-          "<br/><small>Twórca: " + event.createdBy + "</small>" +
-          "<br/><small>Limit: " + event.maxParticipants + " osób</small>"
-        );
-      }
+    eventContent: function (arg) {
+      const data = arg.event.extendedProps;
+      const title = arg.event.title;
+      const div = document.createElement('div');
+      div.innerHTML = `<b>${title}</b>
+        ${data.createdBy ? `<br><small>Twórca: ${data.createdBy}</small>` : ''}
+        ${data.maxParticipants ? `<br><small>Limit: ${data.maxParticipants} osób</small>` : ''}`;
+      return { domNodes: [div] };
     },
-
     events: []
   });
 
-  $('#saveEventBtn').click(function (e) {
-    e.preventDefault();
+  calendar.render();
 
-    const title = $('#eventTitle').val();
-    const creator = $('#eventCreator').val();
-    const max = $('#eventMax').val();
-
-    if (title && creator && max) {
-      $('#calendar').fullCalendar('renderEvent', {
-        title: title,
-        start: tempStart,
-        end: tempEnd,
-        allDay: false,
-        createdBy: creator,
-        maxParticipants: max
-      }, true);
-
-      $('#eventPopup').hide();
-      $('#eventTitle').val('');
-      $('#eventCreator').val('');
-      $('#eventMax').val('');
-      $('#calendar').fullCalendar('unselect');
-    } else {
-      alert('Proszę wypełnić wszystkie pola!');
-    }
-  });
-
-  $('#cancelEventBtn').click(function () {
-    $('#eventPopup').hide();
-    $('#calendar').fullCalendar('unselect');
+  cancelBtn.addEventListener('click', function () {
+    popup.style.display = 'none';
+    form.reset();
   });
 });
