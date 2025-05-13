@@ -12,13 +12,30 @@ if ($conn->connect_error) {
     exit;
 }
 
-$stmt = $conn->prepare("SELECT TrainingID, (SELECT COUNT(usertrainings.TrainingID) FROM usertrainings 
-JOIN trainings ON usertrainings.TrainingID = trainings.TrainingID) as 'Participants', users.FirstName, users.LastName, Title, Description, StartTime, EndTime, MaxParticipants, Price, Location FROM trainings 
+$stmt = $conn->prepare("SELECT TrainingID, users.FirstName, users.LastName, Title, Description, StartTime, EndTime, MaxParticipants, Price, Location FROM trainings 
 JOIN trainers ON trainings.TrainerID = trainers.TrainerID 
 JOIN users ON trainers.UserID = users.UserID");
 $stmt->execute();
 $result = $stmt->get_result();
 $data = $result->fetch_all(MYSQLI_ASSOC);
+
+$stmt->close();
+$stmt = $conn->prepare("SELECT COUNT(usertrainings.TrainingID) as 'count', usertrainings.TrainingID FROM usertrainings 
+JOIN trainings ON usertrainings.TrainingID = trainings.TrainingID
+GROUP BY 2");
+$stmt->execute();
+$result = $stmt->get_result();
+$participants = $result->fetch_all(MYSQLI_ASSOC);
+
+$participantMap = [];
+foreach ($participants as $p) {
+    $participantMap[$p['TrainingID']] = $p['count'];
+}
+
+foreach ($data as &$event) {
+    $id = $event['TrainingID'];
+    $event['Participants'] = isset($participantMap[$id]) ? $participantMap[$id] : 0;
+}
 
 echo json_encode($data);
 

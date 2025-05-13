@@ -5,7 +5,9 @@ document.addEventListener('DOMContentLoaded', function () {
   const calendarEl = document.getElementById('calendar');
   const popup = document.getElementById('eventPopup');
   const form = document.getElementById('eventForm');
+  const detail = document.getElementById('eventDetail');
   const cancelBtn = document.getElementById('cancelEventBtn');
+  const joinBtn = document.getElementById('joinBtn');
 
   const calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'timeGridWeek',
@@ -25,6 +27,23 @@ document.addEventListener('DOMContentLoaded', function () {
       document.getElementById('eventStart').value = tempStart;
       document.getElementById('eventEnd').value = tempEnd;
       popup.style.display = 'block';
+    },
+    eventClick: function (event) {
+      detailTitle.innerText = event.event.title;
+      detailDescription.innerText = event.event.extendedProps.description;
+      detailLocation.innerText = event.event.extendedProps.location;
+      detailPrice.innerText = event.event.extendedProps.price;
+      detailCreator.innerText = event.event.extendedProps.createdBy;
+      detailParticipants.innerText = event.event.extendedProps.participants;
+      detailMax.innerText = event.event.extendedProps.maxParticipants;
+      detailStart.innerText = event.event.start.toLocaleString();
+      detailEnd.innerText = event.event.end.toLocaleString();
+
+      joinBtn.addEventListener('click', function () {
+        window.location.href = `../../backend/api/join-training.php?trainingId=${event.event.id}`;
+      });
+
+      detail.style.display = 'block';
     },
     eventContent: function (arg) {
       const data = arg.event.extendedProps;
@@ -64,5 +83,9 @@ document.addEventListener('DOMContentLoaded', function () {
   cancelBtn.addEventListener('click', function () {
     popup.style.display = 'none';
     form.reset();
+  });
+
+  cancelDetailBtn.addEventListener('click', function () {
+    detail.style.display = 'none';
   });
 });
