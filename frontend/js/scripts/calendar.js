@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
     slotMinTime: '06:00:00',
     slotMaxTime: '23:59:00',
     selectable: true,
-    editable: true,
+    editable: false,
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
@@ -72,7 +72,9 @@ document.addEventListener('DOMContentLoaded', function () {
   fetch('../../backend/api/render-calendar.php')
     .then(response => response.json())
     .then(data => {
-      data.forEach(event => {
+      const events = data.events;
+      const role = data.role;
+      events.forEach(event => {
         calendar.addEvent({
           id: event.TrainingID,
           title: event.Title,
@@ -88,6 +90,9 @@ document.addEventListener('DOMContentLoaded', function () {
           }
         });
       });
+      if(role === 'client'){
+        calendar.setOption('selectable', false);
+      }
     })
 
   calendar.render();

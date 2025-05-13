@@ -17,7 +17,7 @@ JOIN trainers ON trainings.TrainerID = trainers.TrainerID
 JOIN users ON trainers.UserID = users.UserID");
 $stmt->execute();
 $result = $stmt->get_result();
-$data = $result->fetch_all(MYSQLI_ASSOC);
+$events = $result->fetch_all(MYSQLI_ASSOC);
 
 $stmt->close();
 $stmt = $conn->prepare("SELECT COUNT(usertrainings.TrainingID) as 'count', usertrainings.TrainingID FROM usertrainings 
@@ -32,10 +32,23 @@ foreach ($participants as $p) {
     $participantMap[$p['TrainingID']] = $p['count'];
 }
 
-foreach ($data as &$event) {
+foreach ($events as &$event) {
     $id = $event['TrainingID'];
     $event['Participants'] = isset($participantMap[$id]) ? $participantMap[$id] : 0;
 }
+$stmt->close();
+
+$UserID = $_SESSION['user_id'] ?? null;
+$stmt = $conn->prepare("SELECT Role FROM users WHERE UserID = ?");
+$stmt->bind_param("i", $UserID);
+$stmt->execute();
+$stmt->bind_result($role);
+$stmt->fetch();
+
+$data = [
+    'events' => $events,
+    'role' => $role,
+];
 
 echo json_encode($data);
 
