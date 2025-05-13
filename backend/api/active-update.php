@@ -18,7 +18,6 @@ if ($conn->connect_error) {
 
 $date = date('Y-m-d');
 
-// Pobierz wszystkie karnety, których data ważności minęła
 $stmt = $conn->prepare("SELECT PassID, ExpiryDate FROM Passes WHERE ExpiryDate < ?");
 $stmt->bind_param("s", $date);
 $stmt->execute();
@@ -29,7 +28,6 @@ while ($row = $result->fetch_assoc()) {
 }
 $stmt->close();
 
-// Zaktualizuj status karnetów, których data ważności minęła
 $stmt = $conn->prepare("UPDATE Passes SET IsActive = '0' WHERE ExpiryDate < ?");
 $stmt->bind_param("s", $date);
 $stmt->execute();
@@ -37,7 +35,6 @@ $stmt->close();
 
 $conn->close();
 
-// Zwróć listę zaktualizowanych karnetów
 echo json_encode(['success' => true, 'expiredPasses' => $expiredPasses]);
 
 ?>
