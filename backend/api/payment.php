@@ -37,14 +37,19 @@ if ($result->num_rows > 0) {
     if ($row['IsActive'] == 0) {
         $stmt = $conn->prepare("DELETE  from Passes WHERE UserID = ? AND Type = ?");
         $stmt->bind_param("ss", $UserID, $type);
-        //get back .....
+        if ($stmt->execute()) {
+
+            error_log("Usunięto nieaktywny karnet, dodaję nowy");
+        } else {
+            error_log("Błąd przy usuwaniu karnetu: " . $stmt->error);
+        }
     }else{
         $currentExpiryDate = $row['ExpiryDate'];
         $expiryDateObj = new DateTime($currentExpiryDate);
         $expiryDateObj->modify("+$period months");
         $newExpiryDate = $expiryDateObj->format('Y-m-d');
 
-        $stmt = $conn->prepare("UPDATE Passes SET PurchaseDate = ?, ExpiryDate = ?, WHERE UserID = ? AND Type = ?");
+        $stmt = $conn->prepare("UPDATE Passes SET PurchaseDate = ?, ExpiryDate = ? WHERE UserID = ? AND Type = ?");
         $stmt->bind_param("ssss",$PurchaseDate, $newExpiryDate, $UserID, $type);
 
         if ($stmt->execute()) {
@@ -52,7 +57,8 @@ if ($result->num_rows > 0) {
             header('Location: ../../frontend/sites/profile.html?success=5');
             exit;
     }}
-} else {
+} 
+
     $purchaseDateObj = new DateTime($PurchaseDate);
     $purchaseDateObj->modify("+$period months");
     $ExpiryDate = $purchaseDateObj->format('Y-m-d');
@@ -68,7 +74,7 @@ if ($result->num_rows > 0) {
         http_response_code(500);
         echo json_encode(['error' => 'Błąd podczas dodawania karnetu: ' . $stmt->error]);
     }
-}
+
 
 function sendConfirmationEmail($conn, $UserID, $type, $PurchaseDate, $ExpiryDate, $isRenewal) {
     $stmt = $conn->prepare("SELECT * FROM Users WHERE UserID = ?");
