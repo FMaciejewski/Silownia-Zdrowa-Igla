@@ -7,7 +7,6 @@
     <script type="module" src="/Silownia-Zdrowa-Igla/frontend/js/main.js"></script>
     <link rel="icon" href="../assets/images/logo.png" type="image/x-icon">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
 </head>
 <body>
     <header>
@@ -26,44 +25,51 @@
       <div class="success-msg" id="success-message"></div>
         <article class="main-loging">
     <h2>Kup karnet</h2>
-    <form action="pay.html" method="GET">
-        <label for="rodzaj">Wybierz rodzaj karnetu: </label>
-        <select id="rodzaj" name="rodzaj" required>
-            <option value="normal">Normalny</option>
-            <option value="premium">Premium</option>
-            <option value="vip">VIP</option>
-        </select>
+    <form action="../../backend/api/payment.php" method="POST">
+    <input type="radio" name="payment-type" value="card" required />
+    <label for="card">Karta kredytowa</label>
+    <div class="card-fields" style="display: none;">
+        <input type="text" name="name" id="name" placeholder="Imię" />
+        <input type="text" name="surname" id="surname" placeholder="Nazwisko" />
+        <input type="number" name="card-number" id="card-number" placeholder="Numer karty" />
+        <input type="text" name="expiry-date" id="expiry-date" placeholder="Data ważności (MM/RRRR)" />
+        <input type="text" name="cvv" id="cvv" placeholder="Kod CVV" />
+        <input type="text" name="address" id="address" placeholder="Adres" />
+        <input type="text" name="postal-code" id="postal-code" placeholder="Kod pocztowy" />
+        <input type="text" name="city" id="city" placeholder="Miasto" />
+        <input type="text" name="country" id="country" placeholder="Kraj" />
+    </div>
 
-        <label for="miasto">Wybierz miasto:</label>
-        <select id="miasto" name="miasto" required>
-            <option value="poznan">Poznań</option>
-            <option value="wronki">Wronki</option>
-            <option value="warszawa">Warszawa</option>
-            <option value="gdansk">Gdańsk</option>
-        </select>
+    <input type="radio" name="payment-type" value="blik" required />
+    <label for="blik">BLIK</label>
+    <div class="blik-fields" style="display: none;">
+        <input type="text" name="blik-code" id="blik-code" placeholder="Kod BLIK" />
+    </div>
 
-        <label for="okres">Wybierz okres trwania karnetu:</label>
-        <select id="okres" name="okres" required>
-            <option value="1">1 miesiąc</option>
-            <option value="3">3 miesiące</option>
-            <option value="12">12 miesięcy</option>
-        </select>
+    <input type="radio" name="payment-type" value="google-pay" required />
+    <label for="google-pay">Google Pay</label>
+    <div class="google-pay-fields" style="display: none;">
+        <p>Płatność przy pomocy google pay</p>
+    </div>
 
-        <label for="data_rozpoczecia">Data rozpoczęcia:</label>
-        <input type="date" id="data_rozpoczecia" name="data_rozpoczecia" required />
 
-        <script src="../js/scripts/date.js"></script>
 
-        <button type="submit">Przejdź do płatności</button>
+        <script src="../js/scripts/payment-type.js"></script>
+    <input type="hidden" name="rodzaj" id="rodzaj" />
+    <input type="hidden" name="miasto" id="miasto" />
+    <input type="hidden" name="okres" id="okres" />
+    <input type="hidden" name="data_rozpoczecia" id="data_rozpoczecia" />
+
+    <script src="../js/scripts/hidden-params.js"></script>
+
+        <button type="submit">Zapłać</button>
     </form>
-    <script src="../js/scripts/summary.js"></script>
-</article>
+</article>    
+<script src="../js/scripts/summary.js"></script>
       <aside class="summary">
         <h2>Podsumowanie</h2>
         <div class="summary-content">
             <p class="price"></p>
-            <p>Mam kod rabatowy</p>
-            <input type="text" id="discount-code" placeholder="Wpisz kod rabatowy" />
         </div>
       </aside>
     </main>
