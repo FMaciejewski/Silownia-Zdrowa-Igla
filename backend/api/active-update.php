@@ -16,25 +16,21 @@ if ($conn->connect_error) {
     exit;
 }
 
-$date = date('Y-m-d');
+$currentDate = date('Y-m-d');
 
-$stmt = $conn->prepare("SELECT PassID, ExpiryDate FROM Passes WHERE ExpiryDate < ?");
-$stmt->bind_param("s", $date);
-$stmt->execute();
-$result = $stmt->get_result();
-$expiredPasses = [];
-while ($row = $result->fetch_assoc()) {
-    $expiredPasses[] = $row;
-}
-$stmt->close();
+$sqlActivate = "UPDATE Passes SET IsActive = 1 
+                WHERE PurchaseDate <= ? AND ExpiryDate >= ? AND IsActive = 0";
+$stmtActivate = $conn->prepare($sqlActivate);
+$stmtActivate->bind_param("ss", $currentDate, $currentDate);
+$stmtActivate->execute();
+$stmtActivate->close();
 
-$stmt = $conn->prepare("UPDATE Passes SET IsActive = '0' WHERE ExpiryDate < ?");
-$stmt->bind_param("s", $date);
-$stmt->execute();
-$stmt->close();
+$sqlDeactivate = "UPDATE Passes SET IsActive = 0 
+                  WHERE (PurchaseDate > ? OR ExpiryDate < ?) AND IsActive = 1";
+$stmtDeactivate = $conn->prepare($sqlDeactivate);
+$stmtDeactivate->bind_param("ss", $currentDate, $currentDate);
+$stmtDeactivate->execute();
+$stmtDeactivate->close();
 
 $conn->close();
-
-echo json_encode(['success' => true, 'expiredPasses' => $expiredPasses]);
-
 ?>

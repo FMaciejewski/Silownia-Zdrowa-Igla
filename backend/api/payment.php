@@ -4,6 +4,9 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 session_start();
 
+include 'active_update.php';
+
+
 $host = 'localhost';
 $user = 'root';
 $pass = '';
@@ -34,37 +37,42 @@ $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
-    if ($row['IsActive'] == 0) {
-        $stmt = $conn->prepare("DELETE  from Passes WHERE UserID = ? AND Type = ?");
-        $stmt->bind_param("ss", $UserID, $type);
-        if ($stmt->execute()) {
+    $currentDate = date('Y-m-d');
 
-            error_log("Usunięto nieaktywny karnet, dodaję nowy");
-        } else {
-            error_log("Błąd przy usuwaniu karnetu: " . $stmt->error);
-        }
+if ($row['IsActive'] == 0 && $row['ExpiryDate'] < $currentDate) {
+    $stmt = $conn->prepare("DELETE FROM Passes WHERE UserID = ? AND Type = ?");
+    $stmt->bind_param("ss", $UserID, $type);
+    
+    if ($stmt->execute()) {
+        error_log("Usunięto nieaktywny i przeterminowany karnet użytkownika $UserID o typie $type.");
+    } else {
+        error_log("Błąd przy usuwaniu karnetu: " . $stmt->error);
+    }
     }else{
         $currentExpiryDate = $row['ExpiryDate'];
         $expiryDateObj = new DateTime($currentExpiryDate);
         $expiryDateObj->modify("+$period months");
         $newExpiryDate = $expiryDateObj->format('Y-m-d');
 
-        $stmt = $conn->prepare("UPDATE Passes SET PurchaseDate = ?, ExpiryDate = ? WHERE UserID = ? AND Type = ?");
-        $stmt->bind_param("ssss",$PurchaseDate, $newExpiryDate, $UserID, $type);
+        $stmt = $conn->prepare("UPDATE Passes SET ExpiryDate = ? WHERE UserID = ? AND Type = ?");
+        $stmt->bind_param("sss", $newExpiryDate, $UserID, $type);
 
         if ($stmt->execute()) {
             sendConfirmationEmail($conn, $UserID, $type, $PurchaseDate, $newExpiryDate, true);
             header('Location: ../../frontend/sites/profile.html?success=5');
             exit;
     }}
-} 
-
+}   
+$isActive = 1;
+if (new DateTime($PurchaseDate) > new DateTime()) {
+    $isActive = 0;
+}
     $purchaseDateObj = new DateTime($PurchaseDate);
     $purchaseDateObj->modify("+$period months");
     $ExpiryDate = $purchaseDateObj->format('Y-m-d');
 
-    $stmt = $conn->prepare("INSERT INTO Passes (UserID, Type, PurchaseDate, ExpiryDate) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $UserID, $type, $PurchaseDate, $ExpiryDate);
+    $stmt = $conn->prepare("INSERT INTO Passes (UserID, Type, PurchaseDate, ExpiryDate, IsActive) VALUES (?, ?, ?, ?,?)");
+    $stmt->bind_param("sssss", $UserID, $type, $PurchaseDate, $ExpiryDate, $isActive);
 
     if ($stmt->execute()) {
         sendConfirmationEmail($conn, $UserID, $type, $PurchaseDate, $ExpiryDate, false);
