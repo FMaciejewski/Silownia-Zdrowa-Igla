@@ -25,6 +25,9 @@ document.addEventListener('DOMContentLoaded', function () {
     slotMaxTime: '23:59:00',
     selectable: true,
     editable: false,
+    eventOverlap: true,
+    eventMaxStack: 1,
+    eventDisplay: 'block',
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',

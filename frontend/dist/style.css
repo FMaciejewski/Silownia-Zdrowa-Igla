@@ -519,6 +519,12 @@ footer {
   box-shadow: 0 0 5px #00f7ff;
 }
 
+.fc-event {
+  margin-bottom: 2px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
 .period {
   width: 36%;
   display: flex;
