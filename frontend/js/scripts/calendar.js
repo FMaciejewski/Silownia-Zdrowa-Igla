@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const joinBtn = document.getElementById('joinBtn');
   const editBtn = document.getElementById('editBtn');
   const deleteBtn = document.getElementById('deleteBtn');
+  const leaveBtn = document.getElementById('leaveBtn');
 
   function formatLocalDateTime(date) {
     const offset = date.getTimezoneOffset();
@@ -99,10 +100,19 @@ document.addEventListener('DOMContentLoaded', function () {
               window.location.href = `../../backend/api/delete-training.php?trainingId=${event.event.id}`;
             });
           } else {
-            joinBtn.style.display = 'block';
-            joinBtn.addEventListener('click', function () {
+            if(data.joined){
+              leaveBtn.style.display = 'block';
+              leaveBtn.addEventListener('click', function () {
+                window.location.href = `../../backend/api/leave-training.php?trainingId=${event.event.id}`;
+              });
+            }
+            else{
+              joinBtn.style.display = 'block';
+              joinBtn.addEventListener('click', function () {
               window.location.href = `../../backend/api/join-training.php?trainingId=${event.event.id}`;
             });
+            }
+            
           }
         });
 

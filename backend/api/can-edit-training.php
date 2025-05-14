@@ -27,8 +27,19 @@ if ($result->num_rows > 0) {
         'canEdit' => true,
     ];
 } else {
+    $stmrt->close();
+    $stmrt = $conn->prepare("SELECT usertrainings.UserID FROM users JOIN usertrainings ON usertrainings.UserID = users.UserID WHERE usertrainings.UserID = ? AND TrainingID = ?");
+    $stmrt->bind_param("ii", $ID, $training_id);
+    $stmrt->execute();
+    $result = $stmrt->get_result();
+    if ($result->num_rows > 0) {
+        $joined = true;
+    } else {
+        $joined = false;
+    }
     $data = [
         'canEdit' => false,
+        'joined' => $joined,
     ];
 }
 echo json_encode($data);
