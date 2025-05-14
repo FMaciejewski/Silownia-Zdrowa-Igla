@@ -8,6 +8,14 @@ document.addEventListener('DOMContentLoaded', function () {
   const detail = document.getElementById('eventDetail');
   const cancelBtn = document.getElementById('cancelEventBtn');
   const joinBtn = document.getElementById('joinBtn');
+  const editBtn = document.getElementById('editBtn');
+  const deleteBtn = document.getElementById('deleteBtn');
+
+  function formatLocalDateTime(date) {
+    const offset = date.getTimezoneOffset();
+    const localDate = new Date(date.getTime() - offset * 60 * 1000);
+    return localDate.toISOString().slice(0, 16);
+  }
 
   const calendar = new FullCalendar.Calendar(calendarEl, {
     locale: 'pl',
@@ -40,6 +48,20 @@ document.addEventListener('DOMContentLoaded', function () {
       document.getElementById('eventEnd').value = tempEnd;
       popup.style.display = 'block';
     },
+    eventDidMount: function(info) {
+      info.el.style.cursor = 'pointer';
+
+      info.el.addEventListener('mouseenter', function () {
+          info.el.style.filter = 'brightness(1.2)';
+          info.el.style.boxShadow = '0 0 10px rgba(0,0,0,0.3)';
+          info.el.style.transition = '0.2s all ease-in-out';
+      });
+
+      info.el.addEventListener('mouseleave', function () {
+          info.el.style.filter = 'none';
+          info.el.style.boxShadow = 'none';
+      });
+    },
     eventClick: function (event) {
       detailTitle.innerText = event.event.title;
       detailDescription.innerText = event.event.extendedProps.description;
@@ -51,9 +73,35 @@ document.addEventListener('DOMContentLoaded', function () {
       detailStart.innerText = event.event.start.toLocaleString();
       detailEnd.innerText = event.event.end.toLocaleString();
 
-      joinBtn.addEventListener('click', function () {
-        window.location.href = `../../backend/api/join-training.php?trainingId=${event.event.id}`;
-      });
+      fetch('../../backend/api/can-edit-training.php?trainingId=' + event.event.id)
+        .then(response => response.json())
+        .then(data => {
+          if (data.canEdit) {
+            editBtn.style.display = 'block';
+            editBtn.addEventListener('click', function () {
+              detail.style.display = 'none';
+              editForm.style.display = 'block';
+
+              editEventId.value = event.event.id;
+              editEventTitle.value = event.event.title;
+              editEventDescription.value = event.event.extendedProps.description;
+              editEventLocation.value = event.event.extendedProps.location;
+              editEventPrice.value = event.event.extendedProps.price;
+              editEventStart.value = formatLocalDateTime(event.event.start);
+              editEventEnd.value = formatLocalDateTime(event.event.end);
+              editEventMax.value = event.event.extendedProps.maxParticipants;
+            });
+            deleteBtn.style.display = 'block';
+            deleteBtn.addEventListener('click', function () {
+              window.location.href = `../../backend/api/delete-training.php?trainingId=${event.event.id}`;
+            });
+          } else {
+            joinBtn.style.display = 'block';
+            joinBtn.addEventListener('click', function () {
+              window.location.href = `../../backend/api/join-training.php?trainingId=${event.event.id}`;
+            });
+          }
+        });
 
       detail.style.display = 'block';
     },
@@ -81,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
           start: event.StartTime,
           end: event.EndTime,
           extendedProps: {
-            createdBy: event.FirstName + ' ' + event.LastName,
+            createdBy: event.createdBy,
             description: event.Description,
             location: event.Location,
             price : event.Price,
@@ -104,5 +152,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   cancelDetailBtn.addEventListener('click', function () {
     detail.style.display = 'none';
+    editBtn.style.display = 'none';
+    deleteBtn.style.display = 'none';
+    joinBtn.style.display = 'none';
   });
 });

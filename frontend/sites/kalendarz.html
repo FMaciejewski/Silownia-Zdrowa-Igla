@@ -72,7 +72,40 @@
           <p><strong>Lokalizacja:</strong> <span id="detailLocation"></span></p>
           <p><strong>Cena:</strong> <span id="detailPrice"></span></p>
           <p><strong>Liczba zapisanych:</strong><span id="detailParticipants"></span>/<span id="detailMax"></span></p>
-          <button id="joinBtn" class="modal-btn confirm">Zapisz się</button>
+          <button id="joinBtn" class="modal-btn confirm" style="display: none;">Zapisz się</button>
+          <button id="editBtn" class="modal-btn confirm" style="display: none;">Edytuj zajęcie</button>
+          <button id="deleteBtn" class="modal-btn delete" style="display: none;">Usuń zajęcie</button>
+        </div>
+      </div>
+      <div id="editForm" class="modal">
+        <div class="modal-content">
+          <h2>Edytuj Wydarzenie</h2>
+          <form action="../../backend/api/edit-training.php" method="post">
+            <input type="text" id="editEventId" name="eventId" hidden />
+
+            <label for="editEventTitle">Tytuł:</label>
+            <input type="text" id="editEventTitle" class="modal-input" required name="title"/>
+
+            <label for="editEventDescription">Opis:</label>
+            <textarea id="editEventDescription" class="modal-input" required name="description"></textarea>
+
+            <label for="editEventPrice">Cena: </label>
+            <input type="number" id="editEventPrice" class="modal-input" required min="0" name="price"/>
+
+            <label for="editEventLocation">Lokalizacja:</label>
+            <input type="text" id="editEventLocation" class="modal-input" required name="location"/>
+
+            <label for="editEventMax">Max osób:</label>
+            <input type="number" id="editEventMax" class="modal-input" required min="1" name="maximum"/>
+
+            <label for="start">Data rozpoczęcia:</label>
+            <input type="datetime-local" id="editEventStart" class="modal-input" name="start" required />
+
+            <label for="end">Data zakończenia:</label>
+            <input type="datetime-local" id="editEventEnd" class="modal-input" name="end" required />
+
+            <button type="submit" id="saveEditBtn" class="modal-btn confirm">Zapisz</button>
+          </form>
         </div>
       </div>
     </main>

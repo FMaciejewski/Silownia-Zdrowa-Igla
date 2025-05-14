@@ -35,6 +35,7 @@ foreach ($participants as $p) {
 foreach ($events as &$event) {
     $id = $event['TrainingID'];
     $event['Participants'] = isset($participantMap[$id]) ? $participantMap[$id] : 0;
+    $event["createdBy"] = $event['FirstName'] . " " . $event['LastName'];
 }
 $stmt->close();
 
@@ -44,6 +45,8 @@ $stmt->bind_param("i", $UserID);
 $stmt->execute();
 $stmt->bind_result($role);
 $stmt->fetch();
+
+
 
 $data = [
     'events' => $events,

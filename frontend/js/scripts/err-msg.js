@@ -11,6 +11,7 @@ if (error) {
     wronglogin: "Brak takiego loginu.",
     already_joined: "Jesteś już zapisany na te zajęcia.",
     max_participants: "Nie ma już miejsc na te zajęcia.",
+    invalid_date: "Podano niepoprawną datę rozpoczęcia lub zakończenia.",
   };
 
   const errorMsg = document.getElementById("error-message");

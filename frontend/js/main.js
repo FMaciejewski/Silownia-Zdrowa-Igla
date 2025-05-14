@@ -56,7 +56,8 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch('../backend/api/render-calendar.php')
     .then(response => response.json())
     .then(data => {
-      data.forEach(event => {
+      const events = data.events;
+      events.forEach(event => {
         calendar.addEvent({
           id: event.TrainingID,
           title: event.Title,
