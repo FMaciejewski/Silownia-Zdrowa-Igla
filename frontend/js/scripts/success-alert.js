@@ -25,6 +25,9 @@ if (successMessage) {
         successMessage.textContent = "Karnet został zakupiony!";
         showMessage();
         break;
+    case "6":
+         successMessage.textContent = "Pomyślnie zapisano się na zajęcia.";
+         showMessage();
     default:
         console.log("Nieznany przypadek success.");
         successMessage.style.opacity = "0";

@@ -34,10 +34,6 @@ if (password_verify($currentPassword, $hashedPassword)) {
     if (!$stmt->execute()) {
         die("Error updating password: " . $stmt->error);
     }
-    $stmt->close();
-    header('Location: ../../frontend/sites/profile.html');
-    exit;
-    
 } else {
     header('Location: ../../frontend/sites/profile.html?error=wrongpassword');
     exit;
