@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Siłownia Zdrowa Igła</title>
-    <link rel="stylesheet" href="../dist/logging.css">
+    <link rel="stylesheet" href="../dist/buy.css">
     <script type="module" src="/Silownia-Zdrowa-Igla/frontend/js/main.js"></script>
     <link rel="icon" href="../assets/images/logo.png" type="image/x-icon">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
@@ -41,58 +41,94 @@
         <a href="../../backend/api/logout.php"><i class="fas fa-circle-right"></i>Wyloguj się</a>
       </div>
     </div>
-    <main id="main-content">
-      <div class="success-msg" id="success-message"></div>
-        <article class="main-loging">
+    <main class="payment-container" id="main-content">
+  <div class="success-msg" id="success-message"></div>
+  
+  <article class="payment-form">
     <h2>Kup karnet</h2>
-    <form action="../../backend/api/payment.php" method="POST">
-    <input type="radio" name="payment-type" value="card" required />
-    <label for="card">Karta kredytowa</label>
-    <div class="card-fields" style="display: none;">
-        <input type="text" name="name" id="name" placeholder="Imię" />
-        <input type="text" name="surname" id="surname" placeholder="Nazwisko" />
-        <input type="number" name="card-number" id="card-number" placeholder="Numer karty" />
-        <input type="text" name="expiry-date" id="expiry-date" placeholder="Data ważności (MM/RRRR)" />
-        <input type="text" name="cvv" id="cvv" placeholder="Kod CVV" />
-        <input type="text" name="address" id="address" placeholder="Adres" />
-        <input type="text" name="postal-code" id="postal-code" placeholder="Kod pocztowy" />
-        <input type="text" name="city" id="city" placeholder="Miasto" />
-        <input type="text" name="country" id="country" placeholder="Kraj" />
-    </div>
-
-    <input type="radio" name="payment-type" value="blik" required />
-    <label for="blik">BLIK</label>
-    <div class="blik-fields" style="display: none;">
-        <input type="text" name="blik-code" id="blik-code" placeholder="Kod BLIK" />
-    </div>
-
-    <input type="radio" name="payment-type" value="google-pay" required />
-    <label for="google-pay">Google Pay</label>
-    <div class="google-pay-fields" style="display: none;">
-        <p>Płatność przy pomocy google pay</p>
-    </div>
-
-
-
-        <script src="../js/scripts/payment-type.js"></script>
-    <input type="hidden" name="rodzaj" id="rodzaj" />
-    <input type="hidden" name="miasto" id="miasto" />
-    <input type="hidden" name="okres" id="okres" />
-    <input type="hidden" name="data_rozpoczecia" id="data_rozpoczecia" />
-
-    <script src="../js/scripts/hidden-params.js"></script>
-
-        <button type="submit">Zapłać</button>
-    </form>
-</article>    
-<script src="../js/scripts/summary.js"></script>
-      <aside class="summary">
-        <h2>Podsumowanie</h2>
-        <div class="summary-content">
-            <p class="price"></p>
+    <form action="../../backend/api/payment.php" method="POST" id="paymentForm">
+      <div class="payment-methods">
+        <div class="payment-option">
+          <input type="radio" name="payment-type" id="card" value="card" required />
+          <label for="card">Karta kredytowa</label>
+          <div class="card-fields payment-fields">
+            <div class="form-row">
+              <input type="text" name="name" id="name" placeholder="Imię" required />
+              <input type="text" name="surname" id="surname" placeholder="Nazwisko" required />
+            </div>
+            <input type="text" name="card-number" id="card-number" placeholder="Numer karty (xxxx xxxx xxxx xxxx)" pattern="\d{16}" required />
+            <div class="form-row">
+              <input type="text" name="expiry-date" id="expiry-date" placeholder="MM/RRRR" pattern="(0[1-9]|1[0-2])\/[0-9]{4}" required />
+              <input type="text" name="cvv" id="cvv" placeholder="CVV" pattern="\d{3}" required />
+            </div>
+            <input type="text" name="address" id="address" placeholder="Adres" required />
+            <div class="form-row">
+              <input type="text" name="postal-code" id="postal-code" placeholder="Kod pocztowy (xx-xxx)" pattern="\d{2}-\d{3}" required />
+              <input type="text" name="city" id="city" placeholder="Miasto" required />
+            </div>
+            <input type="text" name="country" id="country" placeholder="Kraj" required />
+          </div>
         </div>
-      </aside>
-    </main>
+
+        <div class="payment-option">
+          <input type="radio" name="payment-type" id="blik" value="blik" required />
+          <label for="blik">BLIK</label>
+          <div class="blik-fields payment-fields">
+            <input type="text" name="blik-code" id="blik-code" placeholder="6-cyfrowy kod BLIK" pattern="\d{6}" required />
+            <p class="hint">Otwórz aplikację bankową, aby wygenerować kod</p>
+          </div>
+        </div>
+
+        <div class="payment-option">
+          <input type="radio" name="payment-type" id="google-pay" value="google-pay" required />
+          <label for="google-pay">Google Pay</label>
+          <div class="google-pay-fields payment-fields">
+            <div class="google-pay-button"></div>
+            <p class="hint">Zostaniesz przekierowany do systemu płatności</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hidden fields for pass data -->
+      <input type="hidden" name="rodzaj" id="rodzaj" />
+      <input type="hidden" name="miasto" id="miasto" />
+      <input type="hidden" name="okres" id="okres" />
+      <input type="hidden" name="data_rozpoczecia" id="data_rozpoczecia" />
+
+      <button type="submit" class="submit-btn">Zapłać</button>
+    </form>
+  </article>
+  
+  <aside class="order-summary">
+    <h2>Podsumowanie</h2>
+    <div class="summary-content">
+      <div class="summary-item">
+        <span>Typ karnetu:</span>
+        <span id="summary-rodzaj">-</span>
+      </div>
+      <div class="summary-item">
+        <span>Miasto:</span>
+        <span id="summary-miasto">-</span>
+      </div>
+      <div class="summary-item">
+        <span>Okres:</span>
+        <span id="summary-okres">-</span>
+      </div>
+      <div class="summary-item">
+        <span>Data rozpoczęcia:</span>
+        <span id="summary-data">-</span>
+      </div>
+      <div class="summary-total">
+        <span>Do zapłaty:</span>
+        <span class="price" id="summary-price">-</span>
+      </div>
+    </div>
+  </aside>
+</main>
+<script src="../js/scripts/payment-type.js"></script>
+<script src="../js/scripts/hidden-params.js"></script>
+<script src="../js/scripts/summary.js"></script>
+<script src="../js/scripts/paycheck.js"></script>
     <footer id="kontakt">
       <section class="footer-upper">
         <div class="footer1">
