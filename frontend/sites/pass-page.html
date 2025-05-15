@@ -3,13 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <title>Siłownia Zdrowa Igła</title>
-    <link rel="stylesheet" href="../dist/profile.css">
+
+    <link rel="stylesheet" href="../dist/pass.css">
     <script type="module" src="../js/main.js"></script>
     <link rel="icon" href="../assets/images/logo.png" type="image/x-icon">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <script src="../js/scripts/profile.js"></script>
+    <script src="../js/scripts/pass-page.js"></script>
     <header>
         <nav class="navbar">
             <div class="logging">
@@ -24,38 +25,9 @@
     <div class="success-msg" id="success-message"></div>
     <script src="../js/scripts/success-alert.js"defer ></script>
     <main>
-        <section class="profile-section">
-            <div id="profile-info"></div>
-            <div id="button-container">
-                <button class="profile-button" onclick="zamiana(1, 2)">Edytuj profil</button>
-                <button class="profile-button" onclick="zamiana(1, 3)">Zamiana hasła</button>
-                <a href="pass-page.html"><button class="profile-button">Twój karnet</button></a>
-            </div>
-        </section>
-        <section class="profile-section" style="display: none;">
-            <div id="profile-form"></div>
-        </section>
-        <section class="profile-section" style="display: none;">
-            <div id="password-change">
-                <h2>Zmiana hasła</h2>
-                <form id="change-password-form" method="POST" action="../../backend/api/change-password.php">
-                    <label for="old-password">Stare hasło:</label>
-                    <input type="password" id="old-password" name="old-password" required class="profile-input">
-
-                    <label for="new-password">Nowe hasło:</label>
-                    <input type="password" id="new-password" name="new-password" required class="profile-input">
-
-                    <label for="confirm-new-password">Potwierdź nowe hasło:</label>
-                    <input type="password" id="confirm-new-password" name="confirm-new-password" required class="profile-input">
-
-                    <div class="error-msg">
-                        <p id="error-message"></p>
-                    </div>
-
-                    <button type="submit" class="profile-button">Zmień hasło</button>
-                </form>
-                <button class="profile-button" onclick="zamiana(3, 1)">Powrót</button>
-            </div>
+        <section class="pass-section">
+            <h2>Twój karnet</h2>
+            
         </section>
         <article>
             <h2>Dokumenty</h2>
