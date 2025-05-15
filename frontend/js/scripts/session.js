@@ -1,4 +1,4 @@
-fetch("../backend/api/session.php" , { cache: "no-store" })
+fetch("/Silownia-Zdrowa-Igla/backend/api/session.php" , { cache: "no-store" })
     .then(response => response.json())
     .then(data => {
         const sesja = data.sesja;

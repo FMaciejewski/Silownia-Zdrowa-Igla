@@ -7,14 +7,14 @@
     <script type="module" src="/Silownia-Zdrowa-Igla/frontend/js/main.js"></script>
     <link rel="icon" href="../assets/images/logo.png" type="image/x-icon">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
 </head>
 <body>
+  <script src="../js/scripts/sidebar.js"></script>
+    <script src="../js/scripts/sidebar-profile.js"></script>
     <header>
         <nav class="navbar">
             <div class="logging">
-                <a class="signin-btn" href="../index.html">Strona Główna</a>
-                <a class="login-btn" href="sign-in.html">Zarejestruj się</a>
+                <button class="menu-toggle" onclick="toggleSidebar()" id="menu-btn">☰ Menu</button>
             </div>
             <div class="navbar-logo">
                 <img class="logo" src="../assets/images/logo.png" alt="logo">
@@ -22,7 +22,26 @@
             </div>
         </nav>
     </header>
-    <main>
+    <div id="sidebar" class="sidebar">
+      <div id="sidebar-profile">
+        <div id="sidebar-info">
+          <img src="" alt="profile-picture" id="sidebar-picture" />
+          <h4 id="sidebar-name"></h4>
+        </div>
+        <button class="close-btn" onclick="toggleSidebar()">x</button>
+      </div>
+      <div class="sidebar-content">
+        <ul>
+            <li><a href="../index.html"><i class="fas fa-building"></i>Strona Główna</a></li>
+            <li><a href="profile.html"><i class="fas fa-user"></i>Profil</a></li>
+            <li><a href="#kontakt"><i class="fas fa-envelope"></i>Kontakt</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-footer">
+        <a href="../../backend/api/logout.php"><i class="fas fa-circle-right"></i>Wyloguj się</a>
+      </div>
+    </div>
+    <main id="main-content">
       <div class="success-msg" id="success-message"></div>
         <article class="main-loging">
     <h2>Kup karnet</h2>
@@ -67,7 +86,7 @@
         </div>
       </aside>
     </main>
-    <footer>
+    <footer id="kontakt">
       <section class="footer-upper">
         <div class="footer1">
           <div class="footer-logo">

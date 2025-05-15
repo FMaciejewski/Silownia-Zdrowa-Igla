@@ -4,6 +4,7 @@
 @use './layout/logo.scss';
 @use './base/messages.scss';
 @use './base/media.scss';
+@use './sections/sidebar.scss';
 
 main {
     display: flex;
@@ -52,7 +53,7 @@ main {
 }
 
 
-button {
+.buy-pass-button, .change-date-button {
     margin-top: 2rem;
     padding: 0.75rem 1.5rem;
     background: linear-gradient(135deg, #4a90e2, #005caa);
