@@ -11,10 +11,11 @@
 <body>
     <script src="../js/scripts/profile.js"></script>
     <script src="../js/scripts/sidebar.js"></script>
+    <script src="../js/scripts/sidebar-profile.js"></script>
     <header>
         <nav class="navbar">
             <div class="logging">
-                <button class="menu-toggle" onclick="toggleSidebar()">☰ Menu</button>
+                <button class="menu-toggle" onclick="toggleSidebar()" id="menu-btn">☰ Menu</button>
             </div>
             <div class="navbar-logo">
                 <img class="logo" src="../assets/images/logo.png" alt="logo">
@@ -23,7 +24,13 @@
         </nav>
     </header>
     <div id="sidebar" class="sidebar">
-      <button class="close-btn" onclick="toggleSidebar()">x</button>
+        <div id="sidebar-profile">
+            <div id="sidebar-info">
+            <img src="" alt="profile-picture" id="sidebar-picture" />
+            <h4 id="sidebar-name"></h4>
+            </div>
+            <button class="close-btn" onclick="toggleSidebar()">x</button>
+        </div>
       <div class="sidebar-content">
         <ul>
           <li><a href="../index.html"><i class="fas fa-building"></i>Strona Główna</a></li>

@@ -5,7 +5,7 @@ fetch("../backend/api/session.php" , { cache: "no-store" })
         const buttons = document.querySelector('.logging');
         if(sesja !== null){
             buttons.innerHTML = `
-                <button class="menu-toggle" onclick="toggleSidebar()">☰ Menu</button>`;
+                <button class="menu-toggle" onclick="toggleSidebar()" id="menu-btn">☰ Menu</button>`;
             document.getElementById('navbar-menu').style.display = 'none';
         }
         else{

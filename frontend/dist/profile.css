@@ -268,7 +268,6 @@ footer {
   background-color: #363636;
   overflow-x: hidden;
   transition: 0.3s;
-  padding-top: 60px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -287,14 +286,17 @@ footer {
 }
 
 .sidebar .close-btn {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  font-size: 36px;
   background: none;
   border: none;
-  color: white;
+  color: #fff;
+  font-size: 20px;
   cursor: pointer;
+  padding: 5px;
+  transition: color 0.2s ease-in-out;
+}
+
+.sidebar .close-btn:hover {
+  color: #f00;
 }
 
 main {
@@ -342,6 +344,34 @@ main {
 
 .sidebar-footer a i {
   margin-right: 10px;
+}
+
+#sidebar-profile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: 1px solid #333;
+}
+
+#sidebar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+#sidebar-picture {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+}
+
+#sidebar-name {
+  color: #fff;
+  font-size: 16px;
+  margin: 0;
 }
 
 main {
