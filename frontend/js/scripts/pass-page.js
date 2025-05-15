@@ -53,6 +53,12 @@ document.addEventListener("DOMContentLoaded", () => {
                             <p><strong>Karnet aktywny</strong> (${pass.Type})</p>
                             <p>Ważny do ${formatDate(pass.ExpiryDate)}</p>
                         </div>`;
+                        section.innerHTML += `
+                        <div class="active-pass-qrcode">
+                            <img src="../assets/images/qrcode.png" alt="QR Kod" class="qr-code">
+                        </div>
+                    `;
+
                 }
 
                 section.innerHTML += `
