@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Siłownia Zdrowa Igła</title>
-    <link rel="stylesheet" href="../dist/logging.css">
+    <link rel="stylesheet" href="../dist/buy.css">
     <script type="module" src="/Silownia-Zdrowa-Igla/frontend/js/main.js"></script>
     <link rel="icon" href="../assets/images/logo.png" type="image/x-icon">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
@@ -22,51 +22,64 @@
             </div>
         </nav>
     </header>
-    <main>
-      <div class="success-msg" id="success-message"></div>
-        <article class="main-loging">
-    <h2>Kup karnet</h2>
-    <form action="pay.html" method="GET">
-        <label for="rodzaj">Wybierz rodzaj karnetu: </label>
-        <select id="rodzaj" name="rodzaj" required>
-            <option value="normal">Normalny</option>
-            <option value="premium">Premium</option>
-            <option value="vip">VIP</option>
+    <main class="pass-purchase">
+  <div class="success-msg" id="success-message"></div>
+  
+  <article class="main-loging pass-form">
+    <h2 class="form-title">Kup karnet</h2>
+    <form action="pay.html" method="GET" class="pass-form-container">
+      <div class="form-group">
+        <label for="rodzaj" class="form-label">Wybierz rodzaj karnetu:</label>
+        <select id="rodzaj" name="rodzaj" class="form-select" required>
+          <option value="normal">Normalny</option>
+          <option value="premium">Premium</option>
+          <option value="vip">VIP</option>
         </select>
+      </div>
 
-        <label for="miasto">Wybierz miasto:</label>
-        <select id="miasto" name="miasto" required>
-            <option value="poznan">Poznań</option>
-            <option value="wronki">Wronki</option>
-            <option value="warszawa">Warszawa</option>
-            <option value="gdansk">Gdańsk</option>
+      <div class="form-group">
+        <label for="miasto" class="form-label">Wybierz miasto:</label>
+        <select id="miasto" name="miasto" class="form-select" required>
+          <option value="poznan">Poznań</option>
+          <option value="wronki">Wronki</option>
+          <option value="warszawa">Warszawa</option>
+          <option value="gdansk">Gdańsk</option>
         </select>
+      </div>
 
-        <label for="okres">Wybierz okres trwania karnetu:</label>
-        <select id="okres" name="okres" required>
-            <option value="1">1 miesiąc</option>
-            <option value="3">3 miesiące</option>
-            <option value="12">12 miesięcy</option>
+      <div class="form-group">
+        <label for="okres" class="form-label">Wybierz okres trwania karnetu:</label>
+        <select id="okres" name="okres" class="form-select" required>
+          <option value="1">1 miesiąc</option>
+          <option value="3">3 miesiące</option>
+          <option value="12">12 miesięcy</option>
         </select>
+      </div>
 
-        <label for="data_rozpoczecia">Data rozpoczęcia:</label>
-        <input type="date" id="data_rozpoczecia" name="data_rozpoczecia" required />
+      <div class="form-group">
+        <label for="data_rozpoczecia" class="form-label">Data rozpoczęcia:</label>
+        <input type="date" id="data_rozpoczecia" name="data_rozpoczecia" class="form-input" required />
+      </div>
 
-        <script src="../js/scripts/date.js"></script>
-
-        <button type="submit">Przejdź do płatności</button>
+      <button type="submit" class="submit-btn">Przejdź do płatności</button>
+      <script src="../js/scripts/date.js"></script>
     </form>
-    <script src="../js/scripts/summary.js"></script>
-</article>
-      <aside class="summary">
-        <h2>Podsumowanie</h2>
-        <div class="summary-content">
-            <p class="price"></p>
-            <p>Mam kod rabatowy</p>
-            <input type="text" id="discount-code" placeholder="Wpisz kod rabatowy" />
-        </div>
-      </aside>
-    </main>
+  </article>
+  
+  <aside class="summary pass-summary">
+    <h2 class="summary-title">Podsumowanie</h2>
+    <div class="summary-content">
+      <div class="price-container">
+        <span class="price-label">Cena:</span>
+        <span class="price-value">50,00 zł</span>
+      </div>
+      <div class="discount-section">
+        <p class="discount-text">Mam kod rabatowy</p>
+        <input type="text" id="discount-code" class="discount-input" placeholder="Wpisz kod rabatowy" />
+      </div>
+    </div>
+  </aside>
+</main>
     <footer>
       <section class="footer-upper">
         <div class="footer1">
