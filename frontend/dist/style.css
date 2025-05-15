@@ -16,6 +16,9 @@ body {
 }
 
 header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   background: #4a90e2;
   color: #ffffff;
   padding: 1rem 2rem;
@@ -92,11 +95,21 @@ header {
   border-color: #4a90e2;
 }
 
+.menu-toggle {
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+}
+
 footer {
   background: #333333;
   color: #ffffff;
   padding: 2rem 0;
   text-align: center;
+  margin-left: 0;
+  transition: margin-left 0.3s;
 }
 
 .footer-upper {
@@ -555,6 +568,125 @@ footer {
 
 .period-btn.active:hover {
   background-color: #357ABD;
+}
+
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1500;
+  top: 0;
+  left: 0;
+  background-color: #363636;
+  overflow-x: hidden;
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar a {
+  padding: 10px 15px;
+  text-decoration: none;
+  color: white;
+  display: block;
+}
+
+.sidebar .close-btn {
+  position: absolute;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px;
+  transition: color 0.2s ease-in-out;
+  top: 20px;
+  right: 20px;
+}
+
+.sidebar .close-btn:hover {
+  color: #f00;
+}
+
+main {
+  margin-left: 0;
+  transition: margin-left 0.3s;
+}
+
+.sidebar ul li a {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  font-size: 16px;
+  color: white;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.sidebar ul li a i {
+  margin-right: 10px;
+  min-width: 20px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.sidebar ul li a:hover {
+  background-color: #333;
+}
+
+.sidebar-content {
+  flex-grow: 1;
+}
+
+.sidebar-footer {
+  padding: 20px;
+  border-top: 1px solid #333;
+}
+
+.sidebar-footer a {
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.sidebar-footer a i {
+  margin-right: 10px;
+}
+
+#sidebar-profile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: 1px solid #333;
+}
+
+#sidebar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+#sidebar-picture {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+}
+
+#sidebar-name {
+  color: #fff;
+  font-size: 16px;
+  margin: 0;
 }
 
 /*# sourceMappingURL=style.css.map */

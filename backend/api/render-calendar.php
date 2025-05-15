@@ -11,6 +11,9 @@ if ($conn->connect_error) {
     echo json_encode(['error' => 'Błąd połączenia z bazą danych: ' . $conn->connect_error]);
     exit;
 }
+$stmt = $conn->prepare("DELETE FROM trainings WHERE EndTime < NOW()");
+$stmt->execute();
+$stmt->close();
 
 $stmt = $conn->prepare("SELECT TrainingID, users.FirstName, users.LastName, Title, Description, StartTime, EndTime, MaxParticipants, Price, Location FROM trainings 
 JOIN trainers ON trainings.TrainerID = trainers.TrainerID 

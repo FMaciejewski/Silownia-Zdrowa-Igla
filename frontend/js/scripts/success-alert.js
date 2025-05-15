@@ -28,6 +28,7 @@ if (successMessage) {
     case "6":
          successMessage.textContent = "Pomyślnie zapisano się na zajęcia.";
          showMessage();
+         break;
     default:
         console.log("Nieznany przypadek success.");
         successMessage.style.opacity = "0";

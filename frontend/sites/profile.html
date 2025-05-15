@@ -10,10 +10,12 @@
 </head>
 <body>
     <script src="../js/scripts/profile.js"></script>
+    <script src="../js/scripts/sidebar.js"></script>
+    <script src="../js/scripts/sidebar-profile.js"></script>
     <header>
         <nav class="navbar">
             <div class="logging">
-                <a class="signin-btn" href="../index.html">Strona Główna</a>
+                <button class="menu-toggle" onclick="toggleSidebar()" id="menu-btn">☰ Menu</button>
             </div>
             <div class="navbar-logo">
                 <img class="logo" src="../assets/images/logo.png" alt="logo">
@@ -21,9 +23,29 @@
             </div>
         </nav>
     </header>
+    <div id="sidebar" class="sidebar">
+        <div id="sidebar-profile">
+            <div id="sidebar-info">
+                <img src="" alt="profile-picture" id="sidebar-picture" />
+                <h4 id="sidebar-name"></h4>
+            </div>
+            <button class="close-btn" onclick="toggleSidebar()">x</button>
+        </div>
+      <div class="sidebar-content">
+        <ul>
+          <li><a href="../index.html"><i class="fas fa-building"></i>Strona Główna</a></li>
+          <li><a href="kalendarz.html"><i class="fas fa-calendar"></i>Zapisy na zajęcia</a></li>
+          <li><a href="#documents"><i class="fas fa-file-pdf"></i>Dokumenty</a></li>
+          <li><a href="#kontakt"><i class="fas fa-envelope"></i>Kontakt</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-footer">
+        <a href="../../backend/api/logout.php"><i class="fas fa-circle-right"></i>Wyloguj się</a>
+      </div>
+    </div>
     <div class="success-msg" id="success-message"></div>
     <script src="../js/scripts/success-alert.js"defer ></script>
-    <main>
+    <main id="main-content">
         <section class="profile-section">
             <div id="profile-info"></div>
             <div id="button-container">
@@ -57,7 +79,7 @@
                 <button class="profile-button" onclick="zamiana(3, 1)">Powrót</button>
             </div>
         </section>
-        <article>
+        <article id="documents">
             <h2>Dokumenty</h2>
             <p>Wszystkie dokumenty są dostępne w formacie PDF.</p>
             <ul>
@@ -104,11 +126,6 @@
             <p>Siłownia Zdrowa Igła &copy; 2023 Wszelkie prawa zastrzeżone</p>
             <p>Wykonanie: Filip Maciejewski, Adrian Cichocki</p>
         </div>
-      </section>
-      <div class="copyright">
-        <p>Siłownia Zdrowa Igła &copy; 2023 Wszelkie prawa zastrzeżone</p>
-        <p>Wykonanie: Filip Maciejewski, Adrian Cichocki</p>
-      </div>
     </footer>  
 </body>
 </html>
