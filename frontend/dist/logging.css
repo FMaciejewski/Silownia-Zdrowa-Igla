@@ -400,6 +400,7 @@ textarea {
 }
 
 .sidebar .close-btn {
+  position: absolute;
   background: none;
   border: none;
   color: #fff;
@@ -407,6 +408,8 @@ textarea {
   cursor: pointer;
   padding: 5px;
   transition: color 0.2s ease-in-out;
+  top: 20px;
+  right: 20px;
 }
 
 .sidebar .close-btn:hover {

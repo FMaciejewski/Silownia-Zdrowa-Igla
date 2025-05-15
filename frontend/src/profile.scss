@@ -4,7 +4,7 @@
 @use './layout/logo.scss';
 @use './base/messages.scss';
 @use './base/media.scss';
-@use './sections/sidebar.scss';
+@use 'sections/sidebar.scss';
 
 main {
     display: flex;
