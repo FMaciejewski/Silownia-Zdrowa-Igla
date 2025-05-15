@@ -16,6 +16,9 @@ body {
 }
 
 header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   background: #4a90e2;
   color: #ffffff;
   padding: 1rem 2rem;
@@ -92,11 +95,21 @@ header {
   border-color: #4a90e2;
 }
 
+.menu-toggle {
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+}
+
 footer {
   background: #333333;
   color: #ffffff;
   padding: 2rem 0;
   text-align: center;
+  margin-left: 0;
+  transition: margin-left 0.3s;
 }
 
 .footer-upper {
