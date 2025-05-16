@@ -6,8 +6,8 @@ if (error) {
     missmatch: "Hasła nie pasują do siebie.",
     required: "Wszystkie pola są wymagane.",
     already_registered: "Login lub email już istnieje.",
-    empty: 'Hasła nie pasują do siebie.',
-    wrong: 'Hasło lub login są błędne.',
+    empty: "Hasła nie pasują do siebie.",
+    wrong: "Hasło lub login są błędne.",
     wronglogin: "Brak takiego loginu.",
     already_joined: "Jesteś już zapisany na te zajęcia.",
     max_participants: "Nie ma już miejsc na te zajęcia.",
@@ -15,6 +15,5 @@ if (error) {
   };
 
   const errorMsg = document.getElementById("error-message");
-  errorMsg.textContent =
-    errorMessage[error] || "Wystąpił nieznany błąd.";
+  errorMsg.textContent = errorMessage[error] || "Wystąpił nieznany błąd.";
 }

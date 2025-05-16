@@ -68,7 +68,10 @@ header {
   border-radius: 5px;
   text-decoration: none;
   font-weight: bold;
-  transition: background 0.3s, color 0.3s, border 0.3s;
+  transition:
+    background 0.3s,
+    color 0.3s,
+    border 0.3s;
   border: 2px solid #ffffff;
 }
 
@@ -162,7 +165,9 @@ footer {
 .social-media a {
   color: #ffffff;
   font-size: 1.8rem;
-  transition: transform 0.3s, color 0.3s;
+  transition:
+    transform 0.3s,
+    color 0.3s;
 }
 
 .social-media a:hover {
@@ -453,7 +458,8 @@ main {
   font-weight: 500;
 }
 
-.form-select, .form-input {
+.form-select,
+.form-input {
   width: 100%;
   padding: 0.75rem;
   border: 1px solid #ddd;
@@ -462,7 +468,8 @@ main {
   transition: border-color 0.3s;
 }
 
-.form-select:focus, .form-input:focus {
+.form-select:focus,
+.form-input:focus {
   border-color: #3498db;
   outline: none;
 }
@@ -570,7 +577,7 @@ main {
   border-color: #3498db;
 }
 
-.payment-option input[type=radio] {
+.payment-option input[type="radio"] {
   margin-right: 10px;
 }
 
@@ -586,7 +593,7 @@ main {
   border-top: 1px solid #eee;
 }
 
-.payment-option input[type=radio]:checked ~ .payment-fields {
+.payment-option input[type="radio"]:checked ~ .payment-fields {
   display: block;
 }
 
@@ -600,8 +607,8 @@ main {
   flex: 1;
 }
 
-input[type=text],
-input[type=number] {
+input[type="text"],
+input[type="number"] {
   width: 100%;
   padding: 0.75rem;
   margin-bottom: 1rem;

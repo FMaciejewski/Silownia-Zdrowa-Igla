@@ -1,89 +1,91 @@
 footer {
-    background: #333333;
-    color: #ffffff;
-    padding: 2rem 0;
-    text-align: center;
-    margin-left: 0;
-    transition: margin-left 0.3s;
+  background: #333333;
+  color: #ffffff;
+  padding: 2rem 0;
+  text-align: center;
+  margin-left: 0;
+  transition: margin-left 0.3s;
 }
 
 .footer-upper {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    width: 100%;
-    box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .footer1,
 .opens,
 .footer2 {
-    flex: 1;
-    text-align: left;
-    padding: 0 1rem; 
+  flex: 1;
+  text-align: left;
+  padding: 0 1rem;
 }
-  
-  .footer-logo {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  
-  .footer-logo img.logo {
-    width: 50px;
-    height: auto;
-  }
-  
-  .addres,
-  .opens,
-  .contact,
-  .social-media {
-    font-size: 0.95rem;
-    text-align: center;
-  }
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer-logo img.logo {
+  width: 50px;
+  height: auto;
+}
+
+.addres,
+.opens,
+.contact,
 .social-media {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    text-align: center;
-    margin: auto;
+  font-size: 0.95rem;
+  text-align: center;
+}
+.social-media {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  text-align: center;
+  margin: auto;
 }
 
 .social-media a {
-    color: #ffffff;
-    font-size: 1.8rem;
-    transition: transform 0.3s, color 0.3s;
+  color: #ffffff;
+  font-size: 1.8rem;
+  transition:
+    transform 0.3s,
+    color 0.3s;
 }
 
 .social-media a:hover {
-    color: #90e0ef;
-    transform: scale(1.2);
+  color: #90e0ef;
+  transform: scale(1.2);
 }
 
 .contact {
-    text-align: center;
-    margin: auto;
+  text-align: center;
+  margin: auto;
 }
 
 .contact a {
-    color: #90e0ef;
-    text-decoration: none;
-    transition: color 0.3s;
+  color: #90e0ef;
+  text-decoration: none;
+  transition: color 0.3s;
 }
 
 .contact a:hover {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .copyright {
-    grid-column: 1 / -1;
-    font-size: 0.8rem;
-    text-align: center;
-    margin-top: 1rem;
-    border-top: 1px solid #555555;
-    padding-top: 1rem;
+  grid-column: 1 / -1;
+  font-size: 0.8rem;
+  text-align: center;
+  margin-top: 1rem;
+  border-top: 1px solid #555555;
+  padding-top: 1rem;
 }

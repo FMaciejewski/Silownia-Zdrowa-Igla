@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Siłownia Zdrowa Igła</title>
-    <link rel="stylesheet" href="../dist/logging.css">
+    <link rel="stylesheet" href="../dist/logging.css" />
     <script
       type="module"
       src="/Silownia-Zdrowa-Igla/frontend/js/main.js"
@@ -33,10 +33,14 @@
     </header>
     <main>
       <div class="success-msg" id="success-message"></div>
-      <script src="../js/scripts/success-alert.js"></script></script>
+      <script src="../js/scripts/success-alert.js"></script>
       <article class="main-loging">
         <h2>Odzyskaj hasło</h2>
-        <form action="../../backend/api/forgotten.php" method="POST" class="register-form">
+        <form
+          action="../../backend/api/forgotten.php"
+          method="POST"
+          class="register-form"
+        >
           <label for="username">Nazwa użytkownika:</label>
           <input type="text" id="username" name="username" required />
 

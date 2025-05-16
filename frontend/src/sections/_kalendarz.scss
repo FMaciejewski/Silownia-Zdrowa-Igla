@@ -1,10 +1,10 @@
 #calendar {
-    margin: 30px auto;
-    max-width: 1000px;
-    height: 800px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px #00ffd5;
-  }
+  margin: 30px auto;
+  max-width: 1000px;
+  height: 800px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #00ffd5;
+}
 
 .toastui-calendar-timegrid-schedule {
   z-index: 1000;
@@ -102,13 +102,23 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0 }
-  to { opacity: 1 }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideDown {
-  from { transform: translateY(-50px); opacity: 0 }
-  to { transform: translateY(0); opacity: 1 }
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .modal-input:invalid {
@@ -128,6 +138,5 @@
 .fc-event {
   margin-bottom: 2px;
   border-radius: 6px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
-
