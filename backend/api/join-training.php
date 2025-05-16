@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 $host = 'localhost';
@@ -46,4 +47,3 @@ if ($stmt->execute()) {
 
 $stmt->close();
 $conn->close();
-?>

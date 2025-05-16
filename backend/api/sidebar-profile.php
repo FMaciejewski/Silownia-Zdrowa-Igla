@@ -1,7 +1,8 @@
 <?php
+
 session_start();
 $host = 'localhost';
-$username = 'root'; 
+$username = 'root';
 $password = '';
 $database = 'SilowniaZdrowaIgla';
 $conn = new mysqli($host, $username, $password, $database);
@@ -20,4 +21,3 @@ $data = $result->fetch_assoc();
 echo json_encode($data);
 $stmt->close();
 $conn->close();
-?>

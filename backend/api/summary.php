@@ -1,4 +1,5 @@
 <?php
+
 header('Content-Type: application/json');
 $host = 'localhost';
 $user = 'root';
@@ -49,4 +50,3 @@ if ($data) {
 
 $stmt->close();
 $conn->close();
-?>

@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 $host = 'localhost';
 $username = 'root';
@@ -25,8 +26,8 @@ $stmt->close();
 
 if (password_verify($currentPassword, $hashedPassword)) {
     if ($newPassword !== $confirmPassword) {
-    header('Location: ../../frontend/sites/profile.html?error=missmatch');
-    exit;
+        header('Location: ../../frontend/sites/profile.html?error=missmatch');
+        exit;
     }
     $newHashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
     $stmt = $conn->prepare("UPDATE users SET PasswordHash = ? WHERE UserID = ?");
@@ -38,4 +39,3 @@ if (password_verify($currentPassword, $hashedPassword)) {
     header('Location: ../../frontend/sites/profile.html?error=wrongpassword');
     exit;
 }
-?>

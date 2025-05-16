@@ -1,4 +1,5 @@
 <?php
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -31,7 +32,7 @@ if ($profilePicture && $profilePicture['error'] === 0) {
     $fileName = $profilePicture['name'];
     $fileTmpName = $profilePicture['tmp_name'];
     $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
-    
+
     if (!in_array(strtolower($fileExtension), $allowedExtensions)) {
         die("Niedozwolony format pliku.");
     }
@@ -52,8 +53,8 @@ if ($profilePicturePath) {
     $relativePath = 'assets/images/' . basename($profilePicturePath);
     $query = "UPDATE users SET FirstName = ?, LastName = ?, Email = ?, PhoneNumber = ?, ProfilePicture = ? WHERE UserID = ?";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("sssssi",$firstName, $lastName, $email, $phoneNumber, $relativePath, $ID);
-    if(!$stmt->execute()) {
+    $stmt->bind_param("sssssi", $firstName, $lastName, $email, $phoneNumber, $relativePath, $ID);
+    if (!$stmt->execute()) {
         die("Błąd podczas aktualizacji danych: " . $stmt->error);
     }
     if ($currentProfilePicture && $currentProfilePicture !== 'assets/images/default_profile.png') {
@@ -66,14 +67,14 @@ if ($profilePicturePath) {
 } else {
     $query = "UPDATE users SET FirstName = ?, LastName = ?, Email = ?, PhoneNumber = ? WHERE UserID = ?";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("ssssi",$firstName, $lastName, $email, $phoneNumber, $ID);
-    if(!$stmt->execute()) {
+    $stmt->bind_param("ssssi", $firstName, $lastName, $email, $phoneNumber, $ID);
+    if (!$stmt->execute()) {
         die("Błąd podczas aktualizacji danych: " . $stmt->error);
     }
     $stmt->close();
 }
 
-if($role == 'trainer'){
+if ($role == 'trainer') {
     $specialization = $_POST['specialization'] ?? '';
     $bio = $_POST['bio'] ?? '';
     $hourlyRate = $_POST['hourly-rate'] ?? '';
@@ -81,11 +82,10 @@ if($role == 'trainer'){
     $query = "UPDATE trainers SET Specialization = ?, Bio = ?, HourlyRate = ? WHERE UserID = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("ssdi", $specialization, $bio, $hourlyRate, $ID);
-    if(!$stmt->execute()) {
+    if (!$stmt->execute()) {
         die("Błąd podczas aktualizacji danych: " . $stmt->error);
     }
     $stmt->close();
 }
 header('Location: ../../frontend/sites/profile.html');
 exit();
-?>

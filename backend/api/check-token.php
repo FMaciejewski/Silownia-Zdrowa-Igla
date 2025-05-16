@@ -1,4 +1,5 @@
 <?php
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -23,20 +24,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['token'])) {
     $stmt->bind_param("s", $token);
     $stmt->execute();
     $result = $stmt->get_result();
-    $user = $result->fetch_assoc();    
-    if($user){
+    $user = $result->fetch_assoc();
+    if ($user) {
         echo json_encode(['valid' => true]);
-    }
-    else{
+    } else {
         echo json_encode(['valid' => false]);
     }
 
     $stmt->close();
     $conn->close();
- }
- else {
+} else {
     http_response_code(400);
     echo json_encode(['error' => 'Nieprawidłowe żądanie']);
-
 }
-?>
