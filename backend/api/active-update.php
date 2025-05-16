@@ -34,3 +34,4 @@ $stmtDeactivate->execute();
 $stmtDeactivate->close();
 
 $conn->close();
+echo json_encode(['status' => 'updated']);

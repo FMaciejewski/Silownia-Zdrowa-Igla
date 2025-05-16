@@ -7,8 +7,8 @@ fetch("/Silownia-Zdrowa-Igla/backend/api/active-update.php", {
     }
     return response.json();
   })
-  .then((data) => {
-    console.log("Zaktualizowane karnety:", data);
+  .then(() => {
+    console.log("Zaktualizowano karnety");
   })
   .catch((error) => {
     console.error("Błąd podczas aktualizacji karnetów:", error);

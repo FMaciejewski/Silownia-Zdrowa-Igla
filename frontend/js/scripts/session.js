@@ -6,7 +6,10 @@ fetch("/Silownia-Zdrowa-Igla/backend/api/session.php", { cache: "no-store" })
     if (sesja !== null) {
       buttons.innerHTML = `
                 <button class="menu-toggle" onclick="toggleSidebar()" id="menu-btn">☰ Menu</button>`;
-      document.getElementById("navbar-menu").style.display = "none";
+      const navbarMenu = document.getElementById("navbar-menu");
+      if (navbarMenu) {
+        navbarMenu.style.display = "none";
+      }
     } else {
       buttons.innerHTML = `
                 <a class="signin-btn" href="sites/sign-in.html">Zarejestruj się</a>

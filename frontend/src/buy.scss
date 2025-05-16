@@ -8,12 +8,13 @@
 @use "./sections/sidebar.scss";
 
 .pass-purchase {
-  display: grid;
+  display: flex;
   grid-template-columns: 2fr 1fr;
   gap: 2rem;
-  max-width: 1200px;
-  margin: 2rem auto;
   padding: 0 1rem;
+  align-items: center;
+  margin:auto;
+  flex-wrap: wrap;
 }
 
 .pass-form {
@@ -77,6 +78,7 @@
   border-radius: 10px;
   padding: 2rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    min-width: 300px;
 }
 
 .summary-title {
@@ -125,15 +127,19 @@
   .pass-purchase {
     grid-template-columns: 1fr;
   }
+  .payment-container {
+    grid-template-columns: 1fr;
+  }
 }
 
 .payment-container {
-  display: grid;
+  display: flex;
   grid-template-columns: 2fr 1fr;
   gap: 2rem;
-  max-width: 1200px;
-  margin: 2rem auto;
   padding: 0 1rem;
+  align-items: center;
+  margin:auto;
+  flex-wrap: wrap;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -142,6 +148,7 @@
   border-radius: 10px;
   padding: 2rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  min-width: 500px;
 }
 
 .payment-methods {
@@ -233,6 +240,7 @@ input:focus {
   border-radius: 10px;
   padding: 2rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  min-width: 500px;
 }
 
 .summary-content {
