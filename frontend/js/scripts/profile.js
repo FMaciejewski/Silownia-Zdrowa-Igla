@@ -24,7 +24,6 @@ document.addEventListener("DOMContentLoaded", () => {
         <img src="../${data.ProfilePicture}" alt="Profile Image" class="profile-image">
         <p><strong>Imię:</strong> ${data.FirstName}</p>
         <p><strong>Nazwisko:</strong> ${data.LastName}</p>
-        <p><strong>Login:</strong> ${data.Login}</p>
         <p><strong>Email:</strong> ${data.Email}</p>
         <p><strong>Numer telefonu:</strong> ${data.PhoneNumber}</p>
     `;
@@ -38,8 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
             <input type="text" id="first-name" name="first-name" value="${data.FirstName}" class="profile-input" required>
             <label for="last-name">Nazwisko:</label>
             <input type="text" id="last-name" name="last-name" value="${data.LastName}" class="profile-input" required>
-            <label for="login">Login:</label>
-            <input type="text" id="login" name="login" value="${data.Login}" class="profile-input" required>
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" value="${data.Email}" class="profile-input" required>
             <label for="phone-number">Numer telefonu:</label>
