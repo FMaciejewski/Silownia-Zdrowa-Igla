@@ -37,7 +37,11 @@ if (!$firstName || !$lastName || !$email || !$login || !$password || !$confirmPa
     echo json_encode(['error' => 'Wszystkie pola są wymagane']);
     exit;
 }
-
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Nieprawidłowy adres e-mail']);
+    exit;
+}
 $stmt = $conn->prepare("SELECT * FROM Users WHERE Login = ? OR Email = ?");
 $stmt->bind_param("ss", $login, $email);
 $stmt->execute();
