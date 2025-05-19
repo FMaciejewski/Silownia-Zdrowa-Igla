@@ -5,7 +5,7 @@ fetch("../backend/api/trainers.php")
     const trenerDiv = document.createElement('div');
     trenerDiv.classList.add('trener');
     trenerDiv.innerHTML = `
-        <img src="${trener.ProfilePicture}" alt="${trener.FirstName} ${trener.LastName}" />
+        <img src="assets/images/${trener.ProfilePicture}" alt="${trener.FirstName} ${trener.LastName}" />
         <h4>${trener.FirstName} ${trener.LastName}</h4>
         <h3>${trener.Specialization}</h3>
         <p>${trener.Bio}</p>

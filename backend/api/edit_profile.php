@@ -49,15 +49,15 @@ if ($profilePicture && $profilePicture['error'] === 0) {
 }
 
 if ($profilePicturePath) {
-    $relativePath = 'assets/images/' . basename($profilePicturePath);
+    $relativePath = basename($profilePicturePath);
     $query = "UPDATE users SET FirstName = ?, LastName = ?, Email = ?, PhoneNumber = ?, ProfilePicture = ? WHERE UserID = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("sssssi",$firstName, $lastName, $email, $phoneNumber, $relativePath, $ID);
     if(!$stmt->execute()) {
         die("Błąd podczas aktualizacji danych: " . $stmt->error);
     }
-    if ($currentProfilePicture && $currentProfilePicture !== 'assets/images/default_profile.png') {
-        $oldFilePath = '../../frontend/' . $currentProfilePicture;
+    if ($currentProfilePicture && $currentProfilePicture !== 'default_profile.png') {
+        $oldFilePath = '../../frontend/assets/images/' . $currentProfilePicture;
         if (file_exists($oldFilePath)) {
             unlink($oldFilePath);
         }

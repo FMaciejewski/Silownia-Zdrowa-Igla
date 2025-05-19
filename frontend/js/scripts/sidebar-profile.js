@@ -9,6 +9,6 @@ fetch("/Silownia-Zdrowa-Igla/backend/api/sidebar-profile.php")
         const sidebarProfile = document.getElementById("sidebar-profile");
         const profileImage = document.getElementById("sidebar-picture");
         const profileName = document.getElementById("sidebar-name");
-        profileImage.src = "/Silownia-Zdrowa-Igla/frontend/" + data.ProfilePicture;
+        profileImage.src = "/Silownia-Zdrowa-Igla/frontend/assets/images/" + data.ProfilePicture;
         profileName.innerHTML = data.FirstName + " " + data.LastName;
     })

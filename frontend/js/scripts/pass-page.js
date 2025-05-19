@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
             section.innerHTML = `
                 <div class="pass-header">
                     <h2>Twój karnet</h2>
-                    <img src="../${data.ProfilePicture}" alt="Profile Image" class="profile-image">
+                    <img src="../assets/images/${data.ProfilePicture}" alt="Profile Image" class="profile-image">
                     <p><strong>Imię:</strong> ${data.FirstName}</p>
                     <p><strong>Nazwisko:</strong> ${data.LastName}</p>
                 </div>
