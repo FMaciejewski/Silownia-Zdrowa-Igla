@@ -1,10 +1,12 @@
 <?php
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 session_start();
 
-include 'active_update.php';
+require(__DIR__ . '/active-update.php');
+
 
 
 $host = 'localhost';
@@ -39,16 +41,16 @@ if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $currentDate = date('Y-m-d');
 
-if ($row['IsActive'] == 0 && $row['ExpiryDate'] < $currentDate) {
-    $stmt = $conn->prepare("DELETE FROM Passes WHERE UserID = ? AND Type = ?");
-    $stmt->bind_param("ss", $UserID, $type);
-    
-    if ($stmt->execute()) {
-        error_log("Usunięto nieaktywny i przeterminowany karnet użytkownika $UserID o typie $type.");
+    if ($row['IsActive'] == 0 && $row['ExpiryDate'] < $currentDate) {
+        $stmt = $conn->prepare("DELETE FROM Passes WHERE UserID = ? AND Type = ?");
+        $stmt->bind_param("ss", $UserID, $type);
+
+        if ($stmt->execute()) {
+            error_log("Usunięto nieaktywny i przeterminowany karnet użytkownika $UserID o typie $type.");
+        } else {
+            error_log("Błąd przy usuwaniu karnetu: " . $stmt->error);
+        }
     } else {
-        error_log("Błąd przy usuwaniu karnetu: " . $stmt->error);
-    }
-    }else{
         $currentExpiryDate = $row['ExpiryDate'];
         $expiryDateObj = new DateTime($currentExpiryDate);
         $expiryDateObj->modify("+$period months");
@@ -61,8 +63,9 @@ if ($row['IsActive'] == 0 && $row['ExpiryDate'] < $currentDate) {
             sendConfirmationEmail($conn, $UserID, $type, $PurchaseDate, $newExpiryDate, true);
             header('Location: ../../frontend/sites/profile.html?success=5');
             exit;
-    }}
-}   
+        }
+    }
+}
 $isActive = 1;
 if (new DateTime($PurchaseDate) > new DateTime()) {
     $isActive = 0;
@@ -74,30 +77,31 @@ if (new DateTime($PurchaseDate) > new DateTime()) {
     $stmt = $conn->prepare("INSERT INTO Passes (UserID, Type, PurchaseDate, ExpiryDate, IsActive) VALUES (?, ?, ?, ?,?)");
     $stmt->bind_param("sssss", $UserID, $type, $PurchaseDate, $ExpiryDate, $isActive);
 
-    if ($stmt->execute()) {
-        sendConfirmationEmail($conn, $UserID, $type, $PurchaseDate, $ExpiryDate, false);
-        header('Location: ../../frontend/sites/profile.html?success=5');
-        exit;
-    } else {
-        http_response_code(500);
-        echo json_encode(['error' => 'Błąd podczas dodawania karnetu: ' . $stmt->error]);
-    }
+if ($stmt->execute()) {
+    sendConfirmationEmail($conn, $UserID, $type, $PurchaseDate, $ExpiryDate, false);
+    header('Location: ../../frontend/sites/profile.html?success=5');
+    exit;
+} else {
+    http_response_code(500);
+    echo json_encode(['error' => 'Błąd podczas dodawania karnetu: ' . $stmt->error]);
+}
 
 
-function sendConfirmationEmail($conn, $UserID, $type, $PurchaseDate, $ExpiryDate, $isRenewal) {
+function sendConfirmationEmail($conn, $UserID, $type, $PurchaseDate, $ExpiryDate, $isRenewal)
+{
     $stmt = $conn->prepare("SELECT * FROM Users WHERE UserID = ?");
     $stmt->bind_param("s", $UserID);
     $stmt->execute();
     $result = $stmt->get_result();
     $user = $result->fetch_assoc();
-    
+
     $firstName = $user['FirstName'];
     $lastName = $user['LastName'];
     $email = $user['Email'];
-    
+
     $action = $isRenewal ? 'przedłużony' : 'zakupiony';
-    $message = $firstName . ' ' . $lastName . ' Karnet został ' . $action . '. Rodzaj: ' . $type . 
-               ' Data zakupu: ' . $PurchaseDate . ' Data ważności: ' . $ExpiryDate . 
+    $message = $firstName . ' ' . $lastName . ' Karnet został ' . $action . '. Rodzaj: ' . $type .
+               ' Data zakupu: ' . $PurchaseDate . ' Data ważności: ' . $ExpiryDate .
                ' Zapraszamy do korzystania z naszych usług.';
 
     $to = urlencode($email);
@@ -107,4 +111,3 @@ function sendConfirmationEmail($conn, $UserID, $type, $PurchaseDate, $ExpiryDate
 
     file_get_contents("http://localhost/Silownia-Zdrowa-Igla/backend/api/mail.php?to=$to&name=$name&subject=$subject&body=$body");
 }
-?>

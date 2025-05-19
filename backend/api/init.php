@@ -1,4 +1,5 @@
 <?php
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -46,7 +47,6 @@ if ($tableCheck->num_rows === 0) {
         echo json_encode(['error' => 'Błąd SQL(Users): ' . $conn->error]);
         exit;
     }
-
 }
 
 
@@ -69,7 +69,6 @@ if ($tableCheck->num_rows === 0) {
         echo json_encode(['error' => 'Błąd SQL(Trainers): ' . $conn->error]);
         exit;
     }
-
 }
 
 
@@ -93,7 +92,6 @@ if ($tableCheck->num_rows === 0) {
         echo json_encode(['error' => 'Błąd SQL(Passes): ' . $conn->error]);
         exit;
     }
-
 }
 
 
@@ -120,7 +118,6 @@ if ($tableCheck->num_rows === 0) {
         echo json_encode(['error' => 'Błąd SQL(Trainings): ' . $conn->error]);
         exit;
     }
-
 }
 
 
@@ -144,14 +141,13 @@ if ($tableCheck->num_rows === 0) {
         echo json_encode(['error' => 'Błąd SQL(UserTrainings): ' . $conn->error]);
         exit;
     }
-
 }
 
 
 
 $tableCheck = $conn->query("SHOW TABLES LIKE 'Payments'");
 if ($tableCheck->num_rows === 0) {
-    $sql ="
+    $sql = "
         CREATE TABLE Payments (
     PaymentID INT AUTO_INCREMENT PRIMARY KEY,
     UserID INT NOT NULL,
@@ -168,9 +164,9 @@ if ($tableCheck->num_rows === 0) {
     ";
 
 
-$tableCheck = $conn->query("SHOW COLUMNS FROM Payments LIKE 'pass_types'");
-if ($tableCheck->num_rows === 0) {
-    $sql = "
+    $tableCheck = $conn->query("SHOW COLUMNS FROM Payments LIKE 'pass_types'");
+    if ($tableCheck->num_rows === 0) {
+        $sql = "
         CREATE TABLE pass_types (
     id INT AUTO_INCREMENT PRIMARY KEY,
     type VARCHAR(50) NOT NULL UNIQUE,
@@ -180,19 +176,19 @@ if ($tableCheck->num_rows === 0) {
 );
 
     ";
+        if (!$conn->query($sql)) {
+            http_response_code(500);
+            echo json_encode(['error' => 'Błąd SQL(pass_types): ' . $conn->error]);
+            exit;
+        }
+    }
+
+
     if (!$conn->query($sql)) {
         http_response_code(500);
-        echo json_encode(['error' => 'Błąd SQL(pass_types): ' . $conn->error]);
+        echo json_encode(['error' => 'Błąd SQL(Payments): ' . $conn->error]);
         exit;
     }
-}
-
-
-if (!$conn->query($sql)) {
-    http_response_code(500);
-    echo json_encode(['error' => 'Błąd SQL(Payments): ' . $conn->error]);
-    exit;
-}
 }
 
 
@@ -206,4 +202,3 @@ do {
 
 echo json_encode(['success' => true, 'message' => 'Baza gotowa']);
 exit;
-?>

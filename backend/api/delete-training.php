@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 $host = 'localhost';
@@ -19,4 +20,3 @@ header('Location: ../../frontend/sites/kalendarz.html');
 
 $stmt->close();
 $conn->close();
-?>

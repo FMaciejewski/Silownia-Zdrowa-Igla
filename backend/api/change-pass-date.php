@@ -1,11 +1,11 @@
 <?php
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 header('Content-Type: application/json');
 session_start();
 
-// Konfiguracja bazy danych
 $host = 'localhost';
 $user = 'root';
 $pass = '';
@@ -34,7 +34,6 @@ try {
     }
     $UserID = $_SESSION['user_id'];
 
-    // Pobranie ostatniego karnetu
     $stmt = $conn->prepare("SELECT PassID, PurchaseDate, ExpiryDate FROM Passes WHERE UserID = ? ORDER BY PassID DESC LIMIT 1");
     $stmt->bind_param("i", $UserID);
     $stmt->execute();
@@ -58,7 +57,6 @@ try {
     $formattedStart = $newStart->format('Y-m-d H:i:s');
     $formattedEnd = $newEnd->format('Y-m-d H:i:s');
 
-    // Aktualizacja karnetu
     $stmt = $conn->prepare("UPDATE Passes SET PurchaseDate = ?, ExpiryDate = ? WHERE PassID = ?");
     $stmt->bind_param("ssi", $formattedStart, $formattedEnd, $passID);
     $stmt->execute();
@@ -69,8 +67,10 @@ try {
     echo json_encode(['success' => true]);
 } catch (Exception $e) {
     http_response_code(400);
-    echo json_encode([
+    echo json_encode(
+        [
         'success' => false,
         'error' => $e->getMessage()
-    ]);
+        ]
+    );
 }

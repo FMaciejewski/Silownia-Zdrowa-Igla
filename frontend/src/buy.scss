@@ -1,26 +1,27 @@
-@use './base/baza.scss';
-@use './layout/header.scss';
-@use './layout/footer.scss';
-@use './layout/logo.scss';
-@use './base/media.scss';
-@use './sections/main-loging.scss';
-@use 'base/messages.scss';
-@use './sections/sidebar.scss';
+@use "./base/baza.scss";
+@use "./layout/header.scss";
+@use "./layout/footer.scss";
+@use "./layout/logo.scss";
+@use "./base/media.scss";
+@use "./sections/main-loging.scss";
+@use "base/messages.scss";
+@use "./sections/sidebar.scss";
 
 .pass-purchase {
-  display: grid;
+  display: flex;
   grid-template-columns: 2fr 1fr;
   gap: 2rem;
-  max-width: 1200px;
-  margin: 2rem auto;
   padding: 0 1rem;
+  align-items: center;
+  margin: auto;
+  flex-wrap: wrap;
 }
 
 .pass-form {
   background: #fff;
   border-radius: 10px;
   padding: 2rem;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .form-title {
@@ -40,7 +41,8 @@
   font-weight: 500;
 }
 
-.form-select, .form-input {
+.form-select,
+.form-input {
   width: 100%;
   padding: 0.75rem;
   border: 1px solid #ddd;
@@ -49,7 +51,8 @@
   transition: border-color 0.3s;
 }
 
-.form-select:focus, .form-input:focus {
+.form-select:focus,
+.form-input:focus {
   border-color: #3498db;
   outline: none;
 }
@@ -74,7 +77,8 @@
   background: #f8f9fa;
   border-radius: 10px;
   padding: 2rem;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  min-width: 300px;
 }
 
 .summary-title {
@@ -123,23 +127,28 @@
   .pass-purchase {
     grid-template-columns: 1fr;
   }
+  .payment-container {
+    grid-template-columns: 1fr;
+  }
 }
 
 .payment-container {
-  display: grid;
+  display: flex;
   grid-template-columns: 2fr 1fr;
   gap: 2rem;
-  max-width: 1200px;
-  margin: 2rem auto;
   padding: 0 1rem;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  align-items: center;
+  margin: auto;
+  flex-wrap: wrap;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .payment-form {
   background: #fff;
   border-radius: 10px;
   padding: 2rem;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  min-width: 500px;
 }
 
 .payment-methods {
@@ -230,7 +239,8 @@ input:focus {
   background: #f8f9fa;
   border-radius: 10px;
   padding: 2rem;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  min-width: 500px;
 }
 
 .summary-content {
@@ -269,4 +279,3 @@ input:focus {
   margin-bottom: 1rem;
   cursor: pointer;
 }
-

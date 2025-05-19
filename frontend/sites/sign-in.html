@@ -3,30 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <title>Siłownia Zdrowa Igła</title>
-    <link rel="stylesheet" href="../dist/logging.css">
-    <script src="/Silownia-Zdrowa-Igla/frontend/js/main.js" type="module"></script>
-    <link rel="icon" href="../assets/images/logo.png" type="image/x-icon">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-</head>
-<body>
+    <link rel="stylesheet" href="../dist/logging.css" />
+    <script
+      src="/Silownia-Zdrowa-Igla/frontend/js/main.js"
+      type="module"
+    ></script>
+    <link rel="icon" href="../assets/images/logo.png" type="image/x-icon" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <header>
-        <nav class="navbar">
-            <div class="logging">
-                <a class="signin-btn" href="../index.html">Strona Główna</a>
-                <a class="login-btn" href="log-in.html">Zaloguj się</a>
-            </div>
-            <div class="navbar-logo">
-                <img class="logo" src="../assets/images/logo.png" alt="logo">
-                <h1 class="logo-name">Siłownia Zdrowa Igła</h1>
-            </div>
-        </nav>
+      <nav class="navbar">
+        <div class="logging">
+          <a class="signin-btn" href="../index.html">Strona Główna</a>
+          <a class="login-btn" href="log-in.html">Zaloguj się</a>
+        </div>
+        <div class="navbar-logo">
+          <img class="logo" src="../assets/images/logo.png" alt="logo" />
+          <h1 class="logo-name">Siłownia Zdrowa Igła</h1>
+        </div>
+      </nav>
     </header>
     <main>
-        <article class="main-loging">
-            <h2>Rejestracja</h2>
-            <form action="../../backend/api/register.php" method="POST" class="register-form">
-                <label for="imie">Imię:</label>
-                <input type="text" id="imie" name="firstName" required>
+      <article class="main-loging">
+        <h2>Rejestracja</h2>
+        <form
+          action="../../backend/api/register.php"
+          method="POST"
+          class="register-form"
+        >
+          <label for="imie">Imię:</label>
+          <input type="text" id="imie" name="firstName" required />
 
           <label for="nazwisko">Nazwisko:</label>
           <input type="text" id="nazwisko" name="lastName" required />
@@ -51,7 +61,12 @@
           <input type="password" id="password" name="password" required />
 
           <label for="confirm_password">Potwierdź hasło:</label>
-          <input type="password" id="confirm_password" name="confirmPassword" required/>
+          <input
+            type="password"
+            id="confirm_password"
+            name="confirmPassword"
+            required
+          />
 
           <label for="account_type">Typ konta: </label>
           <select id="account_type" name="role" required>
@@ -59,9 +74,9 @@
             <option value="trainer">Trener</option>
             <option value="fizjo">Fizjoterapeuta</option>
           </select>
-          <div id="additional-fields" style="display: none;">
+          <div id="additional-fields" style="display: none">
             <label for="specialization">Specjalizacja:</label>
-            <input type="text" id="specialization" name="specialization"/>
+            <input type="text" id="specialization" name="specialization" />
 
             <label for="bio">Bio:</label>
             <textarea id="bio" name="bio" rows="4" cols="50"></textarea>
@@ -73,7 +88,7 @@
               name="hourlyRate"
               min="0"
               step="0.01"
-            >
+            />
           </div>
           <div class="error-msg">
             <p id="error-message"></p>

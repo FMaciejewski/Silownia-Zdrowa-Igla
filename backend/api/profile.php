@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 header('Content-Type: application/json');
 
@@ -18,7 +19,7 @@ $stmt->execute();
 $result = $stmt->get_result();
 $data = $result->fetch_assoc();
 
-if($data['Role'] == 'trainer'){
+if ($data['Role'] == 'trainer') {
     $stmt = $db->prepare("SELECT Specialization, Bio, HourlyRate FROM trainers WHERE UserID = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
@@ -30,4 +31,3 @@ if($data['Role'] == 'trainer'){
 }
 
 echo json_encode($data);
-?>

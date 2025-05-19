@@ -12,7 +12,7 @@ body {
   font-family: "Arial", sans-serif;
   line-height: 1.6;
   color: #333333;
-  background-color: #f4f4f9;
+  background-color: #fff;
 }
 
 header {
@@ -68,7 +68,10 @@ header {
   border-radius: 5px;
   text-decoration: none;
   font-weight: bold;
-  transition: background 0.3s, color 0.3s, border 0.3s;
+  transition:
+    background 0.3s,
+    color 0.3s,
+    border 0.3s;
   border: 2px solid #ffffff;
 }
 
@@ -122,6 +125,7 @@ footer {
   padding: 0 2rem;
   width: 100%;
   box-sizing: border-box;
+  flex-wrap: wrap;
 }
 
 .footer1,
@@ -162,7 +166,9 @@ footer {
 .social-media a {
   color: #ffffff;
   font-size: 1.8rem;
-  transition: transform 0.3s, color 0.3s;
+  transition:
+    transform 0.3s,
+    color 0.3s;
 }
 
 .social-media a:hover {
@@ -421,12 +427,13 @@ main {
 }
 
 .pass-purchase {
-  display: grid;
+  display: flex;
   grid-template-columns: 2fr 1fr;
   gap: 2rem;
-  max-width: 1200px;
-  margin: 2rem auto;
   padding: 0 1rem;
+  align-items: center;
+  margin: auto;
+  flex-wrap: wrap;
 }
 
 .pass-form {
@@ -453,7 +460,8 @@ main {
   font-weight: 500;
 }
 
-.form-select, .form-input {
+.form-select,
+.form-input {
   width: 100%;
   padding: 0.75rem;
   border: 1px solid #ddd;
@@ -462,7 +470,8 @@ main {
   transition: border-color 0.3s;
 }
 
-.form-select:focus, .form-input:focus {
+.form-select:focus,
+.form-input:focus {
   border-color: #3498db;
   outline: none;
 }
@@ -488,6 +497,7 @@ main {
   border-radius: 10px;
   padding: 2rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  min-width: 300px;
 }
 
 .summary-title {
@@ -536,14 +546,18 @@ main {
   .pass-purchase {
     grid-template-columns: 1fr;
   }
+  .payment-container {
+    grid-template-columns: 1fr;
+  }
 }
 .payment-container {
-  display: grid;
+  display: flex;
   grid-template-columns: 2fr 1fr;
   gap: 2rem;
-  max-width: 1200px;
-  margin: 2rem auto;
   padding: 0 1rem;
+  align-items: center;
+  margin: auto;
+  flex-wrap: wrap;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -552,6 +566,7 @@ main {
   border-radius: 10px;
   padding: 2rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  min-width: 500px;
 }
 
 .payment-methods {
@@ -570,7 +585,7 @@ main {
   border-color: #3498db;
 }
 
-.payment-option input[type=radio] {
+.payment-option input[type="radio"] {
   margin-right: 10px;
 }
 
@@ -586,7 +601,7 @@ main {
   border-top: 1px solid #eee;
 }
 
-.payment-option input[type=radio]:checked ~ .payment-fields {
+.payment-option input[type="radio"]:checked ~ .payment-fields {
   display: block;
 }
 
@@ -600,8 +615,8 @@ main {
   flex: 1;
 }
 
-input[type=text],
-input[type=number] {
+input[type="text"],
+input[type="number"] {
   width: 100%;
   padding: 0.75rem;
   margin-bottom: 1rem;
@@ -643,6 +658,7 @@ input:focus {
   border-radius: 10px;
   padding: 2rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  min-width: 500px;
 }
 
 .summary-content {

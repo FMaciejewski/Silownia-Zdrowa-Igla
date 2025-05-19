@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 $host = 'localhost';
@@ -15,10 +16,12 @@ if ($conn->connect_error) {
 $ID = $_SESSION['user_id'];
 $training_id = $_GET['trainingId'];
 
-$stmrt = $conn->prepare("SELECT users.UserID FROM users
+$stmrt = $conn->prepare(
+    "SELECT users.UserID FROM users
 JOIN trainers ON users.UserID = trainers.UserID 
 JOIN trainings ON trainers.TrainerID = trainings.TrainerID
-WHERE TrainingID = ? AND users.UserID = ?");
+WHERE TrainingID = ? AND users.UserID = ?"
+);
 $stmrt->bind_param("ii", $training_id, $ID);
 $stmrt->execute();
 $result = $stmrt->get_result();
@@ -46,4 +49,3 @@ echo json_encode($data);
 
 $stmrt->close();
 $conn->close();
-?>

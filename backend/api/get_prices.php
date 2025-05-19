@@ -1,4 +1,5 @@
 <?php
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -11,7 +12,7 @@ $db_name = 'silowniazdrowaigla';
 
 try {
     $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
-    
+
     if ($conn->connect_error) {
         throw new Exception("Błąd połączenia: " . $conn->connect_error);
     }
@@ -25,29 +26,27 @@ try {
     }
 
     $result = $conn->query("SELECT type, month, three_months, year FROM pass_types");
-    
+
     if ($result->num_rows === 0) {
         throw new Exception("Brak danych o karnetach w bazie danych");
     }
 
     $response = [];
     while ($row = $result->fetch_assoc()) {
-        $price = match($period) {
+        $price = match ($period) {
             '1' => $row['month'],
             '3' => $row['three_months'],
             '12' => $row['year'],
             default => 0
         };
-        
+
         $response[strtolower($row['type'])] = $price;
     }
 
     $conn->close();
 
     echo json_encode($response);
-
 } catch (Exception $e) {
     http_response_code(500);
     echo json_encode(['error' => $e->getMessage()]);
 }
-?>

@@ -1,4 +1,5 @@
 <?php
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -23,8 +24,7 @@ $password = $_POST['password'] ?? null;
 $confirmPassword = $_POST['confirmPassword'] ?? null;
 $phone = $_POST['tel'] ?? null;
 $role = $_POST['role'] ?? 'client';
-if($role !== 'client'){
-    
+if ($role !== 'client') {
 }
 
 $phone = "+48" . $phone;
@@ -37,7 +37,11 @@ if (!$firstName || !$lastName || !$email || !$login || !$password || !$confirmPa
     echo json_encode(['error' => 'Wszystkie pola są wymagane']);
     exit;
 }
-
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Nieprawidłowy adres e-mail']);
+    exit;
+}
 $stmt = $conn->prepare("SELECT * FROM Users WHERE Login = ? OR Email = ?");
 $stmt->bind_param("ss", $login, $email);
 $stmt->execute();
@@ -55,7 +59,7 @@ $stmt = $conn->prepare("INSERT INTO Users (Login, PasswordHash, FirstName, LastN
 $stmt->bind_param("sssssss", $login, $hash, $firstName, $lastName, $email, $phone, $role);
 
 if ($stmt->execute()) {
-    if($role !== 'client'){
+    if ($role !== 'client') {
         $specialization = $_POST['specialization'] ?? null;
         $bio = $_POST['bio'] ?? null;
         $hourlyRate = $_POST['hourlyRate'] ?? null;
@@ -70,12 +74,12 @@ if ($stmt->execute()) {
         }
         $stmtTrain->close();
     }
-    
+
     echo json_encode(['success' => true, 'message' => 'Rejestracja zakończona sukcesem']);
     $to = urlencode($email);
     $name = urlencode($firstName . ' ' . $lastName);
     $subject = urlencode('Witamy na naszej stronie');
-    $message = urlencode($firstName . ' ' . $lastName.' Dziękujemy za rejestrację! Cieszymy się, że jesteś z nami.');
+    $message = urlencode($firstName . ' ' . $lastName . ' Dziękujemy za rejestrację! Cieszymy się, że jesteś z nami.');
 
     file_get_contents("http://localhost/Silownia-Zdrowa-Igla/backend/api/mail.php?to=$to&name=$name&subject=$subject&body=$message");
 
@@ -91,8 +95,3 @@ if ($stmt->execute()) {
 
     $stmt->close();
     $conn->close();
-
-
-
-
-?>

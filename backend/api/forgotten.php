@@ -1,4 +1,5 @@
 <?php
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -11,7 +12,8 @@ $db_name = 'silowniazdrowaigla';
 
 $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
 
-function generateToken($length = 8) {
+function generateToken($length = 8)
+{
     return substr(str_shuffle(str_repeat('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789', 5)), 0, $length);
 }
 
@@ -40,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $to = urlencode($user['email']);
         $name = urlencode($user['firstName'] . ' ' . $user['lastName']);
         $subject = urlencode('Zmiana hasła');
-        $message =urlencode($user['firstName'] . ' ' . $user['lastName']. 'Aby zmienić hasło <a href="http://localhost/Silownia-Zdrowa-Igla/frontend/sites/new-password.html?token=' . $token . '">kliknij tutaj</a>');
+        $message = urlencode($user['firstName'] . ' ' . $user['lastName'] . 'Aby zmienić hasło <a href="http://localhost/Silownia-Zdrowa-Igla/frontend/sites/new-password.html?token=' . $token . '">kliknij tutaj</a>');
 
         file_get_contents("http://localhost/Silownia-Zdrowa-Igla/backend/api/mail.php?to=$to&name=$name&subject=$subject&body=$message");
 
@@ -58,5 +60,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $conn->close();
-
-?>

@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 $host = 'localhost';
@@ -21,4 +22,3 @@ if ($stmt->execute()) {
 } else {
     echo json_encode(['error' => 'Error: ' . $stmt->error]);
 }
-?>

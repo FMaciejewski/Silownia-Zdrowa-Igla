@@ -1,28 +1,28 @@
 .sidebar {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1500;
-    top: 0;
-    left: 0;
-    background-color: #363636;
-    overflow-x: hidden;
-    transition: 0.3s;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1500;
+  top: 0;
+  left: 0;
+  background-color: #363636;
+  overflow-x: hidden;
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .sidebar ul {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
 .sidebar a {
-    padding: 10px 15px;
-    text-decoration: none;
-    color: white;
-    display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: white;
+  display: block;
 }
 
 .sidebar .close-btn {
@@ -42,9 +42,9 @@
   color: #f00;
 }
 
-main{
-    margin-left: 0;
-    transition: margin-left 0.3s;
+main {
+  margin-left: 0;
+  transition: margin-left 0.3s;
 }
 
 .sidebar ul li a {

@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 $host = 'localhost';
@@ -19,7 +20,7 @@ $maxParticipants = $_POST['maximum'];
 $startDate = $_POST['start'];
 $endDate = $_POST['end'];
 
-if($startDate >= $endDate || $startDate < date('Y-m-d H:i:s')) {
+if ($startDate >= $endDate || $startDate < date('Y-m-d H:i:s')) {
     header('Location: ../../frontend/sites/kalendarz.html?error=invalid_date');
     exit();
 }
@@ -45,4 +46,3 @@ if ($stmt->execute()) {
 } else {
     header('Location: ../../frontend/sites/kalendarz.html?error=błąd_sql');
 }
-?>

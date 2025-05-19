@@ -13,6 +13,6 @@ fetch("../backend/api/trainers.php")
         <p>Email: <a href="mailto:${trener.Email}">${trener.Email}</a></p>
         <p>Cena: ${trener.HourlyRate} zł/h</p>
     `;
-    document.getElementById("trenerzy").appendChild(trenerDiv);
+      document.getElementById("trenerzy").appendChild(trenerDiv);
     });
-})
+  });
