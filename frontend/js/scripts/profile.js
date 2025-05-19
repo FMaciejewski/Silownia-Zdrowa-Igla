@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const profileForm = document.getElementById("profile-form");
       profileSection.innerHTML = `
         <h2>Profil użytkownika</h2>
-        <img src="../${data.ProfilePicture}" alt="Profile Image" class="profile-image">
+        <img src="../assets/images/${data.ProfilePicture}" alt="Profile Image" class="profile-image">
         <p><strong>Imię:</strong> ${data.FirstName}</p>
         <p><strong>Nazwisko:</strong> ${data.LastName}</p>
         <p><strong>Email:</strong> ${data.Email}</p>
