@@ -29,6 +29,16 @@ CREATE TABLE Trainers (
     FOREIGN KEY (UserID) REFERENCES Users(UserID) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
+CREATE TABLE Doctors (
+    DoctorID INT PRIMARY KEY AUTO_INCREMENT, 
+    UserID INT NOT NULL,               
+    Specialization VARCHAR(255),        
+    Degree VARCHAR(100),              
+    WorkStartDate TIME DEAFULT '08:00:00',
+    WorkEndDate TIME DEAFULT '16:00:00',             
+    FOREIGN KEY (UserID) REFERENCES Users(UserID) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
 -- Tabela karnetów
 CREATE TABLE Passes (
     PassID INT AUTO_INCREMENT PRIMARY KEY,

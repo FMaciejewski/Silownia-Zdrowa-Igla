@@ -57,14 +57,15 @@ textarea {
   resize: none;
 }
 
-#additional-fields label,
-#additional-fields input,
-#additional-fields textarea,
-#additional-fields select {
+.additional-fields label,
+.additional-fields input,
+.additional-fields textarea,
+.additional-fields select {
+  margin-bottom: 1rem;
   width: 100%;
   box-sizing: border-box;
 }
 
-#additional-fields {
+.additional-fields {
   gap: 1rem;
 }

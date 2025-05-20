@@ -59,7 +59,7 @@ $stmt = $conn->prepare("INSERT INTO Users (Login, PasswordHash, FirstName, LastN
 $stmt->bind_param("sssssss", $login, $hash, $firstName, $lastName, $email, $phone, $role);
 
 if ($stmt->execute()) {
-    if ($role !== 'client') {
+    if ($role === 'trainer') {
         $specialization = $_POST['specialization'] ?? null;
         $bio = $_POST['bio'] ?? null;
         $hourlyRate = $_POST['hourlyRate'] ?? null;
@@ -73,6 +73,22 @@ if ($stmt->execute()) {
             exit;
         }
         $stmtTrain->close();
+    }
+    else if ($role === 'fizjo') {
+        $doc_specialization = $_POST['specialization-doc'] ?? null;
+        $degree = $_POST['degree'] ?? null;
+        $workStart = $_POST['work-start'] ?? null;
+        $workEnd = $_POST['work-end'] ?? null;
+        $lastID = $conn->insert_id;
+        $stmtPhysio = $conn->prepare("INSERT INTO Doctors (UserID, Specialization, Degree, WorkStartDate, WorkEndDate) VALUES (?, ?, ?, ?, ?)");
+        $stmtPhysio->bind_param("issss", $lastID, $doc_specialization, $degree, $workStart, $workEnd);
+        if (!$stmtPhysio->execute()) {
+            http_response_code(500);
+            echo json_encode(['error' => 'Błąd rejestracji fizjoterapeuty: ' . $stmtPhysio->error]);
+            header('Location: ../../frontend/sites/register.html?error=błąd_sql');
+            exit;
+        }
+        $stmtPhysio->close();
     }
 
     echo json_encode(['success' => true, 'message' => 'Rejestracja zakończona sukcesem']);

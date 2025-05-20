@@ -74,6 +74,29 @@ if ($tableCheck->num_rows === 0) {
 
 
 
+$tableCheck = $conn->query("SHOW TABLES LIKE 'Doctors'");
+if ($tableCheck->num_rows === 0) {
+    $sql = "
+        CREATE TABLE Doctors (
+    DoctorID INT PRIMARY KEY AUTO_INCREMENT, 
+    UserID INT NOT NULL,               
+    Specialization VARCHAR(255),        
+    Degree VARCHAR(100),              
+    WorkStartDate TIME DEAFAULT '08:00:00',
+    WorkEndDate TIME DEAFAULT '16:00:00',             
+    FOREIGN KEY (UserID) REFERENCES Users(UserID) ON DELETE CASCADE
+) ENGINE=InnoDB;
+    ";
+    if (!$conn->query($sql)) {
+        http_response_code(500);
+        echo json_encode(['error' => 'Błąd SQL(Doctors): ' . $conn->error]);
+        exit;
+    }
+}
+
+
+
+
 $tableCheck = $conn->query("SHOW TABLES LIKE 'Passes'");
 if ($tableCheck->num_rows === 0) {
     $sql = "

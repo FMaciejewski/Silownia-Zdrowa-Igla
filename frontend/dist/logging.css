@@ -68,10 +68,7 @@ header {
   border-radius: 5px;
   text-decoration: none;
   font-weight: bold;
-  transition:
-    background 0.3s,
-    color 0.3s,
-    border 0.3s;
+  transition: background 0.3s, color 0.3s, border 0.3s;
   border: 2px solid #ffffff;
 }
 
@@ -166,9 +163,7 @@ footer {
 .social-media a {
   color: #ffffff;
   font-size: 1.8rem;
-  transition:
-    transform 0.3s,
-    color 0.3s;
+  transition: transform 0.3s, color 0.3s;
 }
 
 .social-media a:hover {
@@ -296,7 +291,7 @@ main {
   box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.25);
 }
 
-button[type="submit"] {
+button[type=submit] {
   margin-top: 1rem;
   background: linear-gradient(135deg, #4a90e2, #005caa);
   color: #fff;
@@ -309,7 +304,7 @@ button[type="submit"] {
   transition: all 0.3s ease;
 }
 
-button[type="submit"]:hover {
+button[type=submit]:hover {
   background: linear-gradient(135deg, #005caa, #003f7f);
   transform: scale(1.03);
 }
@@ -324,15 +319,16 @@ textarea {
   resize: none;
 }
 
-#additional-fields label,
-#additional-fields input,
-#additional-fields textarea,
-#additional-fields select {
+.additional-fields label,
+.additional-fields input,
+.additional-fields textarea,
+.additional-fields select {
+  margin-bottom: 1rem;
   width: 100%;
   box-sizing: border-box;
 }
 
-#additional-fields {
+.additional-fields {
   gap: 1rem;
 }
 
