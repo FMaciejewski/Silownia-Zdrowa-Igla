@@ -21,7 +21,14 @@ document.addEventListener("DOMContentLoaded", function () {
         option.value = doctor.DoctorID;
         option.textContent = `${doctor.Degree} ${doctor.FirstName} ${doctor.LastName}`;
         doctorSelect.appendChild(option);
-      })});
+      })
+      const savedDoctorId = localStorage.getItem("selectedDoctorId");
+      if (doctors.length > 0) {
+            doctorSelect.value = savedDoctorId;
+            const event = new Event('change');
+            doctorSelect.dispatchEvent(event);
+        }
+    });
 
   function formatLocalDateTime(date) {
     const offset = date.getTimezoneOffset();
@@ -132,25 +139,31 @@ document.addEventListener("DOMContentLoaded", function () {
     events: [],
   });
 
-  fetch("../../backend/api/render-appointment-calendar.php")
-    .then((response) => response.json())
-    .then((data) => {
-      const events = data.events;
-      events.forEach((event) => {
-        calendar.addEvent({
-          id: event.TrainingID,
-            title: event.Cause,
-          start: event.StartTime,
-          end: event.EndTime,
-          extendedProps: {
-            Patient: event.Patient,
-            Doctor: event.Doctor,
-          },
+  calendar.render();
+
+  doctorSelect.addEventListener("change", function () {
+    localStorage.setItem("selectedDoctorId", doctorSelect.value);
+    calendar.getEvents().forEach((event) => {
+      event.remove();
+    });
+    fetch("../../backend/api/render-appointment-calendar.php?doctorId=" + parseInt(doctorSelect.value))
+      .then((response) => response.json())
+      .then((data) => {
+        const events = data.events;
+        events.forEach((event) => {
+          calendar.addEvent({
+            id: event.AppointmentID,
+            title: event.title,
+            start: event.start,
+            end: event.end,
+            extendedProps: {
+              Patient: event.Patient,
+              Doctor: event.Doctor,
+            },
+          });
         });
       });
-    });
-
-  calendar.render();
+  });  
 
   cancelBtn.addEventListener("click", function () {
     popup.style.display = "none";

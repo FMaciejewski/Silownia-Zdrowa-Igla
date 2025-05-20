@@ -172,6 +172,7 @@ $tableCheck = $conn->query("SHOW TABLES LIKE 'UserAppointments'");
 if ($tableCheck->num_rows === 0) {
     $sql = "
         CREATE TABLE UserAppointments (
+    AppointmentID INT AUTO_INCREMENT PRIMARY KEY,
   UserID INT NOT NULL,
   DoctorID INT NOT NULL,
   StartDate DATETIME NOT NULL,

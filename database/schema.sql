@@ -14,7 +14,7 @@ CREATE TABLE Users (
     Role ENUM('client', 'trainer', 'admin', 'fizjo') DEFAULT 'client',
     CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     LastLogin TIMESTAMP NULL,
-    ProfilePicture VARCHAR(255) DEAFULT 'default_profile.png',
+    ProfilePicture VARCHAR(255) DEFAULT 'default_profile.png',
     Token VARCHAR(8) DEFAULT NULL;
     TokenCreatedAt TIMESTAMP NULL
 ) ENGINE=InnoDB;
@@ -34,8 +34,8 @@ CREATE TABLE Doctors (
     UserID INT NOT NULL,               
     Specialization VARCHAR(255),        
     Degree VARCHAR(100),              
-    WorkStartDate TIME DEAFULT '08:00:00',
-    WorkEndDate TIME DEAFULT '16:00:00',             
+    WorkStartDate TIME DEFAULT '08:00:00',
+    WorkEndDate TIME DEFAULT '16:00:00',             
     FOREIGN KEY (UserID) REFERENCES Users(UserID) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
@@ -76,6 +76,7 @@ CREATE TABLE UserTrainings (
 ) ENGINE=InnoDB;
 
 CREATE TABLE UserAppointments (
+    AppointmentID INT AUTO_INCREMENT PRIMARY KEY,
   UserID INT NOT NULL,
   DoctorID INT NOT NULL,
   StartDate DATETIME NOT NULL,
