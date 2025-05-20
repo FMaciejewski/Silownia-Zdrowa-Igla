@@ -168,6 +168,32 @@ if ($tableCheck->num_rows === 0) {
 
 
 
+$tableCheck = $conn->query("SHOW TABLES LIKE 'UserAppointments'");
+if ($tableCheck->num_rows === 0) {
+    $sql = "
+        CREATE TABLE UserAppointments (
+  UserID INT NOT NULL,
+  DoctorID INT NOT NULL,
+  StartDate DATETIME NOT NULL,
+  EndDate DATETIME NOT NULL,
+  Cause VARCHAR(255) NOT NULL,
+  FOREIGN KEY (UserID) REFERENCES Users(UserID)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  FOREIGN KEY (DoctorID) REFERENCES Doctors(DoctorID)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+) ENGINE=InnoDB;
+    ";
+    if (!$conn->query($sql)) {
+        http_response_code(500);
+        echo json_encode(['error' => 'Błąd SQL(UserAppointments): ' . $conn->error]);
+        exit;
+    }
+}
+
+
+
 $tableCheck = $conn->query("SHOW TABLES LIKE 'Payments'");
 if ($tableCheck->num_rows === 0) {
     $sql = "

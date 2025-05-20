@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Siłownia Zdrowa Igła</title>
+    <link rel="stylesheet" href="../dist/style.css" />
+    <link rel="icon" href="../assets/images/logo.png" type="image/x-icon" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/locales-all.min.js"></script>
+  </head>
+  <body>
+    <script src="../js/scripts/sidebar.js"></script>
+    <script src="../js/scripts/sidebar-profile.js"></script>
+    <header>
+      <div class="success-msg" id="success-message"></div>
+      <script src="../js/scripts/success-alert.js"></script>
+      <nav class="navbar">
+        <div class="logging">
+          <button class="menu-toggle" onclick="toggleSidebar()" id="menu-btn">
+            ☰ Menu
+          </button>
+        </div>
+        <div class="navbar-logo">
+          <img class="logo" src="../assets/images/logo.png" alt="logo" />
+          <h1 class="logo-name">Siłownia Zdrowa Igła</h1>
+        </div>
+      </nav>
+    </header>
+    <div id="sidebar" class="sidebar">
+      <div id="sidebar-profile">
+        <div id="sidebar-info">
+          <img src="" alt="profile-picture" id="sidebar-picture" />
+          <h4 id="sidebar-name"></h4>
+        </div>
+        <button class="close-btn" onclick="toggleSidebar()">x</button>
+      </div>
+      <div class="sidebar-content">
+        <ul>
+          <li>
+            <a href="../index.html"
+              ><i class="fas fa-building"></i>Strona Główna</a
+            >
+          </li>
+          <li>
+            <a href="profile.html"><i class="fas fa-user"></i>Profil</a>
+          </li>
+          <li>
+            <a href="#kontakt"><i class="fas fa-envelope"></i>Kontakt</a>
+          </li>
+        </ul>
+      </div>
+      <div class="sidebar-footer">
+        <a href="../../backend/api/logout.php"
+          ><i class="fas fa-circle-right"></i>Wyloguj się</a
+        >
+      </div>
+    </div>
+    
+    <main id="main-content">
+        <div class="doctor-id-block">
+            <label for="doctor-id">Wybierz lekarza:</label>
+            <select name="doctor-id" id="doctor-id"></select>
+        </div>
+      <div class="error-msg">
+        <p id="error-message"></p>
+        <script src="../js/scripts/err-msg.js"></script>
+      </div>
+      <div id="calendar"></div>
+      <script src="../js/scripts/doctor-calendar.js"></script>
+      <div id="eventPopup" class="modal">
+        <div class="modal-content">
+          <span class="close-btn" id="cancelEventBtn">&times;</span>
+          <h2>Umów wizytę</h2>
+          <form
+            id="eventForm"
+            method="post"
+            action="../../backend/api/add-appointment.php"
+          >
+            <input type="hidden" id="eventStart" name="eventStart" required />
+            <input type="hidden" id="eventEnd" name="eventEnd" required />
+            <input type="hidden" id="eventDoctorID" name="doctorId" required />
+
+            <label for="eventTitle">Powód wizyty:</label>
+            <input
+              type="text"
+              id="appointmentCause"
+              class="modal-input"
+              required
+              name="cause"
+            />
+
+            <div id="error-message"></div>
+
+            <button type="submit" id="saveEventBtn" class="modal-btn confirm">
+              Zapisz
+            </button>
+          </form>
+        </div>
+      </div>
+      <div id="eventDetail" class="modal">
+        <div class="modal-content">
+          <span class="close-btn" id="cancelDetailBtn">&times;</span>
+          <h2>Szczegóły Wizyty</h2>
+          <p><strong>Powód:</strong> <span id="detailCause"></span></p>
+            <p><strong>Doktor:</strong> <span id="detailDoctor"></span></p>
+          <p><strong>Pacjent:</strong> <span id="detailPatient"></span></p>
+            <p><strong>Data rozpoczęcia:</strong> <span id="detailStart"></span></p>
+          <button id="leaveBtn" class="modal-btn delete" style="display: none">
+            Zrezygnuj z wizyty
+          </button>
+          <button id="editBtn" class="modal-btn confirm" style="display: none">
+            Edytuj Wizytę
+          </button>
+        </div>
+      </div>
+      <div id="editForm" class="modal">
+        <div class="modal-content">
+          <h2>Edytuj Wizytę</h2>
+          <form action="../../backend/api/edit-appointment.php" method="post">
+            <input type="text" id="editEventId" name="eventId" hidden />
+
+            <label for="editEventTitle">Powód:</label>
+            <input
+              type="text"
+              id="editAppointmentCause"
+              class="modal-input"
+              required
+              name="cause"
+            />
+
+
+            <label for="start">Data rozpoczęcia:</label>
+            <input
+              type="datetime-local"
+              id="editAppoinmentStart"
+              class="modal-input"
+              name="start"
+              required
+            />
+
+            <button type="submit" id="saveEditBtn" class="modal-btn confirm">
+              Zapisz
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>
+    <footer id="kontakt">
+      <section class="footer-upper">
+        <div class="footer1">
+          <div class="footer-logo">
+            <img class="logo" src="../assets/images/logo.png" alt="logo" />
+            <h1 class="logo-name">Siłownia Zdrowa Igła</h1>
+          </div>
+          <div class="addres">
+            <p>ul. Zdrowa 1</p>
+            <p>00-000 Warszawa</p>
+          </div>
+        </div>
+        <div class="opens">
+          <p>Godziny techniczne:</p>
+          <p>Poniedziałek - Piątek: 3:00 - 4:00</p>
+          <p>Sobota - Niedziela: 2:00 - 3:00</p>
+          <p>Wszystkie zajęcia odbywają się w godzinach otwarcia siłowni</p>
+        </div>
+        <div class="footer2">
+          <div class="social-media">
+            <a href="https://www.facebook.com/" target="_blank"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="https://www.instagram.com/" target="_blank"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="https://www.youtube.com/" target="_blank"
+              ><i class="fab fa-youtube"></i
+            ></a>
+            <a href="https://www.tiktok.com/" target="_blank"
+              ><i class="fab fa-tiktok"></i
+            ></a>
+          </div>
+          <div class="contact">
+            <p>W razie pytań:</p>
+            <p>
+              <a href="mailto:silowniaZdrowaIgla@gmail.com"
+                >silowniazdrowaigla@gmail.com</a
+              >
+            </p>
+            <p><a href="tel:+48999999999">+48 999 999 999</a></p>
+          </div>
+        </div>
+      </section>
+      <div class="copyright">
+        <p>Siłownia Zdrowa Igła &copy; 2023 Wszelkie prawa zastrzeżone</p>
+        <p>Wykonanie: Filip Maciejewski, Adrian Cichocki</p>
+      </div>
+    </footer>
+  </body>
+</html>
