@@ -44,8 +44,8 @@ document.addEventListener("DOMContentLoaded", function () {
     slotMaxTime: "23:59:00",
     selectable: true,
     editable: false,
-    eventOverlap: true,
-    eventMaxStack: 1,
+    eventOverlap: false,
+    selectOverlap: false,
     eventDisplay: "block",
     weekends: false,
     headerToolbar: {
@@ -72,6 +72,12 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("eventDoctorID").value = parseInt(doctorSelect.value);
       popup.style.display = "block";
     },
+    selectAllow: function (selectInfo) {
+      const start = selectInfo.start;
+      const end = selectInfo.end;
+      const duration = (end - start) / (1000 * 60); 
+      return duration <= 30;
+    },
     eventDidMount: function (info) {
       info.el.style.cursor = "pointer";
 
@@ -89,11 +95,11 @@ document.addEventListener("DOMContentLoaded", function () {
     eventClick: function (event) {
         detailCause = event.event.title;
       detailDoctor.innerText = event.event.extendedProps.Doctor;
-      detailCreator.innerText = event.event.extendedProps.Patient;
+      detailPatient.innerText = event.event.extendedProps.Patient;
       detailStart.innerText = event.event.start.toLocaleString();
 
       fetch(
-        "../../backend/api/can-edit-appointment.php",
+        "../../backend/api/can-edit-appointment.php?appointmentId=" + event.event.id,
       )
         .then((response) => response.json())
         .then((data) => {
@@ -103,25 +109,15 @@ document.addEventListener("DOMContentLoaded", function () {
               detail.style.display = "none";
               editForm.style.display = "block";
 
-              editEventTitle.value = event.event.title;
-              editEventStart.value = formatLocalDateTime(event.event.start);
+              editAppointmentCause.value = event.event.title;
+              editAppointmentStart.value = formatLocalDateTime(event.event.start);
+              editEventId.value = event.event.id;
+              editEventDoctorId.value = parseInt(doctorSelect.value);
             });
             deleteBtn.style.display = "block";
             deleteBtn.addEventListener("click", function () {
-              window.location.href = `../../backend/api/delete-training.php?trainingId=${event.event.id}`;
+              window.location.href = `../../backend/api/delete-appointment.php?appointmentId=${event.event.id}`;
             });
-          } else {
-            if (data.joined) {
-              leaveBtn.style.display = "block";
-              leaveBtn.addEventListener("click", function () {
-                window.location.href = `../../backend/api/leave-training.php?trainingId=${event.event.id}`;
-              });
-            } else {
-              joinBtn.style.display = "block";
-              joinBtn.addEventListener("click", function () {
-                window.location.href = `../../backend/api/join-training.php?trainingId=${event.event.id}`;
-              });
-            }
           }
         });
 

@@ -113,7 +113,7 @@
             <p><strong>Doktor:</strong> <span id="detailDoctor"></span></p>
           <p><strong>Pacjent:</strong> <span id="detailPatient"></span></p>
             <p><strong>Data rozpoczęcia:</strong> <span id="detailStart"></span></p>
-          <button id="leaveBtn" class="modal-btn delete" style="display: none">
+          <button id="deleteBtn" class="modal-btn delete" style="display: none">
             Zrezygnuj z wizyty
           </button>
           <button id="editBtn" class="modal-btn confirm" style="display: none">
@@ -125,7 +125,8 @@
         <div class="modal-content">
           <h2>Edytuj Wizytę</h2>
           <form action="../../backend/api/edit-appointment.php" method="post">
-            <input type="text" id="editEventId" name="eventId" hidden />
+            <input id="editEventId" name="eventId" hidden />
+            <input id="editEventDoctorId" name="doctorId" type="text" />
 
             <label for="editEventTitle">Powód:</label>
             <input
@@ -140,9 +141,10 @@
             <label for="start">Data rozpoczęcia:</label>
             <input
               type="datetime-local"
-              id="editAppoinmentStart"
+              id="editAppointmentStart"
               class="modal-input"
               name="start"
+              step="1800"
               required
             />
 
