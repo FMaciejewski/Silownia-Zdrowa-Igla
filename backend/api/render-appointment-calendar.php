@@ -17,6 +17,8 @@ $stmt = $conn->prepare("SELECT
     ua.Cause AS title,
     ua.StartDate AS start,
     ua.EndDate AS end,
+    ua.UserID AS user,
+    u1.UserID as userDoctor,
     CONCAT(d.Degree, ' ', u1.FirstName, ' ', u1.LastName) AS Doctor,
     CONCAT(u2.FirstName, ' ', u2.LastName) AS Patient
   FROM UserAppointments ua
@@ -29,6 +31,14 @@ $stmt->execute();
 $result = $stmt->get_result();
 $events = $result->fetch_all(MYSQLI_ASSOC);
 $stmt->close();
+foreach ($events as &$event) {
+    $isOwn = false;
+    if ($event['user'] == $ID || $event['userDoctor'] == $ID) {
+        $isOwn = true;
+    }
+
+    $event['isOwn'] = $isOwn;
+}
 
 $data = [
     'events' => $events,

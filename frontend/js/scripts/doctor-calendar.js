@@ -93,6 +93,10 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     },
     eventClick: function (event) {
+      const isOwn = event.event.extendedProps.isOwn;
+
+      if(!isOwn) return;
+
         detailCause = event.event.title;
       detailDoctor.innerText = event.event.extendedProps.Doctor;
       detailPatient.innerText = event.event.extendedProps.Patient;
@@ -127,9 +131,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const data = arg.event.extendedProps;
       const title = arg.event.title;
       const div = document.createElement("div");
-      div.innerHTML = `<b>${title}</b>
-        ${data.Patient ? `<br><small>Pacjent: ${data.Patient}</small>` : ""}
-        ${data.Doctor ? `<br><small>Doktor:${data.Doctor}</small>` : ""}`;
+      div.innerHTML = `<b>${title}</b>`;
       return { domNodes: [div] };
     },
     events: [],
@@ -149,15 +151,30 @@ document.addEventListener("DOMContentLoaded", function () {
         events.forEach((event) => {
           calendar.addEvent({
             id: event.AppointmentID,
-            title: event.title,
+            title: event.isOwn ? event.title : "Zajęte",
             start: event.start,
             end: event.end,
+            backgroundColor: event.isOwn ? "#3788d8" : "#d9534f",
+            borderColor: event.isOwn ? "#3788d8" : "#d43f3a",
+            textColor: "#fff",
             extendedProps: {
               Patient: event.Patient,
               Doctor: event.Doctor,
+              isOwn: event.isOwn,
             },
           });
         });
+      });
+    fetch("../../backend/api/get-doctor-hours.php?doctorId=" + parseInt(doctorSelect.value))
+      .then((response) => response.json())
+      .then((data) => {
+        calendar.setOption("slotMinTime", data.WorkStartDate);
+        calendar.setOption("slotMaxTime", data.WorkEndDate);
+        const start = parseInt(data.WorkStartDate.split(":")[0]);
+        const end = parseInt(data.WorkEndDate.split(":")[0]);
+        const slotHeight = 50;
+        const totalHeight = (end - start) * slotHeight + 125;
+        calendar.setOption("height", totalHeight);
       });
   });  
 
