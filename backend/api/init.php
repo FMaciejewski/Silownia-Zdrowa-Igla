@@ -74,6 +74,29 @@ if ($tableCheck->num_rows === 0) {
 
 
 
+$tableCheck = $conn->query("SHOW TABLES LIKE 'Doctors'");
+if ($tableCheck->num_rows === 0) {
+    $sql = "
+        CREATE TABLE Doctors (
+    DoctorID INT PRIMARY KEY AUTO_INCREMENT, 
+    UserID INT NOT NULL,               
+    Specialization VARCHAR(255),        
+    Degree VARCHAR(100),              
+    WorkStartDate TIME DEAFAULT '08:00:00',
+    WorkEndDate TIME DEAFAULT '16:00:00',             
+    FOREIGN KEY (UserID) REFERENCES Users(UserID) ON DELETE CASCADE
+) ENGINE=InnoDB;
+    ";
+    if (!$conn->query($sql)) {
+        http_response_code(500);
+        echo json_encode(['error' => 'Błąd SQL(Doctors): ' . $conn->error]);
+        exit;
+    }
+}
+
+
+
+
 $tableCheck = $conn->query("SHOW TABLES LIKE 'Passes'");
 if ($tableCheck->num_rows === 0) {
     $sql = "
@@ -139,6 +162,33 @@ if ($tableCheck->num_rows === 0) {
     if (!$conn->query($sql)) {
         http_response_code(500);
         echo json_encode(['error' => 'Błąd SQL(UserTrainings): ' . $conn->error]);
+        exit;
+    }
+}
+
+
+
+$tableCheck = $conn->query("SHOW TABLES LIKE 'UserAppointments'");
+if ($tableCheck->num_rows === 0) {
+    $sql = "
+        CREATE TABLE UserAppointments (
+    AppointmentID INT AUTO_INCREMENT PRIMARY KEY,
+  UserID INT NOT NULL,
+  DoctorID INT NOT NULL,
+  StartDate DATETIME NOT NULL,
+  EndDate DATETIME NOT NULL,
+  Cause VARCHAR(255) NOT NULL,
+  FOREIGN KEY (UserID) REFERENCES Users(UserID)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  FOREIGN KEY (DoctorID) REFERENCES Doctors(DoctorID)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+) ENGINE=InnoDB;
+    ";
+    if (!$conn->query($sql)) {
+        http_response_code(500);
+        echo json_encode(['error' => 'Błąd SQL(UserAppointments): ' . $conn->error]);
         exit;
     }
 }

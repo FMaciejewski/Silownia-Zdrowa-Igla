@@ -29,5 +29,17 @@ if ($data['Role'] == 'trainer') {
     $data['Bio'] = $trainer['Bio'];
     $data['HourlyRate'] = $trainer['HourlyRate'];
 }
+else if ($data['Role'] == 'fizjo') {
+    $stmt = $db->prepare("SELECT Specialization, Degree, WorkStartDate, WorkEndDate FROM  doctors WHERE UserID = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $physio = $result->fetch_assoc();
+    $data['Specialization'] = $physio['Specialization'];
+    $data['Degree'] = $physio['Degree'];
+    $data['WorkStartDate'] = $physio['WorkStartDate'];
+    $data['WorkEndDate'] = $physio['WorkEndDate'];
+}
+$stmt->close();
 
 echo json_encode($data);

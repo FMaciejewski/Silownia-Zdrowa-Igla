@@ -55,11 +55,38 @@ document.addEventListener("DOMContentLoaded", () => {
             <input type="number" id="hourly-rate" name="hourly-rate" value="${data.HourlyRate}" required class="profile-input">
         `;
       }
+      else if (data.Role === "fizjo") {
+        profileSection.innerHTML += `	
+            <p><strong>Specjalizacja:</strong> ${data.Specialization}</p>
+            <p><strong>Wykształcenie:</strong> ${data.Degree}</p>
+            <p><strong>Początek pracy:</strong> ${data.WorkStartDate}</p>
+            <p><strong>Koniec pracy:</strong> ${data.WorkEndDate}</p>`;
+        innerForm += `
+            <label for="specialization">Specjalizacja:</label>
+            <input type="text" id="specialization" name="specialization" value="${data.Specialization}" required class="profile-input">
+            <label for="degree">Wykształcenie:</label>
+            <select name="degree" id="degree" required class="profile-input">
+              <option value="licencjat">Licencjant</option>
+              <option value="mgr">Magister</option>
+              <option value="mgr-inz">Magister inżynier</option>
+              <option value="dr">Doktor</option>
+              <option value="dr-hab">Doktor habilitowany</option>
+              <option value="prof">Profesor</option>
+            </select>
+            <label for="work-start-date">Początek pracy:</label>
+            <input type="time" id="work-start-date" name="work-start-date" value="${data.WorkStartDate}" required class="profile-input">
+            <label for="work-end-date">Koniec pracy:</label>
+            <input type="time" id="work-end-date" name="work-end-date" value="${data.WorkEndDate}" required class="profile-input">
+        `;
+      }
       innerForm += `
             <button type="submit" class="profile-button">Zapisz zmiany</button>
         </form>`;
 
       profileForm.innerHTML = innerForm;
+      if (data.Role === "fizjo") {
+        document.getElementById("degree").value = String(data.Degree);
+      }
     });
   const urlParams = new URLSearchParams(window.location.search);
   const error = urlParams.get("error");

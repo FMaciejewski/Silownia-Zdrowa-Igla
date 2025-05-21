@@ -14,7 +14,7 @@ CREATE TABLE Users (
     Role ENUM('client', 'trainer', 'admin', 'fizjo') DEFAULT 'client',
     CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     LastLogin TIMESTAMP NULL,
-    ProfilePicture VARCHAR(255) DEAFULT 'default_profile.png',
+    ProfilePicture VARCHAR(255) DEFAULT 'default_profile.png',
     Token VARCHAR(8) DEFAULT NULL;
     TokenCreatedAt TIMESTAMP NULL
 ) ENGINE=InnoDB;
@@ -26,6 +26,16 @@ CREATE TABLE Trainers (
     Specialization VARCHAR(100) NOT NULL,
     Bio TEXT,
     HourlyRate DECIMAL(10,2),
+    FOREIGN KEY (UserID) REFERENCES Users(UserID) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+CREATE TABLE Doctors (
+    DoctorID INT PRIMARY KEY AUTO_INCREMENT, 
+    UserID INT NOT NULL,               
+    Specialization VARCHAR(255),        
+    Degree VARCHAR(100),              
+    WorkStartDate TIME DEFAULT '08:00:00',
+    WorkEndDate TIME DEFAULT '16:00:00',             
     FOREIGN KEY (UserID) REFERENCES Users(UserID) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
@@ -63,6 +73,21 @@ CREATE TABLE UserTrainings (
     PRIMARY KEY (UserID, TrainingID),
     FOREIGN KEY (UserID) REFERENCES Users(UserID) ON DELETE CASCADE,
     FOREIGN KEY (TrainingID) REFERENCES Trainings(TrainingID) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+CREATE TABLE UserAppointments (
+    AppointmentID INT AUTO_INCREMENT PRIMARY KEY,
+  UserID INT NOT NULL,
+  DoctorID INT NOT NULL,
+  StartDate DATETIME NOT NULL,
+  EndDate DATETIME NOT NULL,
+  Cause VARCHAR(255) NOT NULL,
+  FOREIGN KEY (UserID) REFERENCES Users(UserID)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  FOREIGN KEY (DoctorID) REFERENCES Doctors(DoctorID)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 ) ENGINE=InnoDB;
 
 -- Tabela płatności

@@ -74,7 +74,7 @@
             <option value="trainer">Trener</option>
             <option value="fizjo">Fizjoterapeuta</option>
           </select>
-          <div id="additional-fields" style="display: none">
+          <div id="additional-fields-trainer" style="display: none" class="additional-fields">
             <label for="specialization">Specjalizacja:</label>
             <input type="text" id="specialization" name="specialization" />
 
@@ -89,6 +89,26 @@
               min="0"
               step="0.01"
             />
+          </div>
+          <div id="additional-fields-doctor" style="display: none;" class="additional-fields">
+            <label for="specialization">Specjalizacja:</label>
+            <input type="text" id="specialization-doc" name="specialization-doc" />
+
+            <label for="degree">Wykształcenie: </label>
+            <select name="degree" id="degree">
+              <option value="licencjat">Licencjant</option>
+              <option value="mgr">Magister</option>
+              <option value="mgr-inz">Magister inżynier</option>
+              <option value="dr">Doktor</option>
+              <option value="dr-hab">Doktor habilitowany</option>
+              <option value="prof">Profesor</option>
+            </select>
+
+            <label for="work-start">Początek pracy:</label>
+            <input type="time" name="work-start" id="work-start">
+
+            <label for="work-end">Koniec pracy:</label>
+            <input type="time" name="work-end" id="work-end">
           </div>
           <div class="error-msg">
             <p id="error-message"></p>

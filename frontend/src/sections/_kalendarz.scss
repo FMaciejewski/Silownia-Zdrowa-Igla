@@ -140,3 +140,46 @@
   border-radius: 6px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
+
+#doctor-id {
+  padding: 0.75rem 1rem;
+  border: 2px solid #4a90e2;
+  border-radius: 0.5rem;
+  background-color: #f0f4ff;
+  color: #333;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+  transition: all 0.2s ease-in-out;
+  margin-bottom: 1rem;
+  display: block;
+  width: 100%;
+  max-width: 400px;
+}
+
+#doctor-id:focus {
+  outline: none;
+  border-color: #2563eb;
+  background-color: #e0e7ff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.4);
+}
+
+.doctor-id-block{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 2rem auto;
+}
+
+.doctor-id-block label {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.5rem;
+}

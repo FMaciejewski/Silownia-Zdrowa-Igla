@@ -87,5 +87,19 @@ if ($role == 'trainer') {
     }
     $stmt->close();
 }
+else if ($role == 'fizjo') {
+    $specialization = $_POST['specialization'] ?? '';
+    $degree = $_POST['degree'] ?? '';
+    $workStartDate = $_POST['work-start-date'] ?? '';
+    $workEndDate = $_POST['work-end-date'] ?? '';
+
+    $query = "UPDATE doctors SET Specialization = ?, Degree = ?, WorkStartDate = ?, WorkEndDate = ? WHERE UserID = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("ssssi", $specialization, $degree, $workStartDate, $workEndDate, $ID);
+    if (!$stmt->execute()) {
+        die("Błąd podczas aktualizacji danych: " . $stmt->error);
+    }
+    $stmt->close();
+}
 header('Location: ../../frontend/sites/profile.html');
 exit();
