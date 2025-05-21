@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat WebSocket</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        #chat-container {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        #messages {
+            height: 400px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #f9f9f9;
+            border: 1px solid #eee;
+            border-radius: 3px;
+        }
+        #messageInput {
+            width: calc(100% - 90px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+        #sendButton {
+            width: 80px;
+            padding: 10px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        #sendButton:hover {
+            background: #45a049;
+        }
+        .message {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 4px;
+            background: #e3f2fd;
+            display: inline-block;
+            max-width: 80%;
+        }
+        .status {
+            color: #666;
+            font-style: italic;
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+        .error {
+            color: #f44336;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <h1>Chat WebSocket</h1>
+        <div id="status" class="status">Łączenie z serwerem...</div>
+        <div id="messages"></div>
+        <div>
+            <input type="text" id="messageInput" placeholder="Wpisz wiadomość..." autocomplete="off">
+            <button id="sendButton" onclick="sendMessage()">Wyślij</button>
+        </div>
+    </div>
+
+    <script>
+        // Zmienne globalne
+        let socket;
+        let reconnectAttempts = 0;
+        const maxReconnectAttempts = 5;
+        const reconnectDelay = 3000; // 3 sekundy
+
+        // Inicjalizacja połączenia WebSocket
+        function initWebSocket() {
+            // Zamknij istniejące połączenie jeśli istnieje
+            if (socket && socket.readyState !== WebSocket.CLOSED) {
+                socket.close();
+            }
+
+            socket = new WebSocket('ws://localhost:8080/chat');
+
+            // Po udanym połączeniu
+            socket.onopen = function(event) {
+                reconnectAttempts = 0;
+                updateStatus('Połączono z serwerem', 'green');
+                console.log('Połączenie WebSocket otwarte');
+            };
+
+            // Odbieranie wiadomości
+            socket.onmessage = function(event) {
+                displayMessage(event.data);
+            };
+
+            // Zamknięcie połączenia
+            socket.onclose = function(event) {
+                if (event.wasClean) {
+                    updateStatus(`Połączenie zamknięte: ${event.reason || 'brak powodu'}`, 'gray');
+                } else {
+                    updateStatus('Połączenie przerwane', 'red');
+                    // Próba ponownego połączenia
+                    if (reconnectAttempts < maxReconnectAttempts) {
+                        reconnectAttempts++;
+                        updateStatus(`Ponowne łączenie (próba ${reconnectAttempts}/${maxReconnectAttempts})...`, 'orange');
+                        setTimeout(initWebSocket, reconnectDelay);
+                    } else {
+                        updateStatus('Nie można połączyć z serwerem', 'red');
+                    }
+                }
+                console.log('Połączenie WebSocket zamknięte');
+            };
+
+            // Obsługa błędów
+            socket.onerror = function(error) {
+                updateStatus('Błąd połączenia', 'red');
+                console.error('Błąd WebSocket:', error);
+            };
+        }
+
+        // Wyświetlanie wiadomości w interfejsie
+         function displayMessage(message, isMyMessage = false) {
+            const messagesDiv = document.getElementById('messages');
+            const messageElement = document.createElement('div');
+            messageElement.className = isMyMessage ? 'message my-message' : 'message other-message';
+            messageElement.textContent = message;
+            messagesDiv.appendChild(messageElement);
+            
+            // Automatyczne przewijanie do najnowszej wiadomości
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        // Wysyłanie wiadomości
+        function sendMessage() {
+            const messageInput = document.getElementById('messageInput');
+            const message = messageInput.value.trim();
+            
+            if (!message) return;
+            
+            // Natychmiastowe wyświetlenie swojej wiadomości
+            displayMessage("Ja: " + message, true);
+            
+            if (!socket || socket.readyState !== WebSocket.OPEN) {
+                updateStatus('Nie można wysłać - brak połączenia', 'red');
+                return;
+            }
+            
+            try {
+                socket.send(message);
+                messageInput.value = '';
+                messageInput.focus();
+            } catch (error) {
+                console.error('Błąd wysyłania wiadomości:', error);
+                updateStatus('Błąd wysyłania wiadomości', 'red');
+            }
+        }
+
+        // Aktualizacja statusu połączenia
+        function updateStatus(text, color) {
+            const statusDiv = document.getElementById('status');
+            statusDiv.textContent = text;
+            statusDiv.style.color = color;
+        }
+
+        // Obsługa klawisza Enter
+        document.getElementById('messageInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Inicjalizacja po załadowaniu strony
+        window.addEventListener('load', function() {
+            initWebSocket();
+            
+            // Przycisk wysyłania
+            document.getElementById('sendButton').addEventListener('click', sendMessage);
+        });
+    </script>
+</body>
+</html>

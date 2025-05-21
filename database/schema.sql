@@ -96,6 +96,19 @@ VALUES
 ('Premium', 150, 400, 1600),
 ('VIP', 220, 580, 2400);
 
+--Tabela wiadomosci
+CREATE TABLE `messages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sender_id` int(11) NOT NULL,
+  `receiver_id` int(11) NOT NULL,
+  `message` text NOT NULL,
+  `status` enum('sent','delivered','read') NOT NULL DEFAULT 'sent',
+  `sent_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `receiver_id` (`receiver_id`,`status`),
+  KEY `sender_id` (`sender_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 
 -- Indeksy dla optymalizacji
 CREATE INDEX idx_user_email ON Users(Email);
