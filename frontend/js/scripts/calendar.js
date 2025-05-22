@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
     allDaySlot: false,
     slotMinTime: "06:00:00",
     slotMaxTime: "23:59:00",
-    selectable: true,
+    selectable: false,
     editable: false,
     eventOverlap: true,
     eventMaxStack: 1,
@@ -152,8 +152,8 @@ document.addEventListener("DOMContentLoaded", function () {
           },
         });
       });
-      if (role === "client") {
-        calendar.setOption("selectable", false);
+      if (role === "trainer") {
+        calendar.setOption("selectable", true);
       }
     });
 

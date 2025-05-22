@@ -33,7 +33,7 @@ $stmt = $conn->prepare("INSERT INTO Trainings (TrainerID, Title, Description, St
 $stmt->bind_param("issssiss", $eventCreatorId, $eventName, $eventDescription, $eventStart, $eventEnd, $maxParticipants, $eventPrice, $eventLocation);
 if ($stmt->execute()) {
     $stmt->close();
-    header('Location: ../../frontend/sites/kalendarz.html');
+    header('Location: ../../frontend/sites/kalendarz.html?success=9');
     exit;
 } else {
     http_response_code(500);

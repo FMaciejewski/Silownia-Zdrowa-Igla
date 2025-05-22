@@ -55,7 +55,7 @@ if ($result->num_rows > 0) {
 $stmt = $conn->prepare("UPDATE userappointments SET Cause = ?, StartDate = ?, EndDate = ? WHERE AppointmentID = ?");
 $stmt->bind_param("sssi", $cause, $startDate, $endDate, $appointmentID);
 if ($stmt->execute()) {
-    header('Location: ../../frontend/sites/appointments.html');
+    header('Location: ../../frontend/sites/appointments.html?success=7');
 } else {
     header('Location: ../../frontend/sites/appointments.html?error=blad_sql');
 }

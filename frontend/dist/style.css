@@ -404,7 +404,7 @@ footer {
   max-width: 1000px;
   height: 800px;
   border-radius: 10px;
-  box-shadow: 0 0 10px #00ffd5;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
 .toastui-calendar-timegrid-schedule {
@@ -420,43 +420,46 @@ footer {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background: rgba(0, 0, 0, 0.7);
-  animation: fadeIn 0.3s;
+  background: rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.3s ease-in-out;
 }
 
 .modal-content {
-  background-color: #fefefe;
+  background-color: #fafafa;
   margin: 10% auto;
-  padding: 30px;
-  border: 2px solid #111;
+  padding: 2rem;
+  border-radius: 12px;
   width: 400px;
-  border-radius: 15px;
-  box-shadow: 0 0 25px #00f7ff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   animation: slideDown 0.3s;
   position: relative;
 }
 
 .modal-content h2 {
   margin-top: 0;
-  color: #222;
+  color: #333;
   font-size: 24px;
   text-align: center;
+  font-weight: 700;
 }
 
 .modal-input {
   width: 100%;
-  padding: 10px;
+  padding: 0.75rem 1rem;
   margin: 10px 0 20px 0;
-  border: 1px solid #999;
-  border-radius: 5px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
   font-size: 16px;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
+  color: #333;
+  background: #f9f9f9;
 }
 
 .modal-input:focus {
   outline: none;
-  border-color: #00f7ff;
-  box-shadow: 0 0 5px #00f7ff;
+  border-color: #4a90e2;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
 }
 
 .modal-btn {
@@ -464,42 +467,45 @@ footer {
   margin-top: 10px;
   font-size: 16px;
   font-weight: bold;
-  border-radius: 8px;
+  border-radius: 12px;
   border: none;
   cursor: pointer;
   transition: 0.3s ease-in-out;
 }
 
 .modal-btn.confirm {
-  background-color: #00c26e;
-  color: white;
+  background: linear-gradient(135deg, #00c26e, #007a4a);
+  color: #fff;
 }
 
 .modal-btn.confirm:hover {
-  background-color: #009e5b;
+  background: linear-gradient(135deg, #009e5b, #005f3d);
+  transform: scale(1.03);
 }
 
 .modal-btn.delete {
-  background-color: #e63946;
-  color: white;
+  background: linear-gradient(135deg, #e63946, #9e1f2b);
+  color: #fff;
 }
 
 .modal-btn.delete:hover {
-  background-color: #c1121f;
+  background: linear-gradient(135deg, #c1121f, #750f16);
+  transform: scale(1.03);
 }
 
 .close-btn {
-  color: #aaa;
+  color: #888;
   font-size: 28px;
   font-weight: bold;
   position: absolute;
-  top: 10px;
-  right: 15px;
+  top: 15px;
+  right: 20px;
   cursor: pointer;
+  transition: color 0.2s;
 }
 
 .close-btn:hover {
-  color: #ff5050;
+  color: #e63946;
 }
 
 @keyframes fadeIn {
@@ -607,6 +613,7 @@ footer {
   font-size: 0.9rem;
   min-width: 160px;
   padding: 0.4rem 0.8rem;
+  cursor: pointer;
 }
 
 .period-btn.active {
