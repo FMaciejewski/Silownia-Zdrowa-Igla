@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Nasi Fizjoterapeuci</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .action-btn {
+            padding: 8px 12px;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+        .calendar-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+        .chat-btn {
+            background-color: #2196F3;
+            color: white;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Nasi Fizjoterapeuci</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Imię i nazwisko</th>
+                <th>Specjalizacja</th>
+                <th>Akcje</th>
+            </tr>
+        </thead>
+        <tbody id="physio-table-body">
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    fetch("../../backend/api/fizjo.php")
+        .then(response => response.json())
+        .then(data => {
+            const tbody = document.getElementById("physio-table-body");
+            tbody.innerHTML = ""; 
+
+            data.forEach(physio => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>${escapeHtml(physio.name)} ${escapeHtml(physio.surname)}</td>
+                    <td>${escapeHtml(physio.specialization)}</td>
+                    <td>
+                        <button class="action-btn calendar-btn" 
+                            onclick="window.location.href='kalendarz.html?physio_id=${physio.id}'">
+                            Kalendarz
+                        </button>
+                        <button class="action-btn chat-btn" 
+                            onclick="window.location.href='chat.html?receiver_id=${physio.id}'">
+                            Chat
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        })
+        .catch(error => {
+            document.getElementById("physio-table-body").innerHTML = 
+                `<tr><td colspan="3">Błąd ładowania danych.</td></tr>`;
+            console.error(error);
+        });
+
+   function escapeHtml(text) {
+    if (typeof text !== "string") return "";
+    return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+});
+</script>
+        </tbody>
+    </table>
+</body>
+</html>

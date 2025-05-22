@@ -241,6 +241,28 @@ if ($tableCheck->num_rows === 0) {
     }
 }
 
+$tableCheck = $conn->query("SHOW TABLES LIKE 'messages'");
+if ($tableCheck->num_rows === 0) {
+    $sql = "
+    CREATE TABLE `messages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sender_id` int(11) NOT NULL,
+  `receiver_id` int(11) NOT NULL,
+  `message` text NOT NULL,
+  `status` enum('sent','delivered','read') NOT NULL DEFAULT 'sent',
+  `sent_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `receiver_id` (`receiver_id`,`status`),
+  KEY `sender_id` (`sender_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    ";
+    if (!$conn->query($sql)) {
+        http_response_code(500);
+        echo json_encode(['error' => 'Błąd SQL(messages): ' . $conn->error]);
+        exit;
+    }
+}
+
 
 do {
     if ($result = $conn->store_result()) {
@@ -252,3 +274,4 @@ do {
 
 echo json_encode(['success' => true, 'message' => 'Baza gotowa']);
 exit;
+?>
