@@ -42,7 +42,7 @@ if ($stmt->execute()) {
         $stmt->execute();
         $stmt->close();
     }
-    header('Location: ../../frontend/sites/kalendarz.html?success=training_updated');
+    header('Location: ../../frontend/sites/kalendarz.html?success=7');
 } else {
     header('Location: ../../frontend/sites/kalendarz.html?error=błąd_sql');
 }

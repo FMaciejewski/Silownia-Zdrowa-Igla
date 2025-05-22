@@ -30,6 +30,22 @@ if (successMessage) {
       successMessage.textContent = "Pomyślnie zapisano się na zajęcia.";
       showMessage();
       break;
+    case "7":
+      successMessage.textContent = "Zapisano zmiany.";
+      showMessage();
+      break;
+    case "8":
+      successMessage.textContent = "Usuwanie przebiegło pomyślnie.";
+      showMessage();
+      break;
+    case "9":
+      successMessage.textContent = "Pomyślnie dodano zajęcia.";
+      showMessage();
+      break;
+    case "10":
+      successMessage.textContent = "Wizyta została umówiona.";
+      showMessage();
+      break;
     default:
       console.log("Nieznany przypadek success.");
       successMessage.style.opacity = "0";
