@@ -101,5 +101,5 @@ else if ($role == 'fizjo') {
     }
     $stmt->close();
 }
-header('Location: ../../frontend/sites/profile.html');
+header('Location: ../../frontend/sites/profile.html?success=7');
 exit();

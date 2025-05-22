@@ -12,5 +12,5 @@ $appointmentId = $_GET['appointmentId'];
 $stmt = $conn->prepare("DELETE FROM userappointments WHERE AppointmentID = ?");
 $stmt->bind_param("i", $appointmentId);
 $stmt->execute();
-header('Location: ../../frontend/sites/appointments.html');
+header('Location: ../../frontend/sites/appointments.html?success=8');
 ?>

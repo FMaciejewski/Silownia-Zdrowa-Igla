@@ -19,7 +19,7 @@ $end_time = $_POST['eventEnd'];
 $stmt = $conn->prepare("INSERT INTO userappointments (UserID, DoctorID, Cause, StartDate, EndDate) VALUES (?, ?, ?, ?, ?)");
 $stmt->bind_param("iisss", $ID, $doctor_id, $cause, $start_time, $end_time);
 if ($stmt->execute()) {
-    header('Location: ../../frontend/sites/appointments.html');
+    header('Location: ../../frontend/sites/appointments.html?success=10');
     exit();
 } else {
     header('Location: ../../frontend/sites/appointments.html?error=sqlerror');
