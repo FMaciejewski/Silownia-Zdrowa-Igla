@@ -1,8 +1,11 @@
 <?php
-require_once __DIR__ . '/../../config.php';
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 header('Content-Type: application/json');
 session_start();
+
 
 if (!isset($_SESSION['user_id'])) {
     http_response_code(401);
@@ -16,6 +19,8 @@ if (!$receiverId) {
     echo json_encode(['error' => 'Invalid receiver ID']);
     exit;
 }
+
+
 $db_host = 'localhost';
 $db_user = 'root';
 $db_pass = '';
@@ -28,25 +33,31 @@ if ($mysqli->connect_error) {
     exit;
 }
 
-// Get current user info
-$currentUserId = $_SESSION['user_id'];
-$currentUserName = $_SESSION['username'];
 
-// Get receiver info
-$query = "SELECT id, username FROM users WHERE id = ?";
-$stmt = $mysqli->prepare($query);
-if (!$stmt) {
-    http_response_code(500);
-    echo json_encode(['error' => 'Database prepare error: ' . $mysqli->error]);
+$currentUserId = $_SESSION['user_id'];
+
+$stmtCurrent = $mysqli->prepare("SELECT FirstName, LastName FROM Users WHERE UserID = ?");
+$stmtCurrent->bind_param('i', $currentUserId);
+$stmtCurrent->execute();
+$currentResult = $stmtCurrent->get_result();
+$current = $currentResult->fetch_assoc();
+$stmtCurrent->close();
+
+if (!$current) {
+    http_response_code(404);
+    echo json_encode(['error' => 'Current user not found']);
     exit;
 }
 
-$stmt->bind_param('i', $receiverId);
-$stmt->execute();
-$result = $stmt->get_result();
-$receiver = $result->fetch_assoc();
+$currentUserName = $current['FirstName'] . ' ' . $current['LastName'];
 
-$stmt->close();
+
+$stmtReceiver = $mysqli->prepare("SELECT UserID, FirstName, LastName FROM Users WHERE UserID = ?");
+$stmtReceiver->bind_param('i', $receiverId);
+$stmtReceiver->execute();
+$receiverResult = $stmtReceiver->get_result();
+$receiver = $receiverResult->fetch_assoc();
+$stmtReceiver->close();
 $mysqli->close();
 
 if (!$receiver) {
@@ -55,9 +66,12 @@ if (!$receiver) {
     exit;
 }
 
+$receiverName = $receiver['FirstName'] . ' ' . $receiver['LastName'];
+
+
 echo json_encode([
     'currentUserId' => $currentUserId,
     'currentUserName' => $currentUserName,
-    'receiverId' => $receiver['id'],
-    'receiverName' => $receiver['username']
+    'receiverId' => $receiver['UserID'],
+    'receiverName' => $receiverName
 ]);

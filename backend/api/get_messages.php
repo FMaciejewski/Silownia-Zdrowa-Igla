@@ -1,5 +1,8 @@
 <?php
-require_once __DIR__ . '/../../config.php';
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 
 header('Content-Type: application/json');
 session_start();
@@ -16,7 +19,12 @@ if (!$receiverId) {
     echo json_encode(['error' => 'Invalid receiver ID']);
     exit;
 }
-$mysqli = new mysqli($db_host, $db_user, $db_pass, $db_name);
+$host = 'localhost';
+$db   = 'SilowniaZdrowaIgla';
+$user = 'root';
+$pass = '';
+$charset = 'utf8mb4';
+$mysqli = new mysqli($host, $user, $pass, $db);
 
 if ($mysqli->connect_error) {
     http_response_code(500);
@@ -28,10 +36,10 @@ $userId = $_SESSION['user_id'];
 $messages = [];
 
 $query = "
-    SELECT m.*, u.username as sender_name 
-    FROM messages m
-    JOIN users u ON m.sender_id = u.id
-    WHERE (m.sender_id = ? AND m.receiver_id = ?) 
+    SELECT m.*, CONCAT(u.FirstName, ' ', u.LastName) AS sender_name 
+    FROM Messages m
+    JOIN Users u ON m.sender_id = u.UserID
+    WHERE (m.sender_id = ? AND m.receiver_id = ?)
        OR (m.sender_id = ? AND m.receiver_id = ?)
     ORDER BY m.sent_at ASC
 ";
@@ -48,8 +56,13 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 while ($row = $result->fetch_assoc()) {
-    $messages[] = $row;
+    $messages[] = [
+        'sender_id' => $row['sender_id'],
+        'sender_name' => $row['sender_name'],
+        'message' => $row['message'],
+    ];
 }
+
 
 $stmt->close();
 $mysqli->close();

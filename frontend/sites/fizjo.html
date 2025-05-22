@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(response => response.json())
         .then(data => {
             const tbody = document.getElementById("physio-table-body");
-            tbody.innerHTML = ""; // Wyczyść na wszelki wypadek
+            tbody.innerHTML = ""; 
 
             data.forEach(physio => {
                 const tr = document.createElement("tr");
@@ -79,7 +79,6 @@ document.addEventListener("DOMContentLoaded", function() {
             console.error(error);
         });
 
-    // Prosta funkcja do zabezpieczenia przed XSS
    function escapeHtml(text) {
     if (typeof text !== "string") return "";
     return text

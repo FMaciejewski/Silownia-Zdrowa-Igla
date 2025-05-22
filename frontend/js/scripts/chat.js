@@ -5,47 +5,27 @@ let reconnectAttempts = 0;
 const maxReconnectAttempts = 5;
 const baseReconnectDelay = 3000;
 
-function updateStatus(text, color) {
-    const statusElement = document.getElementById('status');
-    statusElement.textContent = text;
-    statusElement.style.color = color;
-}
 
-function updateTypingIndicator(isTyping) {
-    const typingIndicator = document.getElementById('typing-indicator');
-    typingIndicator.textContent = isTyping ? `${receiverName} pisze...` : '';
-}
 
-function displayMessage(message, isMyMessage, senderName = null, status = 'sent') {
+function displayMessage(message, isMyMessage, senderName = null) {
     const messagesDiv = document.getElementById('messages');
     const messageElement = document.createElement('div');
     messageElement.className = isMyMessage ? 'message my-message' : 'message their-message';
-    
-    if (!isMyMessage && senderName) {
+
+    if (isMyMessage) {
+
+        messageElement.innerHTML = `<strong>Ja:</strong> ${message}`;
+    } else if (senderName) {
+
         messageElement.innerHTML = `<strong>${senderName}:</strong> ${message}`;
     } else {
         messageElement.textContent = message;
     }
-    
-    if (isMyMessage) {
-        const statusElement = document.createElement('span');
-        statusElement.className = `message-status ${status}`;
-        statusElement.textContent = getStatusText(status);
-        messageElement.appendChild(statusElement);
-    }
-    
+
     messagesDiv.appendChild(messageElement);
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }
 
-function getStatusText(status) {
-    const statusTexts = {
-        'sent': 'Wysłano',
-        'delivered': 'Dostarczono',
-        'read': 'Przeczytano'
-    };
-    return statusTexts[status] || '';
-}
 
 async function loadChatHistory() {
     try {
@@ -55,7 +35,7 @@ async function loadChatHistory() {
         const messages = await response.json();
         messages.forEach(msg => {
             const isMyMessage = msg.sender_id == currentUserId;
-            displayMessage(msg.message, isMyMessage, isMyMessage ? null : msg.sender_name, 'delivered');
+            displayMessage(msg.message, isMyMessage, isMyMessage ? null : msg.sender_name);
         });
     } catch (error) {
         console.error('Error loading chat history:', error);
@@ -68,7 +48,6 @@ function connectWebSocket() {
     socket.onopen = () => {
         isConnected = true;
         reconnectAttempts = 0;
-        updateStatus('Połączono z serwerem czatu', 'green');
         sendPresenceNotification('online');
     };
     
@@ -78,19 +57,13 @@ function connectWebSocket() {
             case 'privateMessage':
                 if (data.senderId == receiverId) {
                     displayMessage(data.message, false, data.senderName);
-                    sendReadReceipt(data.senderId);
                 }
                 break;
             case 'typing':
-                if (data.senderId == receiverId) {
-                    updateTypingIndicator(data.isTyping);
-                }
+                updateTypingIndicator(false);
                 break;
             case 'presence':
                 updateUserPresence(data.userId, data.status);
-                break;
-            case 'messageStatus':
-                updateMessageStatus(data.messageId, data.status);
                 break;
         }
     };
@@ -102,7 +75,6 @@ function connectWebSocket() {
         if (reconnectAttempts < maxReconnectAttempts) {
             reconnectAttempts++;
             const delay = baseReconnectDelay * Math.pow(2, reconnectAttempts);
-            updateStatus(`Rozłączono. Próba ponownego połączenia (${reconnectAttempts}/${maxReconnectAttempts})...`, 'red');
             setTimeout(connectWebSocket, delay);
         } else {
             updateStatus('Nie można połączyć z serwerem. Odśwież stronę aby spróbować ponownie.', 'red');
@@ -124,18 +96,7 @@ function sendPresenceNotification(status) {
     }
 }
 
-function sendReadReceipt(senderId) {
-    if (isConnected) {
-        socket.send(JSON.stringify({
-            type: 'readReceipt',
-            senderId: senderId,
-            receiverId: currentUserId
-        }));
-    }
-}
-
 function getAuthToken() {
-    // Implement token retrieval (e.g., from cookies or local storage)
     return document.cookie.match('(^|;)\\s*token\\s*=\\s*([^;]+)')?.pop() || '';
 }
 
