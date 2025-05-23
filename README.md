@@ -16,14 +16,14 @@ Nasz projekt ma spelniac podane zalozenia:
 
 &emsp;<del>2) Logowanie</del>
 
-&emsp;3) Kupno karnetu
+&emsp;3)<del> Kupno karnetu
 
-&emsp;4) Umówienie się na zajęcia
+&emsp;4) <del>Umówienie się na zajęcia
 
 &emsp;<del>5) Utworzenie zajęcia(trenerzy)</del>
 
-&emsp;6) Umówienie wizyty z fizjoterapetą/lekarzem
+&emsp;6) <del>Umówienie wizyty z fizjoterapetą/lekarzem
 
-&emsp;7) Zarządzanie wizytami(fizjo)
+&emsp;7) <del>Zarządzanie wizytami - wiadomości(fizjo)
 
 &emsp;<del>8) Wysyłanie wiadomości</del>
