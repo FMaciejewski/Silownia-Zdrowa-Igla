@@ -21,13 +21,13 @@ document.addEventListener("DOMContentLoaded", function () {
         option.value = doctor.DoctorID;
         option.textContent = `${doctor.Degree} ${doctor.FirstName} ${doctor.LastName}`;
         doctorSelect.appendChild(option);
-      })
+      });
       const savedDoctorId = localStorage.getItem("selectedDoctorId");
       if (doctors.length > 0) {
-            doctorSelect.value = savedDoctorId;
-            const event = new Event('change');
-            doctorSelect.dispatchEvent(event);
-        }
+        doctorSelect.value = savedDoctorId;
+        const event = new Event("change");
+        doctorSelect.dispatchEvent(event);
+      }
     });
 
   function formatLocalDateTime(date) {
@@ -69,13 +69,15 @@ document.addEventListener("DOMContentLoaded", function () {
       tempEnd = info.endStr;
       document.getElementById("eventStart").value = tempStart;
       document.getElementById("eventEnd").value = tempEnd;
-      document.getElementById("eventDoctorID").value = parseInt(doctorSelect.value);
+      document.getElementById("eventDoctorID").value = parseInt(
+        doctorSelect.value,
+      );
       popup.style.display = "block";
     },
     selectAllow: function (selectInfo) {
       const start = selectInfo.start;
       const end = selectInfo.end;
-      const duration = (end - start) / (1000 * 60); 
+      const duration = (end - start) / (1000 * 60);
       return duration <= 30;
     },
     eventDidMount: function (info) {
@@ -95,15 +97,16 @@ document.addEventListener("DOMContentLoaded", function () {
     eventClick: function (event) {
       const isOwn = event.event.extendedProps.isOwn;
 
-      if(!isOwn) return;
+      if (!isOwn) return;
 
-        detailCause = event.event.title;
+      detailCause = event.event.title;
       detailDoctor.innerText = event.event.extendedProps.Doctor;
       detailPatient.innerText = event.event.extendedProps.Patient;
       detailStart.innerText = event.event.start.toLocaleString();
 
       fetch(
-        "../../backend/api/can-edit-appointment.php?appointmentId=" + event.event.id,
+        "../../backend/api/can-edit-appointment.php?appointmentId=" +
+          event.event.id,
       )
         .then((response) => response.json())
         .then((data) => {
@@ -114,7 +117,9 @@ document.addEventListener("DOMContentLoaded", function () {
               editForm.style.display = "block";
 
               editAppointmentCause.value = event.event.title;
-              editAppointmentStart.value = formatLocalDateTime(event.event.start);
+              editAppointmentStart.value = formatLocalDateTime(
+                event.event.start,
+              );
               editEventId.value = event.event.id;
               editEventDoctorId.value = parseInt(doctorSelect.value);
             });
@@ -144,7 +149,10 @@ document.addEventListener("DOMContentLoaded", function () {
     calendar.getEvents().forEach((event) => {
       event.remove();
     });
-    fetch("../../backend/api/render-appointment-calendar.php?doctorId=" + parseInt(doctorSelect.value))
+    fetch(
+      "../../backend/api/render-appointment-calendar.php?doctorId=" +
+        parseInt(doctorSelect.value),
+    )
       .then((response) => response.json())
       .then((data) => {
         const events = data.events;
@@ -165,7 +173,10 @@ document.addEventListener("DOMContentLoaded", function () {
           });
         });
       });
-    fetch("../../backend/api/get-doctor-hours.php?doctorId=" + parseInt(doctorSelect.value))
+    fetch(
+      "../../backend/api/get-doctor-hours.php?doctorId=" +
+        parseInt(doctorSelect.value),
+    )
       .then((response) => response.json())
       .then((data) => {
         calendar.setOption("slotMinTime", data.WorkStartDate);
@@ -176,7 +187,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const totalHeight = (end - start) * slotHeight + 125;
         calendar.setOption("height", totalHeight);
       });
-  });  
+  });
 
   cancelBtn.addEventListener("click", function () {
     popup.style.display = "none";

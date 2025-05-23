@@ -1,6 +1,10 @@
 const accountType = document.getElementById("account_type");
-const additionalFieldsTrainer = document.getElementById("additional-fields-trainer");
-const additionalFieldsDoctor = document.getElementById("additional-fields-doctor");
+const additionalFieldsTrainer = document.getElementById(
+  "additional-fields-trainer",
+);
+const additionalFieldsDoctor = document.getElementById(
+  "additional-fields-doctor",
+);
 accountType.addEventListener("change", function () {
   if (this.value === "trainer") {
     additionalFieldsTrainer.style.display = "block";
@@ -12,7 +16,7 @@ accountType.addEventListener("change", function () {
     document.getElementById("degree").required = false;
     document.getElementById("work-start").required = false;
     document.getElementById("work-end").required = false;
-  } else if (this.value === "fizjo"){
+  } else if (this.value === "fizjo") {
     additionalFieldsDoctor.style.display = "block";
     additionalFieldsTrainer.style.display = "none";
     document.getElementById("specialization-doc").required = true;
@@ -22,8 +26,7 @@ accountType.addEventListener("change", function () {
     document.getElementById("specialization").required = false;
     document.getElementById("bio").required = false;
     document.getElementById("hourly-rate").required = false;
-  }
-  else {
+  } else {
     additionalFieldsTrainer.style.display = "none";
     additionalFieldsDoctor.style.display = "none";
     document.getElementById("specialization").required = false;

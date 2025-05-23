@@ -54,8 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <label for="hourly-rate">Godzinówka:</label>
             <input type="number" id="hourly-rate" name="hourly-rate" value="${data.HourlyRate}" required class="profile-input">
         `;
-      }
-      else if (data.Role === "fizjo") {
+      } else if (data.Role === "fizjo") {
         profileSection.innerHTML += `	
             <p><strong>Specjalizacja:</strong> ${data.Specialization}</p>
             <p><strong>Wykształcenie:</strong> ${data.Degree}</p>

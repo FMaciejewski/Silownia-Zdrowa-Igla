@@ -61,11 +61,15 @@
             <a href="fizjo.html"
               ><i class="fas fa-comments"></i>Nasi fizjoterapeuci</a
             >
-            <li>
+          </li>
+
+          <li>
             <a href="messages.html"
               ><i class="fas fa-comments"></i>Twoje wiadomości</a
             >
-          <li>
+          </li>
+
+          <li></li>
           <li>
             <a href="#kontakt"><i class="fas fa-envelope"></i>Kontakt</a>
           </li>
@@ -77,12 +81,12 @@
         >
       </div>
     </div>
-    
+
     <main id="main-content">
-        <div class="doctor-id-block">
-            <label for="doctor-id">Wybierz lekarza:</label>
-            <select name="doctor-id" id="doctor-id"></select>
-        </div>
+      <div class="doctor-id-block">
+        <label for="doctor-id">Wybierz lekarza:</label>
+        <select name="doctor-id" id="doctor-id"></select>
+      </div>
       <div class="error-msg">
         <p id="error-message"></p>
         <script src="../js/scripts/err-msg.js"></script>
@@ -124,9 +128,11 @@
           <span class="close-btn" id="cancelDetailBtn">&times;</span>
           <h2>Szczegóły Wizyty</h2>
           <p><strong>Powód:</strong> <span id="detailCause"></span></p>
-            <p><strong>Doktor:</strong> <span id="detailDoctor"></span></p>
+          <p><strong>Doktor:</strong> <span id="detailDoctor"></span></p>
           <p><strong>Pacjent:</strong> <span id="detailPatient"></span></p>
-            <p><strong>Data rozpoczęcia:</strong> <span id="detailStart"></span></p>
+          <p>
+            <strong>Data rozpoczęcia:</strong> <span id="detailStart"></span>
+          </p>
           <button id="deleteBtn" class="modal-btn delete" style="display: none">
             Zrezygnuj z wizyty
           </button>
@@ -150,7 +156,6 @@
               required
               name="cause"
             />
-
 
             <label for="start">Data rozpoczęcia:</label>
             <input

@@ -1,13 +1,13 @@
-document.addEventListener("DOMContentLoaded", function() {
-    fetch("../../backend/api/fizjo.php")
-        .then(response => response.json())
-        .then(data => {
-            const tbody = document.getElementById("physio-table-body");
-            tbody.innerHTML = ""; 
+document.addEventListener("DOMContentLoaded", function () {
+  fetch("../../backend/api/fizjo.php")
+    .then((response) => response.json())
+    .then((data) => {
+      const tbody = document.getElementById("physio-table-body");
+      tbody.innerHTML = "";
 
-            data.forEach(physio => {
-                const tr = document.createElement("tr");
-                tr.innerHTML = `
+      data.forEach((physio) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
                     <td>${escapeHtml(physio.name)} ${escapeHtml(physio.surname)}</td>
                     <td>${escapeHtml(physio.specialization)}</td>
                     <td>
@@ -21,22 +21,22 @@ document.addEventListener("DOMContentLoaded", function() {
                         </button>
                     </td>
                 `;
-                tbody.appendChild(tr);
-            });
-        })
-        .catch(error => {
-            document.getElementById("physio-table-body").innerHTML = 
-                `<tr><td colspan="3">Błąd ładowania danych.</td></tr>`;
-            console.error(error);
-        });
+        tbody.appendChild(tr);
+      });
+    })
+    .catch((error) => {
+      document.getElementById("physio-table-body").innerHTML =
+        `<tr><td colspan="3">Błąd ładowania danych.</td></tr>`;
+      console.error(error);
+    });
 
-   function escapeHtml(text) {
+  function escapeHtml(text) {
     if (typeof text !== "string") return "";
     return text
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-}
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
 });

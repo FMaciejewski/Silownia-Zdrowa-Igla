@@ -1,11 +1,11 @@
 {
-    "name": "adrianc/silownia-zdrowa-igla",
-    "autoload": {
-        "psr-4": {
-            "Adrianc\\SilowniaZdrowaIgla\\": "src/"
-        }
-    },
-    "require": {
-        "cboden/ratchet": "^0.4.4"
+  "name": "adrianc/silownia-zdrowa-igla",
+  "autoload": {
+    "psr-4": {
+      "Adrianc\\SilowniaZdrowaIgla\\": "src/"
     }
+  },
+  "require": {
+    "cboden/ratchet": "^0.4.4"
+  }
 }
