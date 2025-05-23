@@ -134,6 +134,32 @@ CREATE TABLE `messages` (
   KEY `sender_id` (`sender_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--Tabela doktorzy(fizjoterapeuci)
+CREATE TABLE Doctors (
+    DoctorID INT PRIMARY KEY AUTO_INCREMENT, 
+    UserID INT NOT NULL,
+    Specialization VARCHAR(255),
+    Degree VARCHAR(100),
+    WorkStartDate TIME DEFAULT '08:00:00',
+    WorkEndDate TIME DEFAULT '16:00:00',
+    FOREIGN KEY (UserID) REFERENCES Users(UserID) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+--Tabela wizyt
+CREATE TABLE UserAppointments (
+    AppointmentID INT AUTO_INCREMENT PRIMARY KEY,
+  UserID INT NOT NULL,
+  DoctorID INT NOT NULL,
+  StartDate DATETIME NOT NULL,
+  EndDate DATETIME NOT NULL,
+  Cause VARCHAR(255) NOT NULL,
+  FOREIGN KEY (UserID) REFERENCES Users(UserID)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  FOREIGN KEY (DoctorID) REFERENCES Doctors(DoctorID)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+) ENGINE=InnoDB;
 
 -- Indeksy dla optymalizacji
 CREATE INDEX idx_user_email ON Users(Email);
