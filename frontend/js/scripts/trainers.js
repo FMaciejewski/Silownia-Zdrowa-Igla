@@ -1,10 +1,10 @@
 fetch("../backend/api/trainers.php")
-.then(response => response.json())
-.then(data => {
-    data.forEach(trener => {
-    const trenerDiv = document.createElement('div');
-    trenerDiv.classList.add('trener');
-    trenerDiv.innerHTML = `
+  .then((response) => response.json())
+  .then((data) => {
+    data.forEach((trener) => {
+      const trenerDiv = document.createElement("div");
+      trenerDiv.classList.add("trener");
+      trenerDiv.innerHTML = `
         <img src="assets/images/${trener.ProfilePicture}" alt="${trener.FirstName} ${trener.LastName}" />
         <h4>${trener.FirstName} ${trener.LastName}</h4>
         <h3>${trener.Specialization}</h3>
