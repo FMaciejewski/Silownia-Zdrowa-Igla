@@ -52,6 +52,14 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("eventEnd").value = tempEnd;
       popup.style.display = "block";
     },
+    selectAllow: function (selectInfo) {
+      const start = selectInfo.start;
+      const now = new Date();
+
+      const isFuture = start >= now;
+
+      return isFuture;
+    },  
     eventDidMount: function (info) {
       info.el.style.cursor = "pointer";
 

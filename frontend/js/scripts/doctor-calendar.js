@@ -75,8 +75,12 @@ document.addEventListener("DOMContentLoaded", function () {
     selectAllow: function (selectInfo) {
       const start = selectInfo.start;
       const end = selectInfo.end;
-      const duration = (end - start) / (1000 * 60); 
-      return duration <= 30;
+      const now = new Date();
+
+      const duration = (end - start) / (1000 * 60); // w minutach
+      const isFuture = start >= now;
+
+      return isFuture && duration <= 30;
     },
     eventDidMount: function (info) {
       info.el.style.cursor = "pointer";
@@ -102,6 +106,11 @@ document.addEventListener("DOMContentLoaded", function () {
       detailPatient.innerText = event.event.extendedProps.Patient;
       detailStart.innerText = event.event.start.toLocaleString();
 
+      deleteBtn.style.display = "block";
+      deleteBtn.addEventListener("click", function () {
+        window.location.href = `../../backend/api/delete-appointment.php?appointmentId=${event.event.id}`;
+      });
+
       fetch(
         "../../backend/api/can-edit-appointment.php?appointmentId=" + event.event.id,
       )
@@ -117,10 +126,6 @@ document.addEventListener("DOMContentLoaded", function () {
               editAppointmentStart.value = formatLocalDateTime(event.event.start);
               editEventId.value = event.event.id;
               editEventDoctorId.value = parseInt(doctorSelect.value);
-            });
-            deleteBtn.style.display = "block";
-            deleteBtn.addEventListener("click", function () {
-              window.location.href = `../../backend/api/delete-appointment.php?appointmentId=${event.event.id}`;
             });
           }
         });
