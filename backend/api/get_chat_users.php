@@ -19,14 +19,19 @@ if ($mysqli->connect_error) {
 
 $query = "
     SELECT DISTINCT u.UserID, u.FirstName, u.LastName
-    FROM Messages m
-    JOIN Users u ON u.UserID = m.sender_id
-    WHERE m.receiver_id = ?
-    ORDER BY u.FirstName
+FROM Users u
+JOIN Messages m ON (
+    (u.UserID = m.sender_id AND m.receiver_id = ?)
+    OR 
+    (u.UserID = m.receiver_id AND m.sender_id = ?)
+)
+WHERE u.UserID != ?
+ORDER BY u.FirstName;
+
 ";
 
 $stmt = $mysqli->prepare($query);
-$stmt->bind_param('i', $fizjoId);
+$stmt->bind_param('iii', $fizjoId, $fizjoId, $fizjoId);
 $stmt->execute();
 $result = $stmt->get_result();
 
