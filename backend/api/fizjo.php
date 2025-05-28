@@ -26,7 +26,8 @@ try {
     exit;
 }
 
-$stmt = $pdo->query("SELECT UserID AS id, FirstName AS name, LastName AS surname FROM Users WHERE Role = 'fizjo'");
+$stmt = $pdo->query("SELECT Users.UserID AS id, FirstName AS name, LastName AS surname, DoctorID FROM Users
+JOIN Doctors ON Users.UserID = Doctors.UserID WHERE Role = 'fizjo'");
 $physiotherapists = $stmt->fetchAll();
 
 header('Content-Type: application/json');

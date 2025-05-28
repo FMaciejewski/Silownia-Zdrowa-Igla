@@ -1,4 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
+  window.calendarRedirect = function(physioId) {
+    localStorage.setItem("selectedDoctorId", physioId);
+    window.location.href = `appointments.html`;
+  }
+
   fetch("../../backend/api/fizjo.php")
     .then((response) => response.json())
     .then((data) => {
@@ -12,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <td>${escapeHtml(physio.specialization)}</td>
                     <td>
                         <button class="action-btn calendar-btn" 
-                            onclick="window.location.href='kalendarz.html?physio_id=${physio.id}'">
+                            onclick="calendarRedirect('${physio.DoctorID}')">
                             Kalendarz
                         </button>
                         <button class="action-btn chat-btn" 

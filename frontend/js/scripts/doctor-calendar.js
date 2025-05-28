@@ -141,6 +141,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const data = arg.event.extendedProps;
       const title = arg.event.title;
       const div = document.createElement("div");
+      div.className = "info-event";
       div.innerHTML = `<b>${title}</b>`;
       return { domNodes: [div] };
     },
