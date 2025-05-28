@@ -1,8 +1,5 @@
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 session_start();
 
 $db_host = 'localhost';
@@ -20,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $login = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
 
-    $stmt = $conn->prepare("SELECT UserID, login, PasswordHash FROM users WHERE login = ?");
+    $stmt = $conn->prepare("SELECT UserID, login, PasswordHash, role FROM users WHERE login = ?");
     $stmt->bind_param("s", $login);
     $stmt->execute();
 
@@ -33,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute();
         $stmt->close();
         $_SESSION['user_id'] = $user['UserID'];
+        $_SESSION['role'] = $user['role'];
         header("Location: ../../frontend/sites/profile.html?success=4");
         exit;
     } else {
