@@ -131,9 +131,8 @@ document.addEventListener("DOMContentLoaded", function () {
       const data = arg.event.extendedProps;
       const title = arg.event.title;
       const div = document.createElement("div");
-      div.innerHTML = `<b>${title}</b>
-        ${data.createdBy ? `<br><small>Twórca: ${data.createdBy}</small>` : ""}
-        ${data.maxParticipants ? `<br><small>Miejsca:${data.participants}/${data.maxParticipants}</small>` : ""}`;
+      div.className = "info-event";
+      div.innerHTML = `<b>${title}</b> <i class="fas fa-circle-info"></i>`;
       return { domNodes: [div] };
     },
     events: [],
