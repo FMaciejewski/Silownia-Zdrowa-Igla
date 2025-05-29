@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
-  window.calendarRedirect = function(physioId) {
+  window.calendarRedirect = function (physioId) {
     localStorage.setItem("selectedDoctorId", physioId);
     window.location.href = `appointments.html`;
-  }
+  };
 
   fetch("../../backend/api/fizjo.php")
     .then((response) => response.json())

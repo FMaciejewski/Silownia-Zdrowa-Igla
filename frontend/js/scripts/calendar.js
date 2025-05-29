@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const isFuture = start >= now;
 
       return isFuture;
-    },  
+    },
     eventDidMount: function (info) {
       info.el.style.cursor = "pointer";
 

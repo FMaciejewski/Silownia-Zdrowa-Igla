@@ -12,7 +12,7 @@ $user = 'root';
 $pass = '';
 $dbName = 'SilowniaZdrowaIgla';
 
-// Funkcja do formatowania daty i godziny
+
 function formatDateTime($datetime, $format = 'd.m.Y H:i') {
     if (empty($datetime)) return '';
     
@@ -20,7 +20,7 @@ function formatDateTime($datetime, $format = 'd.m.Y H:i') {
     return $date->format($format);
 }
 
-// Funkcja do formatowania tylko daty
+
 function formatDate($date, $format = 'd.m.Y') {
     if (empty($date)) return '';
     
@@ -43,7 +43,7 @@ try {
         exit;
     }
     
-    // Get user role securely
+
     $stmt = $conn->prepare("SELECT role FROM Users WHERE UserID = ?");
     if (!$stmt) {
         throw new Exception('Prepare failed: ' . $conn->error);
@@ -70,7 +70,7 @@ try {
             'appointments' => []
         ];
         
-        // Pobierz treningi klienta
+
         $stmt = $conn->prepare("
             SELECT t.TrainingID, t.Title, t.StartTime, t.EndTime, t.Location,
                    CONCAT(u.FirstName, ' ', u.LastName) as TrainerName
@@ -92,7 +92,7 @@ try {
         $trainingsData = $result->fetch_all(MYSQLI_ASSOC);
         $stmt->close();
         
-        // Formatuj dane treningów
+
         foreach ($trainingsData as $item) {
             $data['trainings'][] = [
                 'TrainingID' => $item['TrainingID'],
@@ -109,7 +109,7 @@ try {
             ];
         }
         
-        // Pobierz wizyty u fizjoterapeuty
+
         $stmt = $conn->prepare("
             SELECT a.AppointmentID, a.StartDate, a.EndDate, a.Cause,
                    CONCAT(u.FirstName, ' ', u.LastName) as DoctorName
@@ -130,7 +130,7 @@ try {
         $appointmentsData = $result->fetch_all(MYSQLI_ASSOC);
         $stmt->close();
         
-        // Formatuj dane wizyt
+
         foreach ($appointmentsData as $item) {
             $data['appointments'][] = [
                 'AppointmentID' => $item['AppointmentID'],
@@ -147,7 +147,6 @@ try {
         }
         
     } elseif ($role === 'trainer') {
-        // Najpierw pobierz TrainerID dla danego użytkownika
         $stmt = $conn->prepare("SELECT TrainerID FROM Trainers WHERE UserID = ?");
         if (!$stmt) {
             throw new Exception('Prepare failed: ' . $conn->error);
@@ -160,7 +159,6 @@ try {
         $stmt->close();
         
         if (!$trainer) {
-            // Jeśli użytkownik nie ma profilu trenera, zwróć pusty wynik
             echo json_encode([
                 'success' => true,
                 'role' => $role,
@@ -190,7 +188,7 @@ try {
         $rawData = $result->fetch_all(MYSQLI_ASSOC);
         $stmt->close();
         
-        // Formatuj daty dla trenera
+
         foreach ($rawData as $item) {
             $data[] = [
                 'TrainingID' => $item['TrainingID'],
@@ -208,7 +206,6 @@ try {
         }
         
     } elseif ($role === 'fizjo') {
-        // Najpierw pobierz DoctorID dla danego użytkownika
         $stmt = $conn->prepare("SELECT DoctorID FROM Doctors WHERE UserID = ?");
         if (!$stmt) {
             throw new Exception('Prepare failed: ' . $conn->error);
@@ -221,7 +218,6 @@ try {
         $stmt->close();
         
         if (!$doctor) {
-            // Jeśli użytkownik nie ma profilu doktora, zwróć pusty wynik
             echo json_encode([
                 'success' => true,
                 'role' => $role,
@@ -250,7 +246,6 @@ try {
         $rawData = $result->fetch_all(MYSQLI_ASSOC);
         $stmt->close();
         
-        // Formatuj daty dla fizjoterapeuty
         foreach ($rawData as $item) {
             $data[] = [
                 'AppointmentID' => $item['AppointmentID'],
@@ -268,7 +263,6 @@ try {
         }
         
     } elseif ($role === 'admin') {
-        // Admin może zobaczyć wszystkie aktywności
         $data = [
             'trainings' => [],
             'appointments' => [],
@@ -276,7 +270,7 @@ try {
             'active_passes' => 0
         ];
         
-        // Pobierz statystyki dla admina
+
         $stmt = $conn->prepare("SELECT COUNT(*) as count FROM Users");
         $stmt->execute();
         $result = $stmt->get_result();
@@ -289,7 +283,7 @@ try {
         $data['active_passes'] = $result->fetch_assoc()['count'];
         $stmt->close();
         
-        // Pobierz nadchodzące treningi
+
         $stmt = $conn->prepare("
             SELECT t.TrainingID, t.Title, t.StartTime, t.EndTime, 
                    CONCAT(u.FirstName, ' ', u.LastName) as TrainerName
