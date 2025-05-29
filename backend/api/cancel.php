@@ -182,7 +182,7 @@ try {
             }
             $stmt->bind_param("ii", $itemId, $doctorId);
 
-        } elseif ($role === 'client') {
+        } elseif ($role === 'client' || $role === 'trainer') {
             error_log("Processing client appointment cancellation");
             
             $stmt = $mysqli->prepare("DELETE FROM UserAppointments WHERE AppointmentID = ? AND UserID = ?");

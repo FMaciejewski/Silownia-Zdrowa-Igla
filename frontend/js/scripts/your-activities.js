@@ -43,7 +43,6 @@ fetch("../../backend/api/your-activities.php", {
         const div = document.createElement("div");
         div.className = "tile";
 
-        // Tworzenie elementów z informacjami
         const patientInfo = document.createElement("div");
         patientInfo.className = "patient-info";
         patientInfo.innerHTML = `
@@ -65,38 +64,82 @@ fetch("../../backend/api/your-activities.php", {
         container.appendChild(div);
       });
     } else if (data.role === "trainer") {
-      if (!data.data || !Array.isArray(data.data) || data.data.length === 0) {
-        container.textContent = "Brak utworzonych treningów.";
+      const hasTrainings = data.data.trainings && data.data.trainings.length > 0;
+      const hasAppointments = data.data.appointments && data.data.appointments.length > 0;
+
+      if (!hasTrainings && !hasAppointments) {
+        container.textContent = "Nie masz żadnych treningów ani wizyt.";
         return;
       }
 
-      data.data.forEach((training) => {
-        const div = document.createElement("div");
-        div.className = "tile";
+      if (hasTrainings) {
+        const trainingsHeader = document.createElement("h3");
+        trainingsHeader.textContent = "Twoje treningi";
+        trainingsHeader.className = "section-header";
+        container.appendChild(trainingsHeader);
 
-        const trainingInfo = document.createElement("div");
-        trainingInfo.className = "training-info";
-        trainingInfo.innerHTML = `
-        <strong>${training.Title}</strong>
-        <div class="training-schedule">
-          <span class="date">${training.DateOnly}</span>
-          <span class="time-range">${training.TimeRange}</span>
-        </div>
-        <div class="participants">Uczestników: ${training.CurrentParticipants}/${training.MaxParticipants}</div>
-        ${training.Location ? `<div class="location">📍 ${training.Location}</div>` : ""}
-      `;
+        data.data.trainings.forEach((training) => {
+          const div = document.createElement("div");
+          div.className = "tile training-tile";
 
-        const cancelBtn = document.createElement("button");
-        cancelBtn.textContent = "Odwołaj";
-        cancelBtn.className = "cancel-btn";
-        cancelBtn.onclick = () => cancelItem(training.TrainingID, "training");
+          const trainingInfo = document.createElement("div");
+          trainingInfo.className = "training-info";
+          trainingInfo.innerHTML = `
+          <strong>${training.Title}</strong>
+          <div class="training-schedule">
+            <span class="date">${training.DateOnly}</span>
+            <span class="time-range">${training.TimeRange}</span>
+          </div>
+          <div class="participants">Uczestników: ${training.CurrentParticipants}/${training.MaxParticipants}</div>
+          ${training.Location ? `<div class="location">📍 ${training.Location}</div>` : ""}
+        `;
 
-        div.appendChild(trainingInfo);
-        div.appendChild(cancelBtn);
-        container.appendChild(div);
-      });
+          const cancelBtn = document.createElement("button");
+          cancelBtn.textContent = "Odwołaj trening";
+          cancelBtn.className = "cancel-btn";
+          cancelBtn.onclick = () => cancelItem(training.TrainingID, "training");
+
+          div.appendChild(trainingInfo);
+          div.appendChild(cancelBtn);
+          container.appendChild(div);
+        });
+      }
+
+      if (hasAppointments) {
+        const appointmentsHeader = document.createElement("h3");
+        appointmentsHeader.textContent = "Twoje wizyty u fizjoterapeuty";
+        appointmentsHeader.className = "section-header";
+        container.appendChild(appointmentsHeader);
+
+        data.data.appointments.forEach((appointment) => {
+          const div = document.createElement("div");
+          div.className = "tile appointment-tile";
+
+          const appointmentInfo = document.createElement("div");
+          appointmentInfo.className = "appointment-info";
+          appointmentInfo.innerHTML = `
+          <strong>Wizyta u fizjoterapeuty</strong>
+          <div class="doctor">Lekarz: ${appointment.DoctorName}</div>
+          <div class="appointment-schedule">
+            <span class="date">${appointment.DateOnly}</span>
+            <span class="time-range">${appointment.TimeRange}</span>
+          </div>
+          ${appointment.Cause ? `<div class="cause">Powód: ${appointment.Cause}</div>` : ""}
+        `;
+
+          const cancelButton = document.createElement("button");
+          cancelButton.textContent = "Odwołaj wizytę";
+          cancelButton.className = "cancel-btn";
+          cancelButton.onclick = () =>
+            cancelItem(appointment.AppointmentID, "appointment");
+
+          div.appendChild(appointmentInfo);
+          div.appendChild(cancelButton);
+          container.appendChild(div);
+        });
+      }
+      
     } else if (data.role === "client") {
-      // Nowa struktura dla klientów - obsługa trainings i appointments
       const hasTrainings =
         data.data.trainings && data.data.trainings.length > 0;
       const hasAppointments =
@@ -108,7 +151,6 @@ fetch("../../backend/api/your-activities.php", {
         return;
       }
 
-      // Wyświetl treningi
       if (hasTrainings) {
         const trainingsHeader = document.createElement("h3");
         trainingsHeader.textContent = "Twoje treningi";
@@ -143,7 +185,6 @@ fetch("../../backend/api/your-activities.php", {
         });
       }
 
-      // Wyświetl wizyty u fizjoterapeuty
       if (hasAppointments) {
         const appointmentsHeader = document.createElement("h3");
         appointmentsHeader.textContent = "Twoje wizyty u fizjoterapeuty";
@@ -178,7 +219,6 @@ fetch("../../backend/api/your-activities.php", {
         });
       }
     } else if (data.role === "admin") {
-      // Obsługa dla admina
       if (!data.data) {
         container.textContent = "Brak danych do wyświetlenia.";
         return;

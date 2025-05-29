@@ -147,6 +147,11 @@ try {
         }
         
     } elseif ($role === 'trainer') {
+        $data = [
+            'trainings' => [],
+            'appointments' => []
+        ];
+        
         $stmt = $conn->prepare("SELECT TrainerID FROM Trainers WHERE UserID = ?");
         if (!$stmt) {
             throw new Exception('Prepare failed: ' . $conn->error);
@@ -162,13 +167,14 @@ try {
             echo json_encode([
                 'success' => true,
                 'role' => $role,
-                'data' => []
+                'data' => $data
             ], JSON_UNESCAPED_UNICODE);
             exit;
         }
         
         $trainer_id = $trainer['TrainerID'];
         
+        // Pobieranie treningów trenera
         $stmt = $conn->prepare("
             SELECT t.TrainingID, t.Title, t.StartTime, t.EndTime, t.Location,
                    t.MaxParticipants,
@@ -185,12 +191,11 @@ try {
         $stmt->bind_param("i", $trainer_id);
         $stmt->execute();
         $result = $stmt->get_result();
-        $rawData = $result->fetch_all(MYSQLI_ASSOC);
+        $trainingsData = $result->fetch_all(MYSQLI_ASSOC);
         $stmt->close();
         
-
-        foreach ($rawData as $item) {
-            $data[] = [
+        foreach ($trainingsData as $item) {
+            $data['trainings'][] = [
                 'TrainingID' => $item['TrainingID'],
                 'Title' => $item['Title'],
                 'StartTime' => $item['StartTime'],
@@ -201,7 +206,43 @@ try {
                 'StartTimeFormatted' => formatDateTime($item['StartTime']),
                 'EndTimeFormatted' => formatDateTime($item['EndTime']),
                 'DateOnly' => formatDate($item['StartTime']),
-                'TimeRange' => formatDateTime($item['StartTime'], 'H:i') . ' - ' . formatDateTime($item['EndTime'], 'H:i')
+                'TimeRange' => formatDateTime($item['StartTime'], 'H:i') . ' - ' . formatDateTime($item['EndTime'], 'H:i'),
+                'type' => 'training'
+            ];
+        }
+        
+        $stmt = $conn->prepare("
+            SELECT a.AppointmentID, a.StartDate, a.EndDate, a.Cause,
+                   CONCAT(u.FirstName, ' ', u.LastName) as DoctorName
+            FROM UserAppointments a
+            JOIN Doctors d ON a.DoctorID = d.DoctorID
+            JOIN Users u ON d.UserID = u.UserID
+            WHERE a.UserID = ?
+            ORDER BY a.StartDate ASC
+        ");
+        
+        if (!$stmt) {
+            throw new Exception('Prepare failed: ' . $conn->error);
+        }
+        
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $appointmentsData = $result->fetch_all(MYSQLI_ASSOC);
+        $stmt->close();
+        
+        foreach ($appointmentsData as $item) {
+            $data['appointments'][] = [
+                'AppointmentID' => $item['AppointmentID'],
+                'DoctorName' => $item['DoctorName'],
+                'StartDate' => $item['StartDate'],
+                'EndDate' => $item['EndDate'],
+                'Cause' => $item['Cause'],
+                'StartDateFormatted' => formatDateTime($item['StartDate']),
+                'EndDateFormatted' => formatDateTime($item['EndDate']),
+                'DateOnly' => formatDate($item['StartDate']),
+                'TimeRange' => formatDateTime($item['StartDate'], 'H:i') . ' - ' . formatDateTime($item['EndDate'], 'H:i'),
+                'type' => 'appointment'
             ];
         }
         
